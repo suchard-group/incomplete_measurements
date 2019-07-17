@@ -16,7 +16,7 @@
 6. Download and build BEAST
     * Enter the following code on the command line. 
     ```
-    git clone https://github.com/beast-dev/beast-mcmc.git
+    git clone --branch repeated_measures --depth 1 https://github.com/beast-dev/beast-mcmc.git
     cd beast-mcmc
     ant
     ```
