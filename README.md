@@ -41,6 +41,16 @@
     * The output `.log` file will be in the `./beast-mcmc/build/dist` directory.
 3. Use Tracer to view the `.log` file.
     * Tracer installation and usage instructions can be found [here](http://beast.community/tracer).
+    
+## Data Processing
+### Raw data files
+- __PanTHERIA_1-0_WR05_Aug2008.txt__ - Mammalian phenotype data from PanTHERIA database. Downloaded from [http://esapubs.org/archive/ecol/E090/184/](http://esapubs.org/archive/ecol/E090/184/).
+- __ele_1307_sm_sa1.tre__ - Mammalian phylogeny from [Fritz et al. (2009)](https://doi.org/10.1111/j.1461-0248.2009.01307.x). Downloaded from [https://onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1111%2Fj.1461-0248.2009.01307.x&file=ELE_1307_sm_SA1.tre](https://onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1111%2Fj.1461-0248.2009.01307.x&file=ELE_1307_sm_SA1.tre).
+### Processed data files
+- __mammals_newick.txt__ - The __mammalST_MSW05_bestDates__ tree manually copied from  __ele_1307_sm_sa1.tre__.
+- __mammals_trimmed_newick.txt__ - Mammals newick file with taxa not present in the data set removed. File was created by running Julia script __mammals_data.jl__ in __Scripts__ directory.
+- __mammals_log_data.csv__ - CSV file that stores logged mammals data. Missing values are prepresented by NaN. File was created by running Julia script __mammals_data.jl__ in __Scripts__ directory.
+    
         
         
     
