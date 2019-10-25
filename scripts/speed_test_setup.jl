@@ -43,10 +43,11 @@ function setup_xml(data_path::String, newick_path::String, xml_path::String,
     taxa, data = XMLConstructor2.df_to_matrix(df)
     newick = read(newick_path, String)
 
-    bx = XMLConstructor2.make_timing_MBD_XML(data, taxa, newick, chain_length = 100_000)
+    bx = XMLConstructor2.make_timing_MBD_XML(data, taxa, newick, chain_length = 1_000)
 
     bx.mcmc_el.filename = filename
-    bx.timer_el.filename = "$(filename)_timer.txt"
+    bx.mcmc_el.screen_logEvery = 100
+    bx.timer_el.filename = "$(filename)Timer_beast.txt"
     bx.MBD_el.precision = inv(Σ)
     bx.extension_el.precision = inv(Γ)
     save_file(XMLConstructor2.make_xml(bx), xml_path)
@@ -71,8 +72,8 @@ mammals_data_path = joinpath(data_dir, "mammals_log_data.csv")
 mammals_newick_path = joinpath(data_dir, "mammals_trimmed_newick.txt")
 mammals_xml_path = joinpath(xml_dir, "$(mammals_filename).xml")
 
-mammals_Σ_outpath = "mammals_diff_mat.mat"
-mammals_Γ_outpath = "mammals_res_mat.mat"
+mammals_Σ_outpath = join(@__DIR__, "storage", "mammals_diff_mat.mat")
+mammals_Γ_outpath = join(@__DIR__, "storage", "mammals_res_mat.mat")
 
 
 mammals_Σ, mammals_Γ = setup_variances(mammals_log_path,
@@ -89,8 +90,8 @@ hiv_data_path = joinpath(data_dir, "hiv_processed_data.csv")
 hiv_newick_path = joinpath(data_dir, "hiv_newick.txt")
 hiv_xml_path = joinpath(xml_dir, "$(hiv_filename).xml")
 
-hiv_Σ_outpath = "hiv_diff_mat.mat"
-hiv_Γ_outpath = "hiv_res_mat.mat"
+hiv_Σ_outpath = join(@__DIR__, "storage", "hiv_diff_mat.mat")
+hiv_Γ_outpath = join(@__DIR__, "storage", "hiv_res_mat.mat")
 
 hiv_Σ, hiv_Γ = setup_variances(hiv_log_path,
                                         hiv_Σ_outpath,
