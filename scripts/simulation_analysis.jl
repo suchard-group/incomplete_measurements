@@ -3,7 +3,7 @@ using Revise
 using CSV, DataFrames
 using ReadLogs, Trees2, MyFunctions #my packages
 
-const VALUE_DIR = joinpath(@__DIR__, "storage")
+const VALUE_DIR = joinpath(@__DIR__, "storage", "simulation")
 const LOG_DIR = joinpath(@__DIR__, "..", "logs", "simulation_study")
 
 struct SimStats
@@ -114,9 +114,7 @@ function make_heritability(tree::Trees2.PhyloTree, Σ::AbstractArray{Float64, 2}
     cγ = (n - 1) / n
 
     return make_heritability(cσ, cγ, Σ, Γ)
-
 end
-
 
 function make_heritability(cσ::Float64, cγ::Float64,
                         Σ::AbstractArray{Float64, 2},
@@ -138,9 +136,6 @@ function make_heritability(cσ::Float64, cγ::Float64,
     end
     return H
 end
-
-
-
 
 function compute_stats(x::Vector{Float64}, value::Float64)
     sum_x = 0.0
@@ -260,11 +255,11 @@ function compute_matrix_stats(X::AbstractArray{Float64, 2}, log_data::Matrix{Flo
     off_diag_stats = SimStats(off_diag_bias, off_diag_mse, off_diag_covered / p_off)
 
     return MatrixSimStats(diag_stats, off_diag_stats)
-
 end
 
 function sim_analysis(sv::SimVersion)
     filename = sv.filename
+    println("starting $filename")
 
     current_dir = pwd()
 
@@ -282,10 +277,6 @@ function sim_analysis(sv::SimVersion)
     Γcorr = MyFunctions.cov2corr(Γ)
 
     H = make_heritability(tree, Σ, Γ) #TODO: check this
-
-    display(Σcorr)
-    display(Γcorr)
-    display(H)
 
     taxa, data = df_to_data(data_df)
 
@@ -325,21 +316,194 @@ function sim_analysis(sv::SimVersion)
     Γcorr_stats = compute_matrix_stats(Γcorr, log_data, Γcorr_range)
     H_stats = compute_matrix_stats(H, log_data, H_range)
     println("done")
+    println("")
 
     return SimAnalysis(sv, trait_stats, Σcorr_stats, Γcorr_stats, H_stats)
-
 end
 
+const TRAIT = "trait"
+const DIAGONAL = "diagonal"
+const OFF_DIAGONAL = "offDiagonal"
+const BIAS = "bias"
+const MSE = "mse"
+const DIFFUSION_CORRELATION = "diffCorr"
+const RESIDUAL_CORRELATION = "resCorr"
+const HERITABILITY = "heritability"
+const NONE = "none"
+
+function make_dataframe(sas::Array{SimAnalysis},
+                        trait_path::String,
+                        matrix_path::String,
+                        coverage_path::String)
+    n = length(sas)
+
+    #compute size of data frame
+    n_missing = [length(sas[i].traits.bias) for i = 1:n]
+    dim_mats = [length(sas[i].diff_corr.diagonal.bias) for i = 1:n]
+
+    # for each trait, there are 3 * p diagonal and 3 * p * (p - 1) off-diagonal entries
+    n_matrix_slots = [3 * (p + div(p * (p - 1), 2)) for p in dim_mats]
+
+    N_trait = sum(n_missing)
+    N_matrix = sum(n_matrix_slots)
+    n_coverage = 7
+    N_coverage = n * n_coverage
+
+
+    trait_df = DataFrame(run = Vector{String}(undef, N_trait),
+                        rep = Vector{Int}(undef, N_trait),
+                        nTaxa = Vector{Int}(undef, N_trait),
+                        nTraits = Vector{Int}(undef, N_trait),
+                        sparsity = Vector{Float64}(undef, N_trait),
+                        bias = Vector{Float64}(undef, N_trait),
+                        mse = Vector{Float64}(undef, N_trait))
+
+    matrix_df = DataFrame(run = Vector{String}(undef, N_matrix),
+                        rep = Vector{Int}(undef, N_matrix),
+                        nTaxa = Vector{Int}(undef, N_matrix),
+                        nTraits = Vector{Int}(undef, N_matrix),
+                        sparsity = Vector{Float64}(undef, N_matrix),
+                        variable = Vector{String}(undef, N_matrix),
+                        component = Vector{String}(undef, N_matrix),
+                        bias = Vector{Float64}(undef, N_matrix),
+                        mse = Vector{Float64}(undef, N_matrix))
+
+    coverage_df = DataFrame(run = Vector{String}(undef, N_coverage),
+                        rep = Vector{Int}(undef, N_coverage),
+                        nTaxa = Vector{Int}(undef, N_coverage),
+                        nTraits = Vector{Int}(undef, N_coverage),
+                        sparsity = Vector{Float64}(undef, N_coverage),
+                        variable = Vector{String}(undef, N_coverage),
+                        component = Vector{String}(undef, N_coverage),
+                        coverage = Vector{Float64}(undef, N_coverage))
+
+    # set up for matrix statistics
+    variables = [DIFFUSION_CORRELATION, RESIDUAL_CORRELATION, HERITABILITY]
+    var_dict = Dict(DIFFUSION_CORRELATION => :diff_corr,
+                    RESIDUAL_CORRELATION => :res_corr,
+                    HERITABILITY => :heritability)
+
+
+
+    trait_ind = 1
+    matrix_ind = 1
+
+    for i = 1:n
+        coverage_ind = (i - 1) * n_coverage + 1
+
+        sa = sas[i]
+        sv = sa.sv
+
+        trait_range = trait_ind:(trait_ind + n_missing[i] - 1)
+        mat_range = matrix_ind:(matrix_ind + n_matrix_slots[i] - 1)
+        cov_range = coverage_ind:(coverage_ind + n_coverage - 1)
+
+        trait_df.run[trait_range] .= sv.version
+        matrix_df.run[mat_range] .= sv.version
+        coverage_df.run[cov_range] .= sv.version
+
+        trait_df.rep[trait_range] .= sv.repeat
+        matrix_df.rep[mat_range] .= sv.repeat
+        coverage_df.rep[cov_range] .= sv.repeat
+
+        trait_df.nTaxa[trait_range] .= sv.N
+        matrix_df.nTaxa[mat_range] .= sv.N
+        coverage_df.nTaxa[cov_range] .= sv.N
+
+        trait_df.nTraits[trait_range] .= sv.P
+        matrix_df.nTraits[mat_range] .= sv.P
+        coverage_df.nTraits[cov_range] .= sv.P
+
+        trait_df.sparsity[trait_range] .= sv.sparsity
+        matrix_df.sparsity[mat_range] .= sv.sparsity
+        coverage_df.sparsity[cov_range] .= sv.sparsity
+
+
+        #missing trait values
+
+        trait_df.bias[trait_range] .= sa.traits.bias
+        trait_df.mse[trait_range] .= sa.traits.mse
+
+        coverage_df.variable[coverage_ind] = TRAIT
+        coverage_df.component[coverage_ind] = NONE
+        coverage_df.coverage[coverage_ind] = sa.traits.coverage
+
+
+        # matrix stats setup
+        p = dim_mats[i] #number diagonal entries
+        q = div(p * (p - 1), 2) #number off-diagonal entries
+        t = p + q #total number of entries
+
+
+        n_var = length(variables)
+        for j = 1:n_var
+            s = (matrix_ind + (j - 1) * t) #start index for this variable
+            matrix_df.variable[s:(s + t - 1)] .= variables[j]
+
+
+            mat_stats = getfield(sa, var_dict[variables[j]])
+
+            #diagonal
+            diag_range = s:(s + p - 1)
+            matrix_df.component[diag_range] .= DIAGONAL
+            diag_stats = mat_stats.diagonal
+
+            matrix_df.bias[diag_range] .= diag_stats.bias
+            matrix_df.mse[diag_range] .= diag_stats.mse
+
+            diag_cov_ind = coverage_ind + 2 * (j - 1) + 1
+            coverage_df.variable[diag_cov_ind] = variables[j]
+            coverage_df.component[diag_cov_ind] = DIAGONAL
+            coverage_df.coverage[diag_cov_ind] = diag_stats.coverage
+
+            #off-diagonal
+            off_diag_range = (s + p):(s + t - 1)
+            matrix_df.component[off_diag_range] .= OFF_DIAGONAL
+            od_stats = mat_stats.off_diagonal
+
+            matrix_df.bias[off_diag_range] .= od_stats.bias
+            matrix_df.mse[off_diag_range] .= od_stats.mse
+
+            diag_cov_ind = coverage_ind + 2 * (j - 1) + 2
+            coverage_df.variable[diag_cov_ind] = variables[j]
+            coverage_df.component[diag_cov_ind] = OFF_DIAGONAL
+            coverage_df.coverage[diag_cov_ind] = od_stats.coverage
+
+
+        end
+
+        trait_ind += n_missing[i]
+        matrix_ind += n_matrix_slots[i]
+
+    end
+
+    CSV.write(trait_path, trait_df)
+    CSV.write(matrix_path, matrix_df)
+    CSV.write(coverage_path, coverage_df)
+end
+
+
+
 files = readdir(LOG_DIR)
+deleteat!(files, findfirst(x -> x == ".gitignore", files))
+
+
 n = length(files)
 sas = Vector{SimAnalysis}(undef, n)
 
-x = 0
-for i = 1:n #TODO: change back to 1
+
+
+for i = 1:n
     sim_version = parse_filename(files[i])
     sas[i] = sim_analysis(sim_version)
 end
 
+storage_dir = joinpath(@__DIR__, "storage")
+trait_path = joinpath(storage_dir, "trait_simulation.csv")
+matrix_path = joinpath(storage_dir, "matrix_simulation.csv")
+coverage_path = joinpath(storage_dir, "coverage_simulation.csv")
+
+df = make_dataframe(sas, trait_path, matrix_path, coverage_path)
 
 #testing
 using Plots
@@ -355,13 +519,14 @@ end
 sa = sas[1]
 display_analysis(sa)
 
-using Distributions
+using Distributions, LinearAlgebra
 
 p = 8
 W = Wishart(p, Matrix(Diagonal(ones(p))))
 
 
-newick = read(joinpath(VALUE_DIR, "$(sa.sv.filename)_newick.txt"), String)
+# newick = read(joinpath(VALUE_DIR, "$(sa.sv.filename)_newick.txt"), String)
+newick = "((A:1, B:1):1.5, (C:2, D:2):.5)"
 tree = Trees2.parse_newick(newick)
 
 diag_sum, all_sum = Trees2.tree_variance_sums(tree, standardize_tree = true)
@@ -370,18 +535,5 @@ n = tree.n_tips
 cσ = 1.0 / n * diag_sum - 1.0 / (n^2) * all_sum
 cγ = (n - 1) / n
 
-
-
-# n = 100000
-# d = zeros(n, p)
-#
-# for i = 1:n
-#     Σ = (rand(W))
-#     Γ = (rand(W))
-#
-#     H = make_heritability(cσ, cγ, Σ, Γ)
-#
-#     d[i, :] .= diag(H)
-# end
-
-H = make_heritability(tree, Diagonal(ones(p)), Diagonal(ones(p)))
+@show all_sum
+@show diag_sum

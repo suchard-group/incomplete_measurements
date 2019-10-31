@@ -53,7 +53,7 @@ function sim_xml(xml_dir::String,
     free(xdoc)
 
     current_dir = pwd()
-    cd(joinpath(@__DIR__, "storage"))
+    cd(joinpath(@__DIR__, "storage", "simulation"))
 
     store_data("$(filename)_traitData.csv", taxa, data)
     write("$(filename)_newick.txt", newick)
