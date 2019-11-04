@@ -50,7 +50,7 @@
 - __mammals_newick.txt__ - The __mammalST_MSW05_bestDates__ tree manually copied from  __ele_1307_sm_sa1.tre__.
 - __mammals_trimmed_newick.txt__ - Mammals newick file with taxa not present in the data set removed. File was created by running Julia script __mammals_data.jl__ in __Scripts__ directory.
 - __mammals_log_data.csv__ - CSV file that stores logged mammals data. Missing values are prepresented by NaN. File was created by running Julia script __mammals_data.jl__ in __Scripts__ directory.
-    
+- __prokaryotes_newick.txt__ - Obtained tree log file after running __prokaryotes.xml__, resampled tree every 100,000 trees to reduce the file size using the BEAST software [LogCombiner](https://beast.community/logcombiner), determined the maximum clade credibility tree using [TreeAnnotator](https://beast.community/treeannotator), and output a newick file using [FigTree](https://beast.community/figtree). This newick had a single negative branch length, which were manually edited to 0.0 and shortened its child nodes accordingly.
         
         
     
