@@ -1,4 +1,5 @@
 .Rhistory
+README.html
 scripts/simulation_batch.jl
 *.trees
 *.tree
