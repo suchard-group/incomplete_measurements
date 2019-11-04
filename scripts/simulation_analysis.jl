@@ -293,8 +293,11 @@ function sim_analysis(sv::SimVersion)
 
     println("done")
 
-    f, l = ReadLogs.find_cols(cols, "tip.traits")
-    trait_range = f:l
+    trait_range = 1:0
+    if sv.sparsity > 0.0
+        f, l = ReadLogs.find_cols(cols, "tip.traits")
+        trait_range = f:l
+    end
 
     f, l = ReadLogs.find_cols(cols, "correlation.inverted.diffusion.precision")
     Σcorr_range = f:l

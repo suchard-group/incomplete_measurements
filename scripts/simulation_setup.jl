@@ -42,7 +42,8 @@ function sim_xml(xml_dir::String,
     xml_name = "$filename.xml"
     for file in readdir(xml_dir)
         if file == xml_name
-            error("File \"$xml_name\" already exists. Please delete it to confirm you want to overwrite it and its associate data")
+            println("WARNING: File \"$xml_name\" already exists. File was NOT overwritten. Delete the file to create new xml.")
+            return filename
         end
     end
 
@@ -64,13 +65,18 @@ function sim_xml(xml_dir::String,
 
     cd(current_dir)
 
+    println("$(xml_name) completed")
+
+    return filename
 end
 
 
 function sim_from_example(xml_dir::String,
                             log_path::String, newick_path::String,
                             diff_string::String, res_string::String,
-                            sparsity::Float64, base_name::String;
+                            sparsity::Vector{Float64},
+                            ns::Vector{Int},
+                            base_name::String;
                             repeats::Int = 0)
 
     cols, data = ReadLogs.get_log(log_path)
@@ -88,20 +94,31 @@ function sim_from_example(xml_dir::String,
     p = size(Σ_hat, 1)
 
     newick = read(newick_path, String)
+    tree = Trees2.parse_newick(newick)
 
-    if repeats == 0
+    for s in sparsity
+        for n in ns
 
-        sim_xml(xml_dir, newick, Σ_hat, Γ_hat, sparsity, base_name,
-                standardize_tree = true)
+            trimmed_tree = Trees2.trim_to_n(tree, n)
+            trimmed_newick = Trees2.make_newick(trimmed_tree)
 
-    else
-        @assert repeats > 0
-        for i = 1:repeats
-            sim_xml(xml_dir, newick, Σ_hat, Γ_hat, sparsity, base_name,
-                    standardize_tree = true, rep = i)
+
+            if repeats == 0
+
+                sim_xml(xml_dir, trimmed_newick, Σ_hat, Γ_hat, s,
+                        base_name,
+                        standardize_tree = true)
+
+            else
+                @assert repeats > 0
+                for i = 1:repeats
+                    sim_xml(xml_dir, trimmed_newick, Σ_hat, Γ_hat, s,
+                            base_name,
+                            standardize_tree = true, rep = i)
+                end
+            end
         end
     end
-
 end
 
 
@@ -159,9 +176,6 @@ function data_to_df(taxa::Vector{String}, data::Matrix{Float64}, col_names::Vect
 end
 
 
-
-
-
 Ns = [100, 1000, 10000]
 Ps = [3, 10, 20]
 heritability = ["high", "low"]
@@ -169,40 +183,50 @@ reps = 2
 
 xml_dir = joinpath(@__DIR__, "..", "xml", "simulation_study")
 
-#simulations on real data sets
+### Simulations on real data sets
+
+
+
 log_dir = joinpath(@__DIR__, "..", "logs")
 data_dir = joinpath(@__DIR__, "..", "data")
 diff_start = "inverse.diffusion.precision.diffusion.precision"
 res_start = "inverse.residualPrecision.residualPrecision"
 
+
+#mammals
 mammals_log_path = joinpath(log_dir, "mammals.log")
 mammals_newick_path = joinpath(data_dir, "mammals_trimmed_newick.txt")
 mammals_mis_percs = [0.0, 0.25, 0.5, 0.75]
+mammals_ns = [100, 500, 1000, 3649]
 
-for perc in mammals_mis_percs
-    sim_from_example(xml_dir, mammals_log_path, mammals_newick_path,
-                diff_start, res_start, perc, "mammalsSim", repeats = reps)
-end
+sim_from_example(xml_dir, mammals_log_path, mammals_newick_path,
+                diff_start, res_start, mammals_mis_percs, mammals_ns,
+                "mammalsSim", repeats = reps)
 
+
+#hiv
 hiv_log_path = joinpath(log_dir, "hiv.log")
 hiv_newick_path = joinpath(data_dir, "hiv_newick.txt")
 hiv_mis_percs = [0.0, 0.25, 0.5]
+hiv_ns = [100, 500, 1000, 1536]
 
-for perc in hiv_mis_percs
-    sim_from_example(xml_dir, hiv_log_path, hiv_newick_path,
-                diff_start, res_start, perc, "hivSim", repeats = reps)
-end
+sim_from_example(xml_dir, hiv_log_path, hiv_newick_path,
+                diff_start, res_start, hiv_mis_percs, hiv_ns,
+                "hivSim", repeats = reps)
 
+
+#prokaryotes
 prok_log_path = joinpath(log_dir, "prokaryotes.log")
 prok_newick_path = joinpath(data_dir, "prokaryotes_newick.txt")
 prok_diff_start = "diffVar"
 prok_res_start = "resVar"
 prok_mis_percs = mammals_mis_percs
+prok_ns = [100, 500, 705]
 
-for perc in prok_mis_percs
-    sim_from_example(xml_dir, prok_log_path, prok_newick_path,
-                prok_diff_start, prok_res_start, perc, "prokSim", repeats = reps)
-end
+sim_from_example(xml_dir, prok_log_path, prok_newick_path,
+                prok_diff_start, prok_res_start, prok_mis_percs, prok_ns,
+                "prokSim", repeats = reps)
+
 
 println("done")
 #test
