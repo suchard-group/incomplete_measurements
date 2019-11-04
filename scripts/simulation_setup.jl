@@ -70,14 +70,15 @@ end
 function sim_from_example(xml_dir::String,
                             log_path::String, newick_path::String,
                             diff_string::String, res_string::String,
-                            sparsity::Float64, base_name::String)
+                            sparsity::Float64, base_name::String;
+                            repeats::Int = 0)
 
     cols, data = ReadLogs.get_log(log_path)
     Σ_hat = ReadLogs.make_meanmatrix(data, cols, diff_string)
     Γ_hat = ReadLogs.make_meanmatrix(data, cols, res_string)
 
-    make_symmetric!(Σ_hat)
-    make_symmetric!(Γ_hat)
+    MyFunctions.make_symmetric!(Σ_hat)
+    MyFunctions.make_symmetric!(Γ_hat)
 
 
     @assert isposdef(Σ_hat)
@@ -88,7 +89,19 @@ function sim_from_example(xml_dir::String,
 
     newick = read(newick_path, String)
 
-    sim_xml(xml_dir, newick, Σ_hat, Γ_hat, sparsity, base_name, standardize_tree = true)
+    if repeats == 0
+
+        sim_xml(xml_dir, newick, Σ_hat, Γ_hat, sparsity, base_name,
+                standardize_tree = true)
+
+    else
+        @assert repeats > 0
+        for i = 1:repeats
+            sim_xml(xml_dir, newick, Σ_hat, Γ_hat, sparsity, base_name,
+                    standardize_tree = true, rep = i)
+        end
+    end
+
 end
 
 
@@ -151,8 +164,8 @@ end
 
 Ns = [100, 1000, 10000]
 Ps = [3, 10, 20]
-miss_perc = [0.0, 0.25, 0.5, 0.75]
 heritability = ["high", "low"]
+reps = 2
 
 xml_dir = joinpath(@__DIR__, "..", "xml", "simulation_study")
 
@@ -164,15 +177,32 @@ res_start = "inverse.residualPrecision.residualPrecision"
 
 mammals_log_path = joinpath(log_dir, "mammals.log")
 mammals_newick_path = joinpath(data_dir, "mammals_trimmed_newick.txt")
+mammals_mis_percs = [0.0, 0.25, 0.5, 0.75]
 
-# sim_from_example(xml_dir, mammals_log_path, mammals_newick_path, diff_start, res_start, 0.5, "mammalsSim")
+for perc in mammals_mis_percs
+    sim_from_example(xml_dir, mammals_log_path, mammals_newick_path,
+                diff_start, res_start, perc, "mammalsSim", repeats = reps)
+end
 
 hiv_log_path = joinpath(log_dir, "hiv.log")
 hiv_newick_path = joinpath(data_dir, "hiv_newick.txt")
-# sim_from_example(xml_dir, hiv_log_path, hiv_newick_path, diff_start, res_start, 0.1, "hivSim")
+hiv_mis_percs = [0.0, 0.25, 0.5]
 
+for perc in hiv_mis_percs
+    sim_from_example(xml_dir, hiv_log_path, hiv_newick_path,
+                diff_start, res_start, perc, "hivSim", repeats = reps)
+end
 
+prok_log_path = joinpath(log_dir, "prokaryotes.log")
+prok_newick_path = joinpath(data_dir, "prokaryotes_newick.txt")
+prok_diff_start = "diffVar"
+prok_res_start = "resVar"
+prok_mis_percs = mammals_mis_percs
 
+for perc in prok_mis_percs
+    sim_from_example(xml_dir, prok_log_path, prok_newick_path,
+                prok_diff_start, prok_res_start, perc, "prokSim", repeats = reps)
+end
 
 println("done")
 #test
