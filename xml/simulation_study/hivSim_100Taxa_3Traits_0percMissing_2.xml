@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beast>
+  <taxa>
+    <taxon id="ID1568">
+      <attr name="traits">1.2761285793837016 1.7067227799300535 1.17942608030219</attr>
+      <attr name="traitsTrue">1.2761285793837016 1.7067227799300535 1.17942608030219</attr>
+    </taxon>
+    <taxon id="ID9">
+      <attr name="traits">-0.09759039910590525 -0.44978582421303615 0.3092475676195231</attr>
+      <attr name="traitsTrue">-0.09759039910590525 -0.44978582421303615 0.3092475676195231</attr>
+    </taxon>
+    <taxon id="ID12">
+      <attr name="traits">-1.1984914992525273 -0.3076881427328921 1.3925384580781737</attr>
+      <attr name="traitsTrue">-1.1984914992525273 -0.3076881427328921 1.3925384580781737</attr>
+    </taxon>
+    <taxon id="ID33">
+      <attr name="traits">1.3074329356614767 1.1330775454821391 1.0084401816295394</attr>
+      <attr name="traitsTrue">1.3074329356614767 1.1330775454821391 1.0084401816295394</attr>
+    </taxon>
+    <taxon id="ID34">
+      <attr name="traits">-1.9481711648117397 -1.227512693212788 -1.0694353853823997</attr>
+      <attr name="traitsTrue">-1.9481711648117397 -1.227512693212788 -1.0694353853823997</attr>
+    </taxon>
+    <taxon id="ID1529">
+      <attr name="traits">-0.46062140545204416 -0.40536346363829906 -0.7389151368265452</attr>
+      <attr name="traitsTrue">-0.46062140545204416 -0.40536346363829906 -0.7389151368265452</attr>
+    </taxon>
+    <taxon id="ID1542">
+      <attr name="traits">-1.4265141569228716 -1.137773582853509 -0.03216689560483488</attr>
+      <attr name="traitsTrue">-1.4265141569228716 -1.137773582853509 -0.03216689560483488</attr>
+    </taxon>
+    <taxon id="ID1552">
+      <attr name="traits">1.1076359972681367 1.330231976499898 -0.7841846197441704</attr>
+      <attr name="traitsTrue">1.1076359972681367 1.330231976499898 -0.7841846197441704</attr>
+    </taxon>
+    <taxon id="ID1294">
+      <attr name="traits">-0.014080117724412422 -0.11129778567158372 -0.06031240331123908</attr>
+      <attr name="traitsTrue">-0.014080117724412422 -0.11129778567158372 -0.06031240331123908</attr>
+    </taxon>
+    <taxon id="ID1296">
+      <attr name="traits">1.343910728173428 1.386438471822475 1.062134868372375</attr>
+      <attr name="traitsTrue">1.343910728173428 1.386438471822475 1.062134868372375</attr>
+    </taxon>
+    <taxon id="ID1314">
+      <attr name="traits">-1.108908338241083 -1.5015812059999878 -0.09086440769586429</attr>
+      <attr name="traitsTrue">-1.108908338241083 -1.5015812059999878 -0.09086440769586429</attr>
+    </taxon>
+    <taxon id="ID1316">
+      <attr name="traits">-0.36669158488003256 -0.7042693113813432 0.8676238419088134</attr>
+      <attr name="traitsTrue">-0.36669158488003256 -0.7042693113813432 0.8676238419088134</attr>
+    </taxon>
+    <taxon id="ID1343">
+      <attr name="traits">0.028643102492367012 -0.01428854088518261 -0.6254616063130535</attr>
+      <attr name="traitsTrue">0.028643102492367012 -0.01428854088518261 -0.6254616063130535</attr>
+    </taxon>
+    <taxon id="ID1346">
+      <attr name="traits">-1.1786491826144552 -0.05317290538243935 -1.3267945391342557</attr>
+      <attr name="traitsTrue">-1.1786491826144552 -0.05317290538243935 -1.3267945391342557</attr>
+    </taxon>
+    <taxon id="ID1347">
+      <attr name="traits">-1.1347675937484625 -0.46855700199653877 0.42187627214010526</attr>
+      <attr name="traitsTrue">-1.1347675937484625 -0.46855700199653877 0.42187627214010526</attr>
+    </taxon>
+    <taxon id="ID1348">
+      <attr name="traits">-0.2092632479647729 -0.3576506239867159 0.14059617428539162</attr>
+      <attr name="traitsTrue">-0.2092632479647729 -0.3576506239867159 0.14059617428539162</attr>
+    </taxon>
+    <taxon id="ID1358">
+      <attr name="traits">0.6986320163371833 0.7350825747583525 -1.3454076643244917</attr>
+      <attr name="traitsTrue">0.6986320163371833 0.7350825747583525 -1.3454076643244917</attr>
+    </taxon>
+    <taxon id="ID1367">
+      <attr name="traits">-1.169530788872398 -1.169612341019746 0.14229632831811487</attr>
+      <attr name="traitsTrue">-1.169530788872398 -1.169612341019746 0.14229632831811487</attr>
+    </taxon>
+    <taxon id="ID1378">
+      <attr name="traits">-0.14577300558228254 -0.5248098816477007 -0.8939369215219178</attr>
+      <attr name="traitsTrue">-0.14577300558228254 -0.5248098816477007 -0.8939369215219178</attr>
+    </taxon>
+    <taxon id="ID1395">
+      <attr name="traits">0.16326140906020337 1.1980624267350342 -0.7094954822407554</attr>
+      <attr name="traitsTrue">0.16326140906020337 1.1980624267350342 -0.7094954822407554</attr>
+    </taxon>
+    <taxon id="ID1403">
+      <attr name="traits">0.19057348716220768 -0.36558737390392376 0.7879694895279363</attr>
+      <attr name="traitsTrue">0.19057348716220768 -0.36558737390392376 0.7879694895279363</attr>
+    </taxon>
+    <taxon id="ID1414">
+      <attr name="traits">0.7223321795796096 1.2310138706066234 -0.9484788108740503</attr>
+      <attr name="traitsTrue">0.7223321795796096 1.2310138706066234 -0.9484788108740503</attr>
+    </taxon>
+    <taxon id="ID1423">
+      <attr name="traits">-0.5881352145522798 -0.8512493843463124 -1.0695251679623956</attr>
+      <attr name="traitsTrue">-0.5881352145522798 -0.8512493843463124 -1.0695251679623956</attr>
+    </taxon>
+    <taxon id="ID1483">
+      <attr name="traits">0.09162215572955221 -0.5983532387178043 -0.435961079725648</attr>
+      <attr name="traitsTrue">0.09162215572955221 -0.5983532387178043 -0.435961079725648</attr>
+    </taxon>
+    <taxon id="ID1507">
+      <attr name="traits">-1.6674120946232054 -2.2296941373086696 -0.44550938173456495</attr>
+      <attr name="traitsTrue">-1.6674120946232054 -2.2296941373086696 -0.44550938173456495</attr>
+    </taxon>
+    <taxon id="ID1509">
+      <attr name="traits">1.293695130660156 1.6478183445516343 -0.2882989401256901</attr>
+      <attr name="traitsTrue">1.293695130660156 1.6478183445516343 -0.2882989401256901</attr>
+    </taxon>
+    <taxon id="ID1153">
+      <attr name="traits">0.39294288192044563 1.2226183475210226 -1.0071104238715936</attr>
+      <attr name="traitsTrue">0.39294288192044563 1.2226183475210226 -1.0071104238715936</attr>
+    </taxon>
+    <taxon id="ID1159">
+      <attr name="traits">-0.43324057940723426 -0.7768862046006099 0.38511259476848464</attr>
+      <attr name="traitsTrue">-0.43324057940723426 -0.7768862046006099 0.38511259476848464</attr>
+    </taxon>
+    <taxon id="ID1174">
+      <attr name="traits">0.1305332526249179 -0.00632449090543008 -1.1654909148848087</attr>
+      <attr name="traitsTrue">0.1305332526249179 -0.00632449090543008 -1.1654909148848087</attr>
+    </taxon>
+    <taxon id="ID1180">
+      <attr name="traits">0.5210991967445266 0.01595407969552526 -0.13503378353174822</attr>
+      <attr name="traitsTrue">0.5210991967445266 0.01595407969552526 -0.13503378353174822</attr>
+    </taxon>
+    <taxon id="ID1192">
+      <attr name="traits">-0.03492327213480695 0.07443483129734946 -0.4538573897195802</attr>
+      <attr name="traitsTrue">-0.03492327213480695 0.07443483129734946 -0.4538573897195802</attr>
+    </taxon>
+    <taxon id="ID1197">
+      <attr name="traits">-2.2609286270947466 -1.8079500186527708 0.8641009315061742</attr>
+      <attr name="traitsTrue">-2.2609286270947466 -1.8079500186527708 0.8641009315061742</attr>
+    </taxon>
+    <taxon id="ID1211">
+      <attr name="traits">1.095580186785807 0.5050462376572543 0.18733947067163992</attr>
+      <attr name="traitsTrue">1.095580186785807 0.5050462376572543 0.18733947067163992</attr>
+    </taxon>
+    <taxon id="ID1229">
+      <attr name="traits">-1.2857665185926692 -1.0403388067790242 0.6454699063126308</attr>
+      <attr name="traitsTrue">-1.2857665185926692 -1.0403388067790242 0.6454699063126308</attr>
+    </taxon>
+    <taxon id="ID1247">
+      <attr name="traits">-1.6168241936577359 -1.5668511450574538 0.40583114273086995</attr>
+      <attr name="traitsTrue">-1.6168241936577359 -1.5668511450574538 0.40583114273086995</attr>
+    </taxon>
+    <taxon id="ID1271">
+      <attr name="traits">1.5856018283378166 1.1923199736973549 -0.696913865755777</attr>
+      <attr name="traitsTrue">1.5856018283378166 1.1923199736973549 -0.696913865755777</attr>
+    </taxon>
+    <taxon id="ID832">
+      <attr name="traits">-0.6563756698471026 -0.4105539021031923 -0.06830451506894553</attr>
+      <attr name="traitsTrue">-0.6563756698471026 -0.4105539021031923 -0.06830451506894553</attr>
+    </taxon>
+    <taxon id="ID834">
+      <attr name="traits">-1.0827189324037356 -0.5793113094097497 0.8264357152667252</attr>
+      <attr name="traitsTrue">-1.0827189324037356 -0.5793113094097497 0.8264357152667252</attr>
+    </taxon>
+    <taxon id="ID837">
+      <attr name="traits">-1.6080799755446709 -1.453354447488464 1.39472881668146</attr>
+      <attr name="traitsTrue">-1.6080799755446709 -1.453354447488464 1.39472881668146</attr>
+    </taxon>
+    <taxon id="ID845">
+      <attr name="traits">-0.5255612216550016 -0.8671326872968373 0.47483109134027013</attr>
+      <attr name="traitsTrue">-0.5255612216550016 -0.8671326872968373 0.47483109134027013</attr>
+    </taxon>
+    <taxon id="ID866">
+      <attr name="traits">-0.2775692412876862 -0.20728314016677918 -0.14580792694439104</attr>
+      <attr name="traitsTrue">-0.2775692412876862 -0.20728314016677918 -0.14580792694439104</attr>
+    </taxon>
+    <taxon id="ID876">
+      <attr name="traits">2.080060093326768 1.8267026474518808 -0.6621437976632047</attr>
+      <attr name="traitsTrue">2.080060093326768 1.8267026474518808 -0.6621437976632047</attr>
+    </taxon>
+    <taxon id="ID893">
+      <attr name="traits">2.5863447473222703 2.675164890619757 -2.1400214521226766</attr>
+      <attr name="traitsTrue">2.5863447473222703 2.675164890619757 -2.1400214521226766</attr>
+    </taxon>
+    <taxon id="ID899">
+      <attr name="traits">0.07186509591903978 0.21209213645440486 0.9834269926624037</attr>
+      <attr name="traitsTrue">0.07186509591903978 0.21209213645440486 0.9834269926624037</attr>
+    </taxon>
+    <taxon id="ID902">
+      <attr name="traits">-1.4017414414995901 -1.6806924560617573 2.220454848664267</attr>
+      <attr name="traitsTrue">-1.4017414414995901 -1.6806924560617573 2.220454848664267</attr>
+    </taxon>
+    <taxon id="ID911">
+      <attr name="traits">-1.816807896997589 -0.9969421256183191 -0.32140057419310664</attr>
+      <attr name="traitsTrue">-1.816807896997589 -0.9969421256183191 -0.32140057419310664</attr>
+    </taxon>
+    <taxon id="ID977">
+      <attr name="traits">-0.02234074107216852 0.12133679190546717 -0.6088601950138888</attr>
+      <attr name="traitsTrue">-0.02234074107216852 0.12133679190546717 -0.6088601950138888</attr>
+    </taxon>
+    <taxon id="ID981">
+      <attr name="traits">1.2335101281096514 1.6955950029742484 0.6277908291086531</attr>
+      <attr name="traitsTrue">1.2335101281096514 1.6955950029742484 0.6277908291086531</attr>
+    </taxon>
+    <taxon id="ID1015">
+      <attr name="traits">-0.9555549716273614 -0.1440464791305011 -0.06205643262105229</attr>
+      <attr name="traitsTrue">-0.9555549716273614 -0.1440464791305011 -0.06205643262105229</attr>
+    </taxon>
+    <taxon id="ID1025">
+      <attr name="traits">1.320789322358616 0.9288757717757665 -0.4524522038956375</attr>
+      <attr name="traitsTrue">1.320789322358616 0.9288757717757665 -0.4524522038956375</attr>
+    </taxon>
+    <taxon id="ID1057">
+      <attr name="traits">0.3109554474855582 0.4663023590424509 -0.16543295946750886</attr>
+      <attr name="traitsTrue">0.3109554474855582 0.4663023590424509 -0.16543295946750886</attr>
+    </taxon>
+    <taxon id="ID1068">
+      <attr name="traits">-1.3141202962167342 -1.5076171763438804 0.48037353214525547</attr>
+      <attr name="traitsTrue">-1.3141202962167342 -1.5076171763438804 0.48037353214525547</attr>
+    </taxon>
+    <taxon id="ID1083">
+      <attr name="traits">1.643132456204394 0.7644584679136415 0.8244972905882103</attr>
+      <attr name="traitsTrue">1.643132456204394 0.7644584679136415 0.8244972905882103</attr>
+    </taxon>
+    <taxon id="ID1095">
+      <attr name="traits">-1.1707694847178098 -0.7919629049724641 0.3646567670206271</attr>
+      <attr name="traitsTrue">-1.1707694847178098 -0.7919629049724641 0.3646567670206271</attr>
+    </taxon>
+    <taxon id="ID1104">
+      <attr name="traits">-0.797436919372324 -0.04666428217596097 1.4699022687728247</attr>
+      <attr name="traitsTrue">-0.797436919372324 -0.04666428217596097 1.4699022687728247</attr>
+    </taxon>
+    <taxon id="ID1126">
+      <attr name="traits">-1.3210431659886548 -0.9349215186394395 1.7543757194042133</attr>
+      <attr name="traitsTrue">-1.3210431659886548 -0.9349215186394395 1.7543757194042133</attr>
+    </taxon>
+    <taxon id="ID59">
+      <attr name="traits">-0.6741953343867514 0.28761466644585787 -1.276662873399277</attr>
+      <attr name="traitsTrue">-0.6741953343867514 0.28761466644585787 -1.276662873399277</attr>
+    </taxon>
+    <taxon id="ID70">
+      <attr name="traits">0.48920825701332954 0.8246706116599329 -1.9023942845675563</attr>
+      <attr name="traitsTrue">0.48920825701332954 0.8246706116599329 -1.9023942845675563</attr>
+    </taxon>
+    <taxon id="ID76">
+      <attr name="traits">0.24922099933905426 0.43126890479790153 -0.25686879808825946</attr>
+      <attr name="traitsTrue">0.24922099933905426 0.43126890479790153 -0.25686879808825946</attr>
+    </taxon>
+    <taxon id="ID88">
+      <attr name="traits">-2.1589699086722853 -1.958282143577702 -0.12227080764699538</attr>
+      <attr name="traitsTrue">-2.1589699086722853 -1.958282143577702 -0.12227080764699538</attr>
+    </taxon>
+    <taxon id="ID90">
+      <attr name="traits">-0.5858110235941363 -0.046618310354721915 -0.03315720693087587</attr>
+      <attr name="traitsTrue">-0.5858110235941363 -0.046618310354721915 -0.03315720693087587</attr>
+    </taxon>
+    <taxon id="ID98">
+      <attr name="traits">-0.5713577808604524 -1.0146237074468112 0.40307969738774213</attr>
+      <attr name="traitsTrue">-0.5713577808604524 -1.0146237074468112 0.40307969738774213</attr>
+    </taxon>
+    <taxon id="ID102">
+      <attr name="traits">2.144839463931554 1.760372795595989 -0.5362155516085974</attr>
+      <attr name="traitsTrue">2.144839463931554 1.760372795595989 -0.5362155516085974</attr>
+    </taxon>
+    <taxon id="ID130">
+      <attr name="traits">-0.6825783938939848 -0.7288064313786584 0.6173306253106997</attr>
+      <attr name="traitsTrue">-0.6825783938939848 -0.7288064313786584 0.6173306253106997</attr>
+    </taxon>
+    <taxon id="ID793">
+      <attr name="traits">-1.814602827105962 -1.5760011588118743 0.5321006670909985</attr>
+      <attr name="traitsTrue">-1.814602827105962 -1.5760011588118743 0.5321006670909985</attr>
+    </taxon>
+    <taxon id="ID798">
+      <attr name="traits">0.4627957377183314 -0.04848149877145391 -1.3133806042400071</attr>
+      <attr name="traitsTrue">0.4627957377183314 -0.04848149877145391 -1.3133806042400071</attr>
+    </taxon>
+    <taxon id="ID802">
+      <attr name="traits">0.5992345366673985 0.24827451225813463 -0.05569319939039924</attr>
+      <attr name="traitsTrue">0.5992345366673985 0.24827451225813463 -0.05569319939039924</attr>
+    </taxon>
+    <taxon id="ID776">
+      <attr name="traits">0.7004011926832323 0.5736003325272451 -1.3057117873985598</attr>
+      <attr name="traitsTrue">0.7004011926832323 0.5736003325272451 -1.3057117873985598</attr>
+    </taxon>
+    <taxon id="ID785">
+      <attr name="traits">0.13731491471745677 -0.8611885180154512 -1.3289426808710323</attr>
+      <attr name="traitsTrue">0.13731491471745677 -0.8611885180154512 -1.3289426808710323</attr>
+    </taxon>
+    <taxon id="ID152">
+      <attr name="traits">-1.2024214771774082 -1.1169094432047293 -0.3876626001016806</attr>
+      <attr name="traitsTrue">-1.2024214771774082 -1.1169094432047293 -0.3876626001016806</attr>
+    </taxon>
+    <taxon id="ID189">
+      <attr name="traits">-0.3351789447209207 -0.43518803999588374 -0.9768232731888448</attr>
+      <attr name="traitsTrue">-0.3351789447209207 -0.43518803999588374 -0.9768232731888448</attr>
+    </taxon>
+    <taxon id="ID556">
+      <attr name="traits">1.3958670333762413 0.07141206734558606 -0.40580261040847576</attr>
+      <attr name="traitsTrue">1.3958670333762413 0.07141206734558606 -0.40580261040847576</attr>
+    </taxon>
+    <taxon id="ID582">
+      <attr name="traits">-1.4472246023530304 -1.8177027250752869 1.467842644101652</attr>
+      <attr name="traitsTrue">-1.4472246023530304 -1.8177027250752869 1.467842644101652</attr>
+    </taxon>
+    <taxon id="ID593">
+      <attr name="traits">0.9951088002521575 0.6313652007953923 0.13635671867683752</attr>
+      <attr name="traitsTrue">0.9951088002521575 0.6313652007953923 0.13635671867683752</attr>
+    </taxon>
+    <taxon id="ID596">
+      <attr name="traits">-0.8567079061199836 -1.0442976350078654 1.5581183501088538</attr>
+      <attr name="traitsTrue">-0.8567079061199836 -1.0442976350078654 1.5581183501088538</attr>
+    </taxon>
+    <taxon id="ID614">
+      <attr name="traits">0.6966991556212907 0.6639253950813314 -2.894598773530946</attr>
+      <attr name="traitsTrue">0.6966991556212907 0.6639253950813314 -2.894598773530946</attr>
+    </taxon>
+    <taxon id="ID621">
+      <attr name="traits">-2.1567069241408885 -2.503126440370312 1.142079498120383</attr>
+      <attr name="traitsTrue">-2.1567069241408885 -2.503126440370312 1.142079498120383</attr>
+    </taxon>
+    <taxon id="ID637">
+      <attr name="traits">1.4606964561365026 -0.14260194396609105 -0.241282253825019</attr>
+      <attr name="traitsTrue">1.4606964561365026 -0.14260194396609105 -0.241282253825019</attr>
+    </taxon>
+    <taxon id="ID693">
+      <attr name="traits">0.20272959314731148 0.7049958972571067 -0.8682771209962226</attr>
+      <attr name="traitsTrue">0.20272959314731148 0.7049958972571067 -0.8682771209962226</attr>
+    </taxon>
+    <taxon id="ID702">
+      <attr name="traits">-0.24496075844193263 0.2663714315713957 1.5488444908817791</attr>
+      <attr name="traitsTrue">-0.24496075844193263 0.2663714315713957 1.5488444908817791</attr>
+    </taxon>
+    <taxon id="ID715">
+      <attr name="traits">-0.03479350299084383 0.1355568282303973 -0.41294515468351717</attr>
+      <attr name="traitsTrue">-0.03479350299084383 0.1355568282303973 -0.41294515468351717</attr>
+    </taxon>
+    <taxon id="ID525">
+      <attr name="traits">-3.1039553390696755 -3.2917768749784933 0.13345594024387353</attr>
+      <attr name="traitsTrue">-3.1039553390696755 -3.2917768749784933 0.13345594024387353</attr>
+    </taxon>
+    <taxon id="ID554">
+      <attr name="traits">0.8258090593722716 0.26965392193667653 -1.7325561830566183</attr>
+      <attr name="traitsTrue">0.8258090593722716 0.26965392193667653 -1.7325561830566183</attr>
+    </taxon>
+    <taxon id="ID346">
+      <attr name="traits">-0.09989853510402186 -0.7899716886721594 -0.4470900065798097</attr>
+      <attr name="traitsTrue">-0.09989853510402186 -0.7899716886721594 -0.4470900065798097</attr>
+    </taxon>
+    <taxon id="ID366">
+      <attr name="traits">1.3053119732096237 0.9421959136791909 -0.6720621892563078</attr>
+      <attr name="traitsTrue">1.3053119732096237 0.9421959136791909 -0.6720621892563078</attr>
+    </taxon>
+    <taxon id="ID373">
+      <attr name="traits">-0.20097715529819904 0.8093578388136442 -1.4240264499002693</attr>
+      <attr name="traitsTrue">-0.20097715529819904 0.8093578388136442 -1.4240264499002693</attr>
+    </taxon>
+    <taxon id="ID384">
+      <attr name="traits">-0.4216741362726072 -0.9007374962046868 -0.5986089488049902</attr>
+      <attr name="traitsTrue">-0.4216741362726072 -0.9007374962046868 -0.5986089488049902</attr>
+    </taxon>
+    <taxon id="ID406">
+      <attr name="traits">-0.504276311551595 -1.2625451930545724 0.5997707151280315</attr>
+      <attr name="traitsTrue">-0.504276311551595 -1.2625451930545724 0.5997707151280315</attr>
+    </taxon>
+    <taxon id="ID416">
+      <attr name="traits">-1.3627826879458171 -1.7401461247035406 1.190939320034409</attr>
+      <attr name="traitsTrue">-1.3627826879458171 -1.7401461247035406 1.190939320034409</attr>
+    </taxon>
+    <taxon id="ID417">
+      <attr name="traits">1.0628912908013115 0.8250399961770459 -0.2949909769618697</attr>
+      <attr name="traitsTrue">1.0628912908013115 0.8250399961770459 -0.2949909769618697</attr>
+    </taxon>
+    <taxon id="ID425">
+      <attr name="traits">-1.764461559086433 -1.6923618559723708 -0.5200783843763127</attr>
+      <attr name="traitsTrue">-1.764461559086433 -1.6923618559723708 -0.5200783843763127</attr>
+    </taxon>
+    <taxon id="ID441">
+      <attr name="traits">-1.5627937945533472 -1.5063868987565001 1.7244461393845127</attr>
+      <attr name="traitsTrue">-1.5627937945533472 -1.5063868987565001 1.7244461393845127</attr>
+    </taxon>
+    <taxon id="ID452">
+      <attr name="traits">-0.9517965180763114 -0.6933566994478404 0.33292742558932964</attr>
+      <attr name="traitsTrue">-0.9517965180763114 -0.6933566994478404 0.33292742558932964</attr>
+    </taxon>
+    <taxon id="ID453">
+      <attr name="traits">0.16633545162706254 0.620301382107297 1.2213179990923875</attr>
+      <attr name="traitsTrue">0.16633545162706254 0.620301382107297 1.2213179990923875</attr>
+    </taxon>
+    <taxon id="ID464">
+      <attr name="traits">-0.5398593465203985 -0.5263920534848446 -0.8556049656811794</attr>
+      <attr name="traitsTrue">-0.5398593465203985 -0.5263920534848446 -0.8556049656811794</attr>
+    </taxon>
+    <taxon id="ID465">
+      <attr name="traits">-0.49515605288392994 0.3030095481126148 -1.1658950286033156</attr>
+      <attr name="traitsTrue">-0.49515605288392994 0.3030095481126148 -1.1658950286033156</attr>
+    </taxon>
+    <taxon id="ID483">
+      <attr name="traits">-1.0412406292207892 -0.16709719483673752 1.5938117422378482</attr>
+      <attr name="traitsTrue">-1.0412406292207892 -0.16709719483673752 1.5938117422378482</attr>
+    </taxon>
+    <taxon id="ID488">
+      <attr name="traits">-0.10437635514952605 -0.5106990714890896 0.5324126931241924</attr>
+      <attr name="traitsTrue">-0.10437635514952605 -0.5106990714890896 0.5324126931241924</attr>
+    </taxon>
+    <taxon id="ID296">
+      <attr name="traits">-0.8492960123749493 -1.8024928455585625 0.7916775414207948</attr>
+      <attr name="traitsTrue">-0.8492960123749493 -1.8024928455585625 0.7916775414207948</attr>
+    </taxon>
+    <taxon id="ID301">
+      <attr name="traits">0.14483616294407423 0.23983697355355338 -0.8468687343250582</attr>
+      <attr name="traitsTrue">0.14483616294407423 0.23983697355355338 -0.8468687343250582</attr>
+    </taxon>
+  </taxa>
+  <newick id="startingTree" usingHeights="true" usingDates="false">((((((((((((((ID1568:38.518695,((ID9:5.5221248,ID12:2.52213):34.091516,(ID33:5.63761,ID34:4.53761):33.475993):0.805048):0.513491,((ID1529:41.2351,ID1542:37.5351925):0.471397,ID1552:36.206544):0.625638):0.589615,(((ID1294:14.6049,ID1296:14.00488):25.509484,((ID1314:33.3958,ID1316:34.995854):5.325611,((ID1343:6.92726,(ID1346:7.6076,ID1347:5.8076):3.01967):0.148175,ID1348:7.87544):30.346062):0.592878):0.507486,((ID1358:38.32598,(ID1367:36.76887,ID1378:37.968749):0.957181):1.45708,((((ID1395:15.81407,ID1403:16.914078):22.019923,ID1414:43.233974):0.366926,ID1423:37.100876):1.373796,(ID1483:32.9237911,(ID1507:22.79801,ID1509:38.09797):1.625764):0.550953):0.3083786):0.0387156):0):0.162988,(((ID1153:35.45534,ID1159:26.955355):4.126203,((ID1174:37.08024,ID1180:34.68027):1.264322,(ID1192:24.23008,ID1197:18.33011):13.81445):1.13698):0.782047,((ID1211:39.22241,ID1229:40.22236):0.625931,(ID1247:40.992512,ID1271:31.192502):0.555771):0.215312):0.621201):0,((((ID832:12.492057,ID834:32.492):1.53074,(ID837:37.266831,ID845:34.466787):0.155967):1.253275,(((ID866:14.079965,ID876:37.679921):0.297497,(ID893:37.45903,(ID899:33.87831,ID902:23.67823):0.980729):0.918457):0.835159,ID911:38.312596):0.263431):1.561,((((ID977:28.834682,ID981:29.234729):1.306408,ID1015:31.541081):0.415754,ID1025:30.156903):4.376282,((ID1057:33.27543,((ID1068:22.1907946,ID1083:20.890801):2.711152,(ID1095:30.23542,ID1104:29.635461):0.366497):0.473392):2.840149,ID1126:39.415512):0.317662):0.903889):0.947765):0.110646,((ID59:39.16,(ID70:15.26337,ID76:35.663407):2.896603):2.431688,((ID88:32.91629,ID90:30.71633):3.517611,ID98:36.333958):0.757771):1.20376):0.515631,(ID102:43.63781,ID130:38.437847):1.17328):0.0972039,((ID793:24.9811,ID798:36.78107):1.71481,ID802:33.49588):3.012422):0.251719,(ID776:36.15031,ID785:39.450266):1.009729):0.193869,(ID152:37.71183,ID189:36.81185):2.442065):0.113791,((ID556:39.02276,((ID582:34.258075,(ID593:28.54906,ID596:25.048993):10.60902):1.23781,ID614:38.395879):0.426923):1.44976,((ID621:13.99404,ID637:38.19407):3.046469,(ID693:34.627949,(ID702:41.99018,ID715:38.1902):1.337698):0.412618):0.23202):1.09512):0.148008,(ID525:39.2845,ID554:29.684497):0.831159):0.337596,((((ID346:38.84699,(ID366:43.285279,ID373:33.685297):0.06169):0.511475,ID384:34.358461):0.516577,ID406:41.67505):0.611833109,(ID416:40.294961,((ID417:37.387104,ID425:37.787068):1.934934,(((ID441:34.13275,(ID452:3.60729,ID453:6.20729):25.92538):1.513985,(ID464:35.1919,ID465:28.3919):3.55477):1.826996,(ID483:36.16339,ID488:36.363393):0.810247):0.348352):0.272964):0.191866):2.266421):2.275483,(ID296:38.157595,ID301:39.657569):0.871145);;</newick>
+  <treeModel id="treeModel" fixHeights="true">
+    <tree idref="startingTree"/>
+    <rootHeight>
+      <parameter id="treeModel.rootHeight"/>
+    </rootHeight>
+    <nodeHeights internalNodes="true">
+      <parameter id="treeModel.internalNodeHeights"/>
+    </nodeHeights>
+    <nodeHeights internalNodes="true" rootNode="true">
+      <parameter id="treeModel.allInternalNodeHeights"/>
+    </nodeHeights>
+    <nodeTraits rootNode="false" internalNodes="false" leafNodes="true" asMatrix="true" traitDimension="3" name="traits">
+      <parameter id="leafTraits"/>
+    </nodeTraits>
+    <nodeTraits rootNode="false" internalNodes="false" leafNodes="true" asMatrix="true" traitDimension="3" name="traitsTrue">
+      <parameter id="leafTraitsTrue"/>
+    </nodeTraits>
+  </treeModel>
+  <multivariateDiffusionModel id="diffusionModel">
+    <precisionMatrix>
+      <matrixParameter id="diffusion.precision">
+        <parameter value="1.0 0.0 0.0"/>
+        <parameter value="0.0 1.0 0.0"/>
+        <parameter value="0.0 0.0 1.0"/>
+      </matrixParameter>
+    </precisionMatrix>
+  </multivariateDiffusionModel>
+  <multivariateWishartPrior id="precisionPrior" df="3">
+    <scaleMatrix>
+      <matrixParameter>
+        <parameter value="1.0 0.0 0.0"/>
+        <parameter value="0.0 1.0 0.0"/>
+        <parameter value="0.0 0.0 1.0"/>
+      </matrixParameter>
+    </scaleMatrix>
+    <data>
+      <matrixParameter idref="diffusion.precision"/>
+    </data>
+  </multivariateWishartPrior>
+  <repeatedMeasuresModel id="repeatedMeasures" traitName="traits">
+    <treeModel idref="treeModel"/>
+    <traitParameter>
+      <parameter idref="leafTraits"/>
+    </traitParameter>
+    <samplingPrecision>
+      <matrixParameter id="residualPrecision">
+        <parameter value="1.0 0.0 0.0"/>
+        <parameter value="0.0 1.0 0.0"/>
+        <parameter value="0.0 0.0 1.0"/>
+      </matrixParameter>
+    </samplingPrecision>
+    <multivariateDiffusionModel idref="diffusionModel"/>
+  </repeatedMeasuresModel>
+  <multivariateWishartPrior id="residualPrior" df="3">
+    <scaleMatrix>
+      <matrixParameter>
+        <parameter value="1.0 0.0 0.0"/>
+        <parameter value="0.0 1.0 0.0"/>
+        <parameter value="0.0 0.0 1.0"/>
+      </matrixParameter>
+    </scaleMatrix>
+    <data>
+      <matrixParameter idref="residualPrecision"/>
+    </data>
+  </multivariateWishartPrior>
+  <traitDataLikelihood allowIdentical="true" standardize="true" cacheBranches="true" id="traitLikelihood" traitName="traits" useTreeLength="false" scaleByTime="true" reportAsMultivariate="true" allowSingular="false">
+    <multivariateDiffusionModel idref="diffusionModel"/>
+    <treeModel idref="treeModel"/>
+    <repeatedMeasuresModel idref="repeatedMeasures"/>
+    <conjugateRootPrior>
+      <meanParameter>
+        <parameter value="0.0 0.0 0.0"/>
+      </meanParameter>
+      <priorSampleSize>
+        <parameter value="0.001" dimension="1"/>
+      </priorSampleSize>
+    </conjugateRootPrior>
+  </traitDataLikelihood>
+  <operators id="operators">
+    <compoundPrecisionOperator weight="1.0">
+      <diffusionOperator>
+        <precisionGibbsOperator weight="1.0">
+          <wishartStatistics traitName="traits">
+            <traitDataLikelihood idref="traitLikelihood"/>
+          </wishartStatistics>
+          <multivariateWishartPrior idref="precisionPrior"/>
+        </precisionGibbsOperator>
+      </diffusionOperator>
+      <residualOperator>
+        <precisionGibbsOperator weight="1.0">
+          <RepeatedMeasuresWishartStatistics traitName="traits">
+            <repeatedMeasuresModel idref="repeatedMeasures"/>
+            <traitDataLikelihood idref="traitLikelihood"/>
+          </RepeatedMeasuresWishartStatistics>
+          <multivariateWishartPrior idref="residualPrior"/>
+        </precisionGibbsOperator>
+      </residualOperator>
+    </compoundPrecisionOperator>
+  </operators>
+  <modelExtensionTraitLogger id="modelExtensionTraitLogger" dimensions="missing" traitName="traits">
+    <traitDataLikelihood idref="traitLikelihood"/>
+    <repeatedMeasuresModel idref="repeatedMeasures"/>
+  </modelExtensionTraitLogger>
+  <matrixInverse id="inverse.diffusion.precision">
+    <matrixParameter idref="diffusion.precision"/>
+  </matrixInverse>
+  <matrixInverse id="inverse.residualPrecision">
+    <matrixParameter idref="residualPrecision"/>
+  </matrixInverse>
+  <correlationMatrix id="correlation.inverted.diffusion.precision" invert="true">
+    <matrixParameter idref="diffusion.precision"/>
+  </correlationMatrix>
+  <correlationMatrix id="correlation.inverted.residualPrecision" invert="true">
+    <matrixParameter idref="residualPrecision"/>
+  </correlationMatrix>
+  <varianceProportionStatistic id="varianceProportionStatistic" matrixRatio="coheritability" useEmpiricalVariance="false">
+    <traitDataLikelihood idref="traitLikelihood"/>
+    <treeModel idref="treeModel"/>
+    <repeatedMeasuresModel idref="repeatedMeasures"/>
+    <multivariateDiffusionModel idref="diffusionModel"/>
+  </varianceProportionStatistic>
+  <mcmc id="mcmc" chainLength="20000" autoOptimize="true">
+    <posterior id="posterior">
+      <prior id="prior">
+        <multivariateWishartPrior idref="precisionPrior"/>
+        <multivariateWishartPrior idref="residualPrior"/>
+      </prior>
+      <likelihood id="likelihood">
+        <traitDataLikelihood idref="traitLikelihood"/>
+      </likelihood>
+    </posterior>
+    <operators idref="operators"/>
+    <log id="screenLog" logEvery="100">
+      <column label="posterior" dp="4" width="12">
+        <posterior idref="posterior"/>
+      </column>
+      <column label="prior" dp="4" width="12">
+        <prior idref="prior"/>
+      </column>
+      <column label="likelihood" dp="4" width="12">
+        <likelihood idref="likelihood"/>
+      </column>
+    </log>
+    <log id="fileLog" logEvery="50" fileName="hivSim_100Taxa_3Traits_0percMissing_2.log" overwrite="true">
+      <posterior idref="posterior"/>
+      <prior idref="prior"/>
+      <likelihood idref="likelihood"/>
+      <modelExtensionTraitLogger idref="modelExtensionTraitLogger"/>
+      <matrixInverse idref="inverse.diffusion.precision"/>
+      <matrixInverse idref="inverse.residualPrecision"/>
+      <correlationMatrix idref="correlation.inverted.diffusion.precision"/>
+      <correlationMatrix idref="correlation.inverted.residualPrecision"/>
+      <varianceProportionStatistic idref="varianceProportionStatistic"/>
+    </log>
+  </mcmc>
+  <report>
+    <property name="timer">
+      <mcmc idref="mcmc"/>
+    </property>
+  </report>
+</beast>
