@@ -5,15 +5,24 @@ library(ggplot2)
 simBoxPlot <- function(data, run, xVar, yVar, shadeVar) {
   
   data.run <- data[which(data$run == run),]
-  p <- ggplot() + geom_boxplot(aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar], group=data.run[,xVar])) +
-    labs(fill = shadeVar, x = xVar, y = yVar) + scale_x_log10()
+  p <- ggplot() + geom_boxplot(aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar])) +
+    labs(fill = shadeVar, x = xVar, y = yVar)
 }
 
-simScatterPlot <- function(data, run, xVar, yVar, colVar) {
+simLinePlot <- function(data, run, xVar, yVar, colVar) {
   data.run <- data[which(data$run == run),]
-  p <- ggplot() + geom_point(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar]), position="jitter") +
+  
+  p <- ggplot() + 
+    # geom_point(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar])) +
+    stat_summary(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar]), fun.data = "stat_sum_quantiles") +
     labs(color = colVar, x = xVar, y = yVar)
   
+}
+
+stat_sum_quantiles <- function(data) {
+  y <- mean(data)
+  qs = quantile(data, c(0.05, 0.95))
+  df <- data.frame(y = y, ymin = qs[[1]], ymax = qs[[2]])
 }
 
 storage.dir <- file.path(this.dir, "storage")
@@ -53,8 +62,8 @@ mats.diag <- mats[which(mats$component == "diagonal"),]
 mats.offDiag <- mats[which(mats$component == "offDiagonal"),]
 
 
-p <- simBoxPlot(mats.diag, "mammalsSim", "nObs", "logmse", "sparsity")
+p <- simBoxPlot(mats.diag, "mammalsSim", "nTaxa", "logmse", "sparsity")
 p
-# ps <- simScatterPlot(mats.offDiag, "mammalsSim", "nObs", "logmse", "sparsity")
-# 
-# ps
+ps <- simLinePlot(mats, "mammalsSim", "nObs", "logmse", "sparsity")
+
+ps

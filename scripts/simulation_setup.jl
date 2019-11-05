@@ -176,10 +176,7 @@ function data_to_df(taxa::Vector{String}, data::Matrix{Float64}, col_names::Vect
 end
 
 
-Ns = [100, 1000, 10000]
-Ps = [3, 10, 20]
-heritability = ["high", "low"]
-reps = 2
+reps = 10
 
 xml_dir = joinpath(@__DIR__, "..", "xml", "simulation_study")
 

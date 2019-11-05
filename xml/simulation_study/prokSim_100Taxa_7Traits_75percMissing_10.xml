@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beast>
+  <taxa>
+    <taxon id="Thermobaculum_terrenum">
+      <attr name="traits">NA NA NA -0.6420595940488373 NA 0.2024909871118315 NA</attr>
+      <attr name="traitsTrue">-0.48828269629652493 0.7854387354136236 1.799429797657412 -0.6420595940488373 -2.5453840615031385 0.2024909871118315 -2.368597615121896</attr>
+    </taxon>
+    <taxon id="Dehalogenimonas_lykanthroporepellens_BL_DC_9">
+      <attr name="traits">NA 0.3034024932054886 NA 1.4150598657065918 NA -0.9396518215550067 NA</attr>
+      <attr name="traitsTrue">-0.6279839423584441 0.3034024932054886 -0.15973834932424774 1.4150598657065918 -1.772005507254592 -0.9396518215550067 -1.8327707222128176</attr>
+    </taxon>
+    <taxon id="Treponema_parvum">
+      <attr name="traits">1.1212417226648468 NA NA NA 1.2161133953054672 NA 1.2237584482670407</attr>
+      <attr name="traitsTrue">1.1212417226648468 -2.1648714915950227 -1.7911913865580749 -1.1122923954162367 1.2161133953054672 1.0851996582614516 1.2237584482670407</attr>
+    </taxon>
+    <taxon id="Thermus_igniterrae">
+      <attr name="traits">NA -0.5647700219288746 NA NA -1.4437386651803186 NA NA</attr>
+      <attr name="traitsTrue">-0.4667448529179069 -0.5647700219288746 -0.10445698695147576 -0.5685346981754233 -1.4437386651803186 0.362999498660459 -1.2763554345332593</attr>
+    </taxon>
+    <taxon id="Caminibacter_hydrogeniphilus">
+      <attr name="traits">-1.0390109445141786 NA NA NA NA NA NA</attr>
+      <attr name="traitsTrue">-1.0390109445141786 1.0116205182310967 0.8381937268296616 -0.6662374407627087 -1.6271099970716842 0.22537641554354604 -1.5957992888524666</attr>
+    </taxon>
+    <taxon id="Geoalkalibacter_ferrihydriticus">
+      <attr name="traits">NA -1.0158745169960381 NA -1.5648536038809142 0.22830408817439235 NA NA</attr>
+      <attr name="traitsTrue">-1.0446798665281292 -1.0158745169960381 1.0452392285699 -1.5648536038809142 0.22830408817439235 1.423877967631938 0.2533871260380184</attr>
+    </taxon>
+    <taxon id="Desulfobacter_curvatus">
+      <attr name="traits">NA 3.4831919174904544 2.1562601203774525 -2.461433168832051 NA NA NA</attr>
+      <attr name="traitsTrue">-2.287220975998766 3.4831919174904544 2.1562601203774525 -2.461433168832051 -4.1037310456429035 0.30044373363016624 -4.164291769542562</attr>
+    </taxon>
+    <taxon id="Desulfobacter_vibrioformis">
+      <attr name="traits">-2.214049864718349 NA NA NA NA NA NA</attr>
+      <attr name="traitsTrue">-2.214049864718349 2.4269281086791072 2.377930919307572 -2.1961876047206355 -3.883516264673418 0.5781611529585302 -3.771018102970945</attr>
+    </taxon>
+    <taxon id="Desulfobulbus_japonicus">
+      <attr name="traits">NA NA NA NA NA 1.2461743906753955 NA</attr>
+      <attr name="traitsTrue">0.31627864083156787 0.9515147433086215 -0.042332547056504854 -0.8248729465179533 -2.0363327281235244 1.2461743906753955 -2.007922049800575</attr>
+    </taxon>
+    <taxon id="Desulfovibrio_marinisediminis">
+      <attr name="traits">-1.9860860321992633 NA NA NA NA NA NA</attr>
+      <attr name="traitsTrue">-1.9860860321992633 2.6363035821860543 1.3709332428375456 -0.1895664719439556 -1.3067841437691778 0.3697992833370956 -1.3467050548873294</attr>
+    </taxon>
+    <taxon id="Desulfovibrio_inopinatus_DSM_10711">
+      <attr name="traits">NA 1.0269471607919274 4.351343747063602 NA -4.1046804741614675 NA -4.150697811367969</attr>
+      <attr name="traitsTrue">-3.4019774907881817 1.0269471607919274 4.351343747063602 -0.02707400668888371 -4.1046804741614675 -0.7032679380488032 -4.150697811367969</attr>
+    </taxon>
+    <taxon id="Desulfovibrio_africanus">
+      <attr name="traits">NA 1.1392993037382402 3.687144417451153 0.7958531870814595 NA NA NA</attr>
+      <attr name="traitsTrue">-1.4449367683932512 1.1392993037382402 3.687144417451153 0.7958531870814595 -2.185199429318806 -0.22184947534973815 -2.1624302980362975</attr>
+    </taxon>
+    <taxon id="Desulfocurvus_vexinensis">
+      <attr name="traits">-3.712584512090659 NA NA NA NA NA -4.521322335403719</attr>
+      <attr name="traitsTrue">-3.712584512090659 3.9482685450728017 3.479938090623461 -0.8492546980065385 -4.286340633438601 0.6929636775014812 -4.521322335403719</attr>
+    </taxon>
+    <taxon id="Desulfonauticus_autotrophicus">
+      <attr name="traits">NA NA NA NA NA -1.2997350024275436 NA</attr>
+      <attr name="traitsTrue">-3.745947434568725 -0.2864995298416121 2.437695071848446 0.45638048687374 -3.4319820989419103 -1.2997350024275436 -3.59107836152135</attr>
+    </taxon>
+    <taxon id="Desulfonatronovibrio_hydrogenovorans">
+      <attr name="traits">NA NA NA NA NA -0.4698090226114874 NA</attr>
+      <attr name="traitsTrue">-1.9149694396608568 0.43132568281766354 2.9714748299946456 -0.07532599004824475 -3.5991930408574953 -0.4698090226114874 -3.638270669411776</attr>
+    </taxon>
+    <taxon id="Rubritepida_flocculans">
+      <attr name="traits">NA NA -0.6054555478162492 NA NA NA NA</attr>
+      <attr name="traitsTrue">0.3126513569126007 3.2841177566276563 -0.6054555478162492 -1.2479213446119646 -1.9375349483237214 -0.26718861356102047 -1.6677143657026314</attr>
+    </taxon>
+    <taxon id="Azospirillum_halopraeferens">
+      <attr name="traits">NA NA NA -2.5507934409840973 -2.1708696233193003 0.9731113386115151 NA</attr>
+      <attr name="traitsTrue">-0.8252108511535005 0.7631573606550756 -0.013247679651627653 -2.5507934409840973 -2.1708696233193003 0.9731113386115151 -1.9174289725384994</attr>
+    </taxon>
+    <taxon id="Fodinicurvata_sediminis_DSM_21159">
+      <attr name="traits">-2.0410778979430018 NA 1.8938288768880096 NA NA NA NA</attr>
+      <attr name="traitsTrue">-2.0410778979430018 -0.1258485241971276 1.8938288768880096 -1.1482091825947907 -3.7068005109895883 0.3028676625609691 -3.5360354047602343</attr>
+    </taxon>
+    <taxon id="Paracoccus_kocurii">
+      <attr name="traits">NA NA NA NA NA NA -3.969535391257012</attr>
+      <attr name="traitsTrue">-0.3713483251956789 1.4760802168961353 0.9319656031804454 0.14031302184314431 -3.6350377266379477 -0.49910556902459935 -3.969535391257012</attr>
+    </taxon>
+    <taxon id="Wenxinia_marina_DSM_24838">
+      <attr name="traits">NA NA NA -0.26748499555802097 NA NA NA</attr>
+      <attr name="traitsTrue">-1.277924255564175 0.915101319983907 1.759298217385911 -0.26748499555802097 -3.543991929311494 -0.04619998568875547 -3.3699028305593615</attr>
+    </taxon>
+    <taxon id="Blastochloris_viridis">
+      <attr name="traits">-1.0398355241159878 NA NA NA NA NA NA</attr>
+      <attr name="traitsTrue">-1.0398355241159878 0.24000655088195127 3.0268055871436323 0.9902352318042302 -3.6534259317951476 1.4393380552299657 -3.5791687884570766</attr>
+    </taxon>
+    <taxon id="Pleomorphomonas_oryzae_DSM_16300">
+      <attr name="traits">NA 1.2166085396643722 NA NA NA 1.2659371380549165 NA</attr>
+      <attr name="traitsTrue">-0.743368823934358 1.2166085396643722 1.3620890584226621 -0.6397053306142262 -3.395052316743442 1.2659371380549165 -3.442365569002633</attr>
+    </taxon>
+    <taxon id="Salinarimonas_rosea_DSM_21201">
+      <attr name="traits">NA 0.29893848020546143 NA NA NA NA NA</attr>
+      <attr name="traitsTrue">-0.3605647710137076 0.29893848020546143 1.7201484601514787 -1.3547136197841207 -4.241345550384981 0.9666659760170141 -4.306136950770737</attr>
+    </taxon>
+    <taxon id="Methylobacter_tundripaludum_SV96">
+      <attr name="traits">NA -0.682959970397949 1.1970122070374538 NA NA NA NA</attr>
+      <attr name="traitsTrue">-0.7767620028546206 -0.682959970397949 1.1970122070374538 -2.457703576042948 -0.4851888514062175 1.2491291672965925 -0.24871086463401698</attr>
+    </taxon>
+    <taxon id="Thiothrix_flexilis_DSM_14609">
+      <attr name="traits">NA NA 1.3254797777856622 NA NA NA -1.2635259906438554</attr>
+      <attr name="traitsTrue">-1.0171094366123121 -0.5408795272567906 1.3254797777856622 -3.1030355193216344 -1.5529511882283806 0.45404339719456355 -1.2635259906438554</attr>
+    </taxon>
+    <taxon id="Allochromatium_vinosum_DSM_180">
+      <attr name="traits">-2.819786100575902 NA NA NA NA 0.6973753555786903 NA</attr>
+      <attr name="traitsTrue">-2.819786100575902 0.33355591162571024 0.8334619815339027 -3.7498846970973982 -1.6955865328575406 0.6973753555786903 -1.3552683259132552</attr>
+    </taxon>
+    <taxon id="Marinomonas_mediterranea">
+      <attr name="traits">NA NA 1.9849061480032222 NA NA NA NA</attr>
+      <attr name="traitsTrue">-2.413193435272139 -0.5474978217444686 1.9849061480032222 -1.7398767251931133 -2.254645612072229 1.51521357383957 -2.1212620914619706</attr>
+    </taxon>
+    <taxon id="Kushneria_aurantia">
+      <attr name="traits">NA NA NA NA NA 0.9198053834206218 NA</attr>
+      <attr name="traitsTrue">-1.1999009290964173 1.4251918643345738 0.6867654906784555 -1.037392354913963 -1.6111547222498213 0.9198053834206218 -1.2644708263745814</attr>
+    </taxon>
+    <taxon id="Kangiella_aquimarina_DSM_16071">
+      <attr name="traits">NA 0.534272628518963 NA -1.6393634602553635 NA NA NA</attr>
+      <attr name="traitsTrue">-0.16465723823838752 0.534272628518963 0.289447645769106 -1.6393634602553635 -1.1228977480733995 1.4738950215105944 -0.7981085992933717</attr>
+    </taxon>
+    <taxon id="Spongiibacter_tropicus_DSM_19543">
+      <attr name="traits">NA -0.020806104954873006 NA NA NA 1.080313839108798 NA</attr>
+      <attr name="traitsTrue">-1.2424571456767357 -0.020806104954873006 0.49631583782574196 -2.6646200642843474 -2.0100341377275526 1.080313839108798 -1.454252594989285</attr>
+    </taxon>
+    <taxon id="Pseudomonas_thermotolerans">
+      <attr name="traits">NA NA NA NA -1.2931415575271823 0.2919119065265872 NA</attr>
+      <attr name="traitsTrue">-0.7507561731198951 0.9674147458146997 0.4125489313487968 -1.38029331847429 -1.2931415575271823 0.2919119065265872 -0.9999986908705906</attr>
+    </taxon>
+    <taxon id="Algicola_sagamiensis">
+      <attr name="traits">-2.459153525671203 NA 1.55080780276496 -1.3993846236061251 -3.88646429588764 NA NA</attr>
+      <attr name="traitsTrue">-2.459153525671203 1.8737250353429116 1.55080780276496 -1.3993846236061251 -3.88646429588764 1.8729930982031873 -3.802106647344453</attr>
+    </taxon>
+    <taxon id="Aliagarivorans_taiwanensis">
+      <attr name="traits">NA NA NA -1.4035803805022984 NA NA -1.4313612347170006</attr>
+      <attr name="traitsTrue">-0.7039817850826277 0.5643312667300464 0.31196419690076976 -1.4035803805022984 -1.7801147157513504 0.7697376273937527 -1.4313612347170006</attr>
+    </taxon>
+    <taxon id="Shewanella_haliotis">
+      <attr name="traits">-1.1521048259260156 NA NA NA NA NA -3.308451073327469</attr>
+      <attr name="traitsTrue">-1.1521048259260156 0.8501957345743164 1.4549001741675998 -0.8823102603047858 -3.6634378425535994 0.7292760067799906 -3.308451073327469</attr>
+    </taxon>
+    <taxon id="Shewanella_colwelliana">
+      <attr name="traits">-2.825524050107463 NA NA NA -2.8378396243680712 NA -2.4221645789114055</attr>
+      <attr name="traitsTrue">-2.825524050107463 2.4678840988958197 2.2731220182805876 -2.0526919579916934 -2.8378396243680712 0.5386414477814512 -2.4221645789114055</attr>
+    </taxon>
+    <taxon id="Photorhabdus_asymbiotica">
+      <attr name="traits">NA NA NA NA -3.416757628552976 0.5181995804128845 NA</attr>
+      <attr name="traitsTrue">-1.9615042749882399 -0.3949217017182446 0.9405533918175354 -0.6034831138682593 -3.416757628552976 0.5181995804128845 -3.1647157707650955</attr>
+    </taxon>
+    <taxon id="Enterobacter_sp_R4_368">
+      <attr name="traits">NA NA 1.628389559331062 NA NA -0.08233868503174219 -3.721352429051983</attr>
+      <attr name="traitsTrue">-0.7331118627383444 0.28804541516421234 1.628389559331062 -0.3629496667071781 -3.7653281399387875 -0.08233868503174219 -3.721352429051983</attr>
+    </taxon>
+    <taxon id="Aeromonas_molluscorum">
+      <attr name="traits">NA NA NA NA NA 0.6470639820266786 NA</attr>
+      <attr name="traitsTrue">-2.1248511337126907 0.15185624615394702 0.8910030862588201 -1.9943909010072471 -2.2122302602981505 0.6470639820266786 -1.9465818555650154</attr>
+    </taxon>
+    <taxon id="Massilia_niastensis">
+      <attr name="traits">NA NA 2.8487959000811585 NA NA NA NA</attr>
+      <attr name="traitsTrue">-0.9475425055845874 0.28222143576346786 2.8487959000811585 -1.5725463691685733 -3.207682437375272 0.6776838480915313 -2.993996381256434</attr>
+    </taxon>
+    <taxon id="Formivibrio_citricus">
+      <attr name="traits">NA NA NA -1.6326848908104077 NA NA -1.7740384855914235</attr>
+      <attr name="traitsTrue">-1.3910356919650728 -0.054823522341190534 0.7173108680140639 -1.6326848908104077 -2.013886776162599 0.6384184894588265 -1.7740384855914235</attr>
+    </taxon>
+    <taxon id="Chitiniphilus_shinanonensis">
+      <attr name="traits">NA NA NA NA NA NA -1.568003886550978</attr>
+      <attr name="traitsTrue">-2.6891543577896253 -1.1072522322707596 3.312862586335373 -3.6776903428876744 -2.2003615052648633 1.5438150384466043 -1.568003886550978</attr>
+    </taxon>
+    <taxon id="Burkholderia_plantarii">
+      <attr name="traits">-2.722735787183116 -0.6493157205677526 NA NA NA 0.3270418079535344 NA</attr>
+      <attr name="traitsTrue">-2.722735787183116 -0.6493157205677526 2.9051846715102214 -1.2054116332871179 -2.4959919142492635 0.3270418079535344 -2.1544916502225315</attr>
+    </taxon>
+    <taxon id="Azohydromonas_australica_DSM_1124">
+      <attr name="traits">NA 0.36251201448470216 NA NA NA NA NA</attr>
+      <attr name="traitsTrue">-1.9387662468503886 0.36251201448470216 3.5770301969737575 -1.869609087351813 -3.5599062332490896 0.7336997795346214 -3.288777513060403</attr>
+    </taxon>
+    <taxon id="Brachymonas_chironomi">
+      <attr name="traits">NA NA NA NA -4.211620075731395 NA NA</attr>
+      <attr name="traitsTrue">-2.001599990437599 0.613426166765827 3.4725136095621103 -1.42018471194153 -4.211620075731395 1.2274487175173339 -3.9074320384623182</attr>
+    </taxon>
+    <taxon id="Rudaea_cellulosilytica_DSM_22992">
+      <attr name="traits">-1.6302481458675608 NA 2.4815022526522976 NA NA 0.10691344597917979 -3.8342420137556736</attr>
+      <attr name="traitsTrue">-1.6302481458675608 -0.6664867218409792 2.4815022526522976 -2.747808868543543 -3.843548588999988 0.10691344597917979 -3.8342420137556736</attr>
+    </taxon>
+    <taxon id="Chlorobaculum_parvum_NCIB_8327">
+      <attr name="traits">NA NA -0.4599232340659661 NA NA NA -0.18384200796233086</attr>
+      <attr name="traitsTrue">-0.7290735901589848 0.32225857932743174 -0.4599232340659661 -0.2295860709766735 -0.23714344763747985 1.023399396545589 -0.18384200796233086</attr>
+    </taxon>
+    <taxon id="Hymenobacter_ocellatus">
+      <attr name="traits">-1.6236655445024644 -1.079915347138868 NA NA NA NA NA</attr>
+      <attr name="traitsTrue">-1.6236655445024644 -1.079915347138868 1.2848235806364285 -2.182423007278917 1.4492802546593742 2.5488122894830134 1.4762896355087853</attr>
+    </taxon>
+    <taxon id="Algoriphagus_boritolerans">
+      <attr name="traits">NA NA 1.195979222341347 -1.7177875606144606 NA NA NA</attr>
+      <attr name="traitsTrue">-0.1773998671341639 0.35262357246805653 1.195979222341347 -1.7177875606144606 -0.8442162014805727 1.4062887834550062 -1.1384668343418123</attr>
+    </taxon>
+    <taxon id="Niabella_soli">
+      <attr name="traits">-0.43530887981187094 NA NA NA NA NA NA</attr>
+      <attr name="traitsTrue">-0.43530887981187094 -0.8823214603947718 0.6588369430957988 -1.7700545204308855 0.2637997217562845 1.5220397997923942 -0.21712977147328436</attr>
+    </taxon>
+    <taxon id="Pedobacter_heparinus_DSM_2366">
+      <attr name="traits">-0.8747747101235397 NA NA -1.7604117714360648 NA NA NA</attr>
+      <attr name="traitsTrue">-0.8747747101235397 -1.084177945080647 -0.20598234759323608 -1.7604117714360648 1.4597284560955244 1.6316297824156702 1.7295087720801385</attr>
+    </taxon>
+    <taxon id="Flavobacterium_swingsii">
+      <attr name="traits">NA NA NA NA NA 0.22905864457862513 NA</attr>
+      <attr name="traitsTrue">-0.9975163145226491 1.0566039649709111 -0.3587339306239608 -1.4639481078855514 -1.5243402586983037 0.22905864457862513 -1.2694142525341081</attr>
+    </taxon>
+    <taxon id="Gaetbulibacter_saemankumensis">
+      <attr name="traits">-1.0982105648963805 -0.13849088146068633 NA NA -0.6811980010322434 NA -0.5006379471928005</attr>
+      <attr name="traitsTrue">-1.0982105648963805 -0.13849088146068633 -1.1332990157953784 -0.7582205119673308 -0.6811980010322434 0.9847054323483551 -0.5006379471928005</attr>
+    </taxon>
+    <taxon id="Mesonia_mobilis">
+      <attr name="traits">NA NA NA NA 1.1117208270486136 NA 1.0810395029336</attr>
+      <attr name="traitsTrue">-0.8579178570137039 -0.16624428186533324 -1.7312570424056224 -1.2513941122001833 1.1117208270486136 0.6008288772251588 1.0810395029336</attr>
+    </taxon>
+    <taxon id="Psychroflexus_tropicus_DSM_15496">
+      <attr name="traits">-1.9819402390844745 -0.07716216184905061 NA NA NA NA NA</attr>
+      <attr name="traitsTrue">-1.9819402390844745 -0.07716216184905061 -2.187924624326523 -1.2227614955661812 1.063433654891399 1.2675963618017776 1.3172304719166072</attr>
+    </taxon>
+    <taxon id="Porphyromonas_macacae_DSM_20710">
+      <attr name="traits">NA NA NA NA NA 2.0204005378081953 0.29954945053370213</attr>
+      <attr name="traitsTrue">-2.408406360957942 -0.3600695356440565 0.763073410447592 -1.7432239588964011 0.3661388944929328 2.0204005378081953 0.29954945053370213</attr>
+    </taxon>
+    <taxon id="Proteiniphilum_acetatigenes">
+      <attr name="traits">NA NA NA NA -0.33790389911602087 NA -0.1988362309371289</attr>
+      <attr name="traitsTrue">-1.6427386265595993 -1.1235700267137145 0.7668498357345418 -0.14010953515723035 -0.33790389911602087 0.8223949280129028 -0.1988362309371289</attr>
+    </taxon>
+    <taxon id="Bacteroides_barnesiae">
+      <attr name="traits">NA -0.6373155060117384 NA -0.20465546786035682 NA NA NA</attr>
+      <attr name="traitsTrue">-1.2021695203987062 -0.6373155060117384 0.2899999092857115 -0.20465546786035682 1.9072874084117153 1.3154435690779058 2.3716053730818913</attr>
+    </taxon>
+    <taxon id="Bacteroides_salyersiae">
+      <attr name="traits">NA NA 0.18732313784590296 -0.3017989614852912 NA 0.9115883169546737 -0.003487489242440356</attr>
+      <attr name="traitsTrue">-0.28129130062135005 -0.11444481891238012 0.18732313784590296 -0.3017989614852912 -0.13888476992343074 0.9115883169546737 -0.003487489242440356</attr>
+    </taxon>
+    <taxon id="Prevotella_micans_DSM_21469">
+      <attr name="traits">NA NA NA NA NA NA 1.4028698728204412</attr>
+      <attr name="traitsTrue">-0.623291588334121 -1.288579781896351 -0.6441411761166944 -0.49643106003412474 1.2224902164479512 1.8838184198087973 1.4028698728204412</attr>
+    </taxon>
+    <taxon id="Ruania_albidiflava_DSM_18029">
+      <attr name="traits">-0.8961676081757745 NA NA NA 0.12159865191365021 NA 0.3406913253824682</attr>
+      <attr name="traitsTrue">-0.8961676081757745 -0.6083343226059276 -1.6543449829488592 -0.960466676266315 0.12159865191365021 1.9804376086053195 0.3406913253824682</attr>
+    </taxon>
+    <taxon id="Demetria_terragena_DSM_11295">
+      <attr name="traits">NA NA NA NA -0.09961544468100078 0.883941687899509 NA</attr>
+      <attr name="traitsTrue">-0.30681318308080524 -1.772193680008653 -0.07368057042048048 -1.543173734602078 -0.09961544468100078 0.883941687899509 0.12203619665927959</attr>
+    </taxon>
+    <taxon id="Corynebacterium_vitaeruminis_DSM_20294">
+      <attr name="traits">NA NA -1.1760453355653173 NA NA NA NA</attr>
+      <attr name="traitsTrue">-0.37101163184325325 -1.4107288857852562 -1.1760453355653173 -0.4417778446395835 -0.6023685316579852 1.5459676283785566 -0.8088257992846344</attr>
+    </taxon>
+    <taxon id="Rhodococcus_rhodochrous">
+      <attr name="traits">NA NA NA NA NA 2.0833894762174507 NA</attr>
+      <attr name="traitsTrue">0.7488361687929954 -0.4114464201888744 -0.6146632031440482 0.022803113376166306 -0.5518837168273376 2.0833894762174507 -0.5605375564551327</attr>
+    </taxon>
+    <taxon id="Atopobium_fossor_DSM_15642">
+      <attr name="traits">-1.8182344241043797 NA -1.9903896132825742 NA NA -1.3386071130855783 NA</attr>
+      <attr name="traitsTrue">-1.8182344241043797 0.5854791498358753 -1.9903896132825742 1.0345038927802617 -1.7863370954492024 -1.3386071130855783 -2.0704441234190973</attr>
+    </taxon>
+    <taxon id="Thermocrinis_albus">
+      <attr name="traits">NA 0.4509216589711317 0.08844419707171443 NA -2.8267879511640817 NA NA</attr>
+      <attr name="traitsTrue">-2.4423392964557005 0.4509216589711317 0.08844419707171443 -0.8877948058760139 -2.8267879511640817 1.0854703608640681 -3.2117626809570514</attr>
+    </taxon>
+    <taxon id="Clostridium_hydrogeniformans">
+      <attr name="traits">-0.1458655210496218 NA -0.3169584760637694 NA -2.2060915414297697 NA NA</attr>
+      <attr name="traitsTrue">-0.1458655210496218 -0.99117542026824 -0.3169584760637694 -0.29472908189007724 -2.2060915414297697 0.5811163216624533 -2.189948859418793</attr>
+    </taxon>
+    <taxon id="Clostridium_akagii">
+      <attr name="traits">0.2030335390167114 NA NA NA NA NA -1.5575859774997827</attr>
+      <attr name="traitsTrue">0.2030335390167114 -0.8702836020824618 -1.5121586434890375 -0.38909561262278836 -1.7525738735065224 1.0870554425146015 -1.5575859774997827</attr>
+    </taxon>
+    <taxon id="Clostridium_homopropionicum">
+      <attr name="traits">NA -2.0439990909931685 NA NA NA NA NA</attr>
+      <attr name="traitsTrue">0.6351001382863576 -2.0439990909931685 0.03147261579920679 -1.5638667247664033 -2.345105930065224 -0.1285087767651178 -2.1500674873061376</attr>
+    </taxon>
+    <taxon id="Clostridium_ganghwense">
+      <attr name="traits">NA -1.9454436930885302 NA NA -1.3991258368755426 NA NA</attr>
+      <attr name="traitsTrue">0.27384346198358145 -1.9454436930885302 -1.2396682818391702 -0.37200312910709565 -1.3991258368755426 0.638470899291487 -1.3022020577692248</attr>
+    </taxon>
+    <taxon id="Clostridium_polysaccharolyticum">
+      <attr name="traits">NA NA -0.44682605042412316 NA NA NA NA</attr>
+      <attr name="traitsTrue">-0.17778453271079647 1.0894037535354366 -0.44682605042412316 -0.7115720463475057 -1.9100603301416952 1.4838535221381335 -1.8978328351981901</attr>
+    </taxon>
+    <taxon id="Marvinbryantia_formatexigens">
+      <attr name="traits">NA -1.452508981679847 NA NA NA NA NA</attr>
+      <attr name="traitsTrue">0.7305347950729892 -1.452508981679847 0.35207721634473366 1.315026573992522 -0.278665516303016 -0.31768065184530164 -0.007946594935621332</attr>
+    </taxon>
+    <taxon id="Sedimentibacter_hydroxybenzoicus">
+      <attr name="traits">0.6947733815792763 NA -0.7443926393438307 0.5343064027429033 NA NA NA</attr>
+      <attr name="traitsTrue">0.6947733815792763 -0.6336107329960643 -0.7443926393438307 0.5343064027429033 -1.0613871666234271 0.7537879680266233 -1.0425335722772018</attr>
+    </taxon>
+    <taxon id="Proteocatella_sphenisci">
+      <attr name="traits">NA NA NA 0.12913807254287157 NA NA NA</attr>
+      <attr name="traitsTrue">0.7991324219723157 0.13514904709434875 -1.7147125338414677 0.12913807254287157 2.2208072999004758 1.357099192738136 2.4813367458182642</attr>
+    </taxon>
+    <taxon id="Alicyclobacillus_acidocaldarius">
+      <attr name="traits">NA NA NA NA 0.6583123339433536 0.9799994301589932 NA</attr>
+      <attr name="traitsTrue">1.6299540988099932 -3.596942511451806 -1.0914425588622776 0.44225577988979564 0.6583123339433536 0.9799994301589932 0.6174160526463528</attr>
+    </taxon>
+    <taxon id="Jeotgalicoccus_psychrophilus_DSM_19085">
+      <attr name="traits">NA -1.9922521620028462 NA NA NA NA NA</attr>
+      <attr name="traitsTrue">-1.313360620022904 -1.9922521620028462 -1.3263357572853471 -0.18923140225305654 -1.0839341589047968 0.623112296141699 -1.2936806389820983</attr>
+    </taxon>
+    <taxon id="Lactobacillus_rossiae_DSM_15814">
+      <attr name="traits">0.5221287422338873 NA NA NA NA NA NA</attr>
+      <attr name="traitsTrue">0.5221287422338873 -3.220130683575339 -1.0243210278598696 -0.03077369877192592 0.0069097826095929765 0.9007833449298479 -0.1737570256777504</attr>
+    </taxon>
+    <taxon id="Erysipelothrix_inopinata">
+      <attr name="traits">NA NA -1.7235445980607453 NA NA NA NA</attr>
+      <attr name="traitsTrue">0.7316203284742772 -4.397770379388755 -1.7235445980607453 -0.03578196469018857 -0.30726739453382157 0.03368240465583078 -0.2371628861006363</attr>
+    </taxon>
+    <taxon id="Lentibacillus_juripiscarius">
+      <attr name="traits">NA -2.0833085350290648 NA NA NA NA NA</attr>
+      <attr name="traitsTrue">0.21635641438171382 -2.0833085350290648 -0.05730786657631415 -2.491711901635919 -0.9620619044627323 1.9037768639426842 -0.8146686533927859</attr>
+    </taxon>
+    <taxon id="Halalkalibacillus_halophilus">
+      <attr name="traits">NA NA NA NA -1.1659433963206445 NA NA</attr>
+      <attr name="traitsTrue">-0.751559231690074 -1.7655586871421811 0.22700030024874468 -0.9247774425335227 -1.1659433963206445 1.9852409375555928 -1.4428875363171825</attr>
+    </taxon>
+    <taxon id="Bacillus_acidiproducens_DSM_23148">
+      <attr name="traits">-0.20484843158694183 NA NA NA NA NA NA</attr>
+      <attr name="traitsTrue">-0.20484843158694183 -2.1113501603089757 -1.1062136639696778 -1.5561155328710314 0.21834928537976475 2.087156425348905 0.3080838309082202</attr>
+    </taxon>
+    <taxon id="Marinococcus_halotolerans">
+      <attr name="traits">NA NA NA NA -0.16136032321548882 2.641448989776282 0.004045609898206098</attr>
+      <attr name="traitsTrue">-0.17751252518844052 -2.3477917168065328 0.5490749117499443 -2.1778436391054377 -0.16136032321548882 2.641448989776282 0.004045609898206098</attr>
+    </taxon>
+    <taxon id="Paenibacillus_ginsengihumi">
+      <attr name="traits">NA NA NA -1.1425712878909429 NA NA NA</attr>
+      <attr name="traitsTrue">0.16028767195457388 -3.2415167123175452 -1.0720009866973195 -1.1425712878909429 -0.6467395086458078 1.8890666021141396 -0.4924158758846586</attr>
+    </taxon>
+    <taxon id="Paenibacillus_assamensis">
+      <attr name="traits">NA -3.6943401670711213 NA NA NA NA -1.8001828109974287</attr>
+      <attr name="traitsTrue">-0.4773788254213429 -3.6943401670711213 -0.06613340521388777 -0.6336286315535933 -1.6698350543869214 1.9067265785690384 -1.8001828109974287</attr>
+    </taxon>
+    <taxon id="Caldibacillus_debilis">
+      <attr name="traits">NA NA -1.2118797537548969 NA NA NA NA</attr>
+      <attr name="traitsTrue">-0.2868620006524321 -3.3014862568158914 -1.2118797537548969 0.9301519943089467 0.3745686771638107 0.3288884599697163 0.21311634903277343</attr>
+    </taxon>
+    <taxon id="Desulfotomaculum_alcoholivorax">
+      <attr name="traits">NA NA 0.08563642289009032 NA NA NA NA</attr>
+      <attr name="traitsTrue">-0.6984953072344504 -1.621581717592058 0.08563642289009032 0.5271234297399375 -0.3664309563834275 -0.12815069995311057 -0.5049528904312017</attr>
+    </taxon>
+    <taxon id="Sporomusa_ovata_DSM_2662">
+      <attr name="traits">NA NA NA -0.08166935482355137 NA NA NA</attr>
+      <attr name="traitsTrue">-0.9629828687889888 -4.298945580619528 -0.0742611985970123 -0.08166935482355137 0.36855046588439566 -0.23992526160136096 0.5807662254105295</attr>
+    </taxon>
+    <taxon id="Heliorestis_convulata">
+      <attr name="traits">NA -1.0664667125586926 -1.1381515934709912 NA NA NA NA</attr>
+      <attr name="traitsTrue">0.7539214307954005 -1.0664667125586926 -1.1381515934709912 -0.04334115553227402 0.5885851249983393 0.30467295740410183 0.3647166502184072</attr>
+    </taxon>
+    <taxon id="Thermoanaerobacter_kivui">
+      <attr name="traits">NA NA -0.9447930086841613 NA NA NA NA</attr>
+      <attr name="traitsTrue">-1.3588793582795775 -1.6826205216640848 -0.9447930086841613 1.079604981362432 -1.4866492822058013 -0.21935522164487642 -1.8716498841649125</attr>
+    </taxon>
+    <taxon id="Syntrophomonas_erecta">
+      <attr name="traits">0.28672261566391954 NA 0.9971165620526854 NA -1.7817291756593572 NA NA</attr>
+      <attr name="traitsTrue">0.28672261566391954 -1.796428974878347 0.9971165620526854 -0.04799527245578425 -1.7817291756593572 1.8273413300390045 -1.9244337933995583</attr>
+    </taxon>
+    <taxon id="Thermanaeromonas_toyohensis">
+      <attr name="traits">0.1607949802606167 NA NA -1.5680279709182807 NA NA NA</attr>
+      <attr name="traitsTrue">0.1607949802606167 -1.0803156501557374 -0.4610379811289262 -1.5680279709182807 -1.433845543985641 0.830613665640873 -1.6765220097516627</attr>
+    </taxon>
+    <taxon id="Thermacetogenium_phaeum_DSM_12270">
+      <attr name="traits">5.492102077142569e-5 NA NA NA NA NA -0.736988665798999</attr>
+      <attr name="traitsTrue">5.492102077142569e-5 -1.384900299685035 -0.6293258504048963 1.2552903628249141 -0.7953280626550233 0.4281165070620355 -0.736988665798999</attr>
+    </taxon>
+    <taxon id="Petrotoga_miotherma">
+      <attr name="traits">NA -0.6987369798161561 NA 0.306134439720728 NA 1.0948627333053136 NA</attr>
+      <attr name="traitsTrue">-2.057194730020381 -0.6987369798161561 -1.2229213891989046 0.306134439720728 -1.6594115215223881 1.0948627333053136 -1.5211880907004531</attr>
+    </taxon>
+    <taxon id="Dethiosulfovibrio_peptidovorans">
+      <attr name="traits">NA NA NA NA NA -0.17587885444040668 NA</attr>
+      <attr name="traitsTrue">-0.6749547504404856 -1.5900115865732025 -1.0887042929320159 0.25535135390555475 -1.9672700201772872 -0.17587885444040668 -1.9812006244478073</attr>
+    </taxon>
+    <taxon id="Jonquetella_anthropi">
+      <attr name="traits">NA -0.4495785995408218 NA NA NA NA NA</attr>
+      <attr name="traitsTrue">-2.17201187534524 -0.4495785995408218 -0.22759706301689892 0.5022555840328982 -0.6635296963908501 0.3002385758205742 -1.019499434999818</attr>
+    </taxon>
+    <taxon id="Sulfolobus_solfataricus_98_2">
+      <attr name="traits">NA NA 0.930366058623514 NA NA 1.670246607582499 NA</attr>
+      <attr name="traitsTrue">-0.5429121852962573 0.3088218997375589 0.930366058623514 1.4927149934203445 3.8192073870841132 1.670246607582499 4.239845321598053</attr>
+    </taxon>
+    <taxon id="Halorubrum_ezzemoulense">
+      <attr name="traits">-1.6516657386066322 NA -0.13851319754621205 NA NA NA NA</attr>
+      <attr name="traitsTrue">-1.6516657386066322 -1.1502877365322437 -0.13851319754621205 1.301798544500957 1.817354895014466 -1.3879381791525227 2.3460621453052113</attr>
+    </taxon>
+    <taxon id="Haloplanus_natans_DSM_17983">
+      <attr name="traits">-1.2590369755973154 NA NA 0.16930124528168755 NA NA NA</attr>
+      <attr name="traitsTrue">-1.2590369755973154 -2.4768520148925113 -0.42929856059407445 0.16930124528168755 2.3968279499445178 0.1472078801329027 2.808359334630643</attr>
+    </taxon>
+    <taxon id="Natrialba_chahannaoensis_JCM_10990">
+      <attr name="traits">0.2659471121172075 NA -1.2998903638346664 NA NA NA 3.634629564309539</attr>
+      <attr name="traitsTrue">0.2659471121172075 -3.1937553830948824 -1.2998903638346664 0.2266985187716224 3.2959510328080173 -0.07637987917383968 3.634629564309539</attr>
+    </taxon>
+    <taxon id="Haloterrigena_saccharevitans">
+      <attr name="traits">NA NA -1.3430282295677418 NA NA NA NA</attr>
+      <attr name="traitsTrue">0.7149347444010357 -2.491825017759578 -1.3430282295677418 -0.0478768873201893 2.782279371543181 -0.8059169282374478 3.184639556097608</attr>
+    </taxon>
+    <taxon id="Halovivax_asiaticus_JCM_14624">
+      <attr name="traits">NA NA 0.41561052009356003 NA NA NA 2.478506002323531</attr>
+      <attr name="traitsTrue">0.6196424065854388 -1.8172353308307232 0.41561052009356003 -0.9379833905445543 2.140557726881768 -0.0879001734018206 2.478506002323531</attr>
+    </taxon>
+  </taxa>
+  <newick id="startingTree" usingHeights="true" usingDates="false">(((Thermobaculum_terrenum:0.4321460242,Dehalogenimonas_lykanthroporepellens_BL_DC_9:0.4321460242):0.3192206082,((Treponema_parvum:0.6106386735,Thermus_igniterrae:0.6106386735):0.06436960599,((((Caminibacter_hydrogeniphilus:0.5287368536,((Geoalkalibacter_ferrihydriticus:0.3817953816,((Desulfobacter_curvatus:0.02518687492,Desulfobacter_vibrioformis:0.02518687492):0.2534174325,Desulfobulbus_japonicus:0.2786043074):0.1031910743):0.05845464258,((Desulfovibrio_marinisediminis:0.1979394243,((Desulfovibrio_inopinatus_DSM_10711:0.1186895612,Desulfovibrio_africanus:0.1186895612):0.05299817164,Desulfocurvus_vexinensis:0.1716877329):0.02625169147):0.06719972974,(Desulfonauticus_autotrophicus:0.1769215815,Desulfonatronovibrio_hydrogenovorans:0.1769215815):0.08821757261):0.1751108702):0.08848682934):0.03574635785,(((Rubritepida_flocculans:0.2419996778,Azospirillum_halopraeferens:0.2419996778):0.096657479,(Fodinicurvata_sediminis_DSM_21159:0.2935746335,((Paracoccus_kocurii:0.1499845285,Wenxinia_marina_DSM_24838:0.1499845285):0.08633901901,(Blastochloris_viridis:0.1870131678,(Pleomorphomonas_oryzae_DSM_16300:0.1364483692,Salinarimonas_rosea_DSM_21201:0.1364483692):0.05056479862):0.04931037968):0.05725108598):0.04508252332):0.1462705342,(((((((Methylobacter_tundripaludum_SV96:0.1799117793,Thiothrix_flexilis_DSM_14609:0.1799117793):0.01895190829,Allochromatium_vinosum_DSM_180:0.1988636876):0.04005142916,((Marinomonas_mediterranea:0.1854884883,Kushneria_aurantia:0.1854884883):0.03256572019,(Kangiella_aquimarina_DSM_16071:0.1429684634,Spongiibacter_tropicus_DSM_19543:0.1429684634):0.07508574514):0.02086090825):0.03331758192,Pseudomonas_thermotolerans:0.2722326987):0.03188574266,((Algicola_sagamiensis:0.1487256637,Aliagarivorans_taiwanensis:0.1487256637):0.05074523319,((Shewanella_haliotis:0.06366115331,Shewanella_colwelliana:0.06366115331):0.1091646564,((Photorhabdus_asymbiotica:0.0455637207,Enterobacter_sp_R4_368:0.0455637207):0.08978343085,Aeromonas_molluscorum:0.1353471516):0.03747865815):0.02664508723):0.1046475444):0.02995608439,((Massilia_niastensis:0.1891425273,(Formivibrio_citricus:0.1038650207,Chitiniphilus_shinanonensis:0.1038650207):0.08527750655):0.007951686759,(Burkholderia_plantarii:0.1434636885,(Azohydromonas_australica_DSM_1124:0.1072720852,Brachymonas_chironomi:0.1072720852):0.03619160334):0.05363052551):0.1369803117):0.05796117472,Rudaea_cellulosilytica_DSM_22992:0.3920357004):0.09289199054):0.07955552045):0.04913174492,(Chlorobaculum_parvum_NCIB_8327:0.5401384477,(((Hymenobacter_ocellatus:0.3164236598,Algoriphagus_boritolerans:0.3164236598):0.05618146134,(Niabella_soli:0.3121458475,Pedobacter_heparinus_DSM_2366:0.3121458475):0.0604592736):0.03809307971,((Flavobacterium_swingsii:0.1997941436,(Gaetbulibacter_saemankumensis:0.1523807841,(Mesonia_mobilis:0.04825616285,Psychroflexus_tropicus_DSM_15496:0.04825616285):0.1041246212):0.04741335946):0.1635671833,((Porphyromonas_macacae_DSM_20710:0.2172558564,Proteiniphilum_acetatigenes:0.2172558564):0.0365043617,((Bacteroides_barnesiae:0.1409544511,Bacteroides_salyersiae:0.1409544511):0.07006373985,Prevotella_micans_DSM_21469:0.211018191):0.04274202715):0.1096011087):0.04733687397):0.1294402468):0.07347650866):0.03631309998,((((Ruania_albidiflava_DSM_18029:0.1437761045,Demetria_terragena_DSM_11295:0.1437761045):0.1010842375,(Corynebacterium_vitaeruminis_DSM_20294:0.1406550121,Rhodococcus_rhodochrous:0.1406550121):0.10420533):0.2477725809,Atopobium_fossor_DSM_15642:0.492632923):0.1065552176,(Thermocrinis_albus:0.5331339992,((((Clostridium_hydrogeniformans:0.1308900062,(Clostridium_akagii:0.1075622853,(Clostridium_homopropionicum:0.04119230392,Clostridium_ganghwense:0.04119230392):0.06636998133):0.02332772099):0.1970828965,((Clostridium_polysaccharolyticum:0.1401712986,Marvinbryantia_formatexigens:0.1401712986):0.1613944854,(Sedimentibacter_hydroxybenzoicus:0.2086323615,Proteocatella_sphenisci:0.2086323615):0.09293342249):0.02640711876):0.1167513139,(((Alicyclobacillus_acidocaldarius:0.332029301,(((Jeotgalicoccus_psychrophilus_DSM_19085:0.2151101089,(Lactobacillus_rossiae_DSM_15814:0.1845018446,Erysipelothrix_inopinata:0.1845018446):0.03060826429):0.03807495721,((((Lentibacillus_juripiscarius:0.09973770394,Halalkalibacillus_halophilus:0.09973770394):0.02612034363,Bacillus_acidiproducens_DSM_23148:0.1258580476):0.01900480466,Marinococcus_halotolerans:0.1448628522):0.04994713887,(Paenibacillus_ginsengihumi:0.1313089803,Paenibacillus_assamensis:0.1313089803):0.06350101077):0.05837507498):0.05559001869,Caldibacillus_debilis:0.3087750848):0.02325421627):0.04794720901,(Desulfotomaculum_alcoholivorax:0.3213350879,(Sporomusa_ovata_DSM_2662:0.2794588753,Heliorestis_convulata:0.2794588753):0.04187621254):0.05864142219):0.02657588811,(Thermoanaerobacter_kivui:0.2934354961,(Syntrophomonas_erecta:0.2489495726,(Thermanaeromonas_toyohensis:0.2338544656,Thermacetogenium_phaeum_DSM_12270:0.2338544656):0.01509510706):0.04448592346):0.1131169021):0.03817181848):0.0536743355,(Petrotoga_miotherma:0.3546248339,(Dethiosulfovibrio_peptidovorans:0.1425324921,Jonquetella_anthropi:0.1425324921):0.2120923418):0.1437737182):0.03473544709):0.06605414127):0.05073991581):0.02508022313):0.07635835299):0.1999917098,(Sulfolobus_solfataricus_98_2:0.5878442966,((Halorubrum_ezzemoulense:0.1511523332,Haloplanus_natans_DSM_17983:0.1511523332):0.05036297219,(Natrialba_chahannaoensis_JCM_10990:0.08770465235,(Haloterrigena_saccharevitans:0.07693643836,Halovivax_asiaticus_JCM_14624:0.07693643836):0.01076821398):0.113810653):0.3863289913):0.3635140456);;</newick>
+  <treeModel id="treeModel" fixHeights="true">
+    <tree idref="startingTree"/>
+    <rootHeight>
+      <parameter id="treeModel.rootHeight"/>
+    </rootHeight>
+    <nodeHeights internalNodes="true">
+      <parameter id="treeModel.internalNodeHeights"/>
+    </nodeHeights>
+    <nodeHeights internalNodes="true" rootNode="true">
+      <parameter id="treeModel.allInternalNodeHeights"/>
+    </nodeHeights>
+    <nodeTraits rootNode="false" internalNodes="false" leafNodes="true" asMatrix="true" traitDimension="7" name="traits">
+      <parameter id="leafTraits"/>
+    </nodeTraits>
+    <nodeTraits rootNode="false" internalNodes="false" leafNodes="true" asMatrix="true" traitDimension="7" name="traitsTrue">
+      <parameter id="leafTraitsTrue"/>
+    </nodeTraits>
+  </treeModel>
+  <multivariateDiffusionModel id="diffusionModel">
+    <precisionMatrix>
+      <matrixParameter id="diffusion.precision">
+        <parameter value="1.0 0.0 0.0 0.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 1.0 0.0 0.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 1.0 0.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 1.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 0.0 1.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 0.0 0.0 1.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 0.0 0.0 0.0 1.0"/>
+      </matrixParameter>
+    </precisionMatrix>
+  </multivariateDiffusionModel>
+  <multivariateWishartPrior id="precisionPrior" df="7">
+    <scaleMatrix>
+      <matrixParameter>
+        <parameter value="1.0 0.0 0.0 0.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 1.0 0.0 0.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 1.0 0.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 1.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 0.0 1.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 0.0 0.0 1.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 0.0 0.0 0.0 1.0"/>
+      </matrixParameter>
+    </scaleMatrix>
+    <data>
+      <matrixParameter idref="diffusion.precision"/>
+    </data>
+  </multivariateWishartPrior>
+  <repeatedMeasuresModel id="repeatedMeasures" traitName="traits">
+    <treeModel idref="treeModel"/>
+    <traitParameter>
+      <parameter idref="leafTraits"/>
+    </traitParameter>
+    <samplingPrecision>
+      <matrixParameter id="residualPrecision">
+        <parameter value="1.0 0.0 0.0 0.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 1.0 0.0 0.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 1.0 0.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 1.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 0.0 1.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 0.0 0.0 1.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 0.0 0.0 0.0 1.0"/>
+      </matrixParameter>
+    </samplingPrecision>
+    <multivariateDiffusionModel idref="diffusionModel"/>
+  </repeatedMeasuresModel>
+  <multivariateWishartPrior id="residualPrior" df="7">
+    <scaleMatrix>
+      <matrixParameter>
+        <parameter value="1.0 0.0 0.0 0.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 1.0 0.0 0.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 1.0 0.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 1.0 0.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 0.0 1.0 0.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 0.0 0.0 1.0 0.0"/>
+        <parameter value="0.0 0.0 0.0 0.0 0.0 0.0 1.0"/>
+      </matrixParameter>
+    </scaleMatrix>
+    <data>
+      <matrixParameter idref="residualPrecision"/>
+    </data>
+  </multivariateWishartPrior>
+  <traitDataLikelihood allowIdentical="true" standardize="true" cacheBranches="true" id="traitLikelihood" traitName="traits" useTreeLength="false" scaleByTime="true" reportAsMultivariate="true" allowSingular="false">
+    <multivariateDiffusionModel idref="diffusionModel"/>
+    <treeModel idref="treeModel"/>
+    <repeatedMeasuresModel idref="repeatedMeasures"/>
+    <conjugateRootPrior>
+      <meanParameter>
+        <parameter value="0.0 0.0 0.0 0.0 0.0 0.0 0.0"/>
+      </meanParameter>
+      <priorSampleSize>
+        <parameter value="0.001" dimension="1"/>
+      </priorSampleSize>
+    </conjugateRootPrior>
+  </traitDataLikelihood>
+  <operators id="operators">
+    <compoundPrecisionOperator weight="1.0">
+      <diffusionOperator>
+        <precisionGibbsOperator weight="1.0">
+          <wishartStatistics traitName="traits">
+            <traitDataLikelihood idref="traitLikelihood"/>
+          </wishartStatistics>
+          <multivariateWishartPrior idref="precisionPrior"/>
+        </precisionGibbsOperator>
+      </diffusionOperator>
+      <residualOperator>
+        <precisionGibbsOperator weight="1.0">
+          <RepeatedMeasuresWishartStatistics traitName="traits">
+            <repeatedMeasuresModel idref="repeatedMeasures"/>
+            <traitDataLikelihood idref="traitLikelihood"/>
+          </RepeatedMeasuresWishartStatistics>
+          <multivariateWishartPrior idref="residualPrior"/>
+        </precisionGibbsOperator>
+      </residualOperator>
+    </compoundPrecisionOperator>
+  </operators>
+  <modelExtensionTraitLogger id="modelExtensionTraitLogger" dimensions="missing" traitName="traits">
+    <traitDataLikelihood idref="traitLikelihood"/>
+    <repeatedMeasuresModel idref="repeatedMeasures"/>
+  </modelExtensionTraitLogger>
+  <matrixInverse id="inverse.diffusion.precision">
+    <matrixParameter idref="diffusion.precision"/>
+  </matrixInverse>
+  <matrixInverse id="inverse.residualPrecision">
+    <matrixParameter idref="residualPrecision"/>
+  </matrixInverse>
+  <correlationMatrix id="correlation.inverted.diffusion.precision" invert="true">
+    <matrixParameter idref="diffusion.precision"/>
+  </correlationMatrix>
+  <correlationMatrix id="correlation.inverted.residualPrecision" invert="true">
+    <matrixParameter idref="residualPrecision"/>
+  </correlationMatrix>
+  <varianceProportionStatistic id="varianceProportionStatistic" matrixRatio="coheritability" useEmpiricalVariance="false">
+    <traitDataLikelihood idref="traitLikelihood"/>
+    <treeModel idref="treeModel"/>
+    <repeatedMeasuresModel idref="repeatedMeasures"/>
+    <multivariateDiffusionModel idref="diffusionModel"/>
+  </varianceProportionStatistic>
+  <mcmc id="mcmc" chainLength="20000" autoOptimize="true">
+    <posterior id="posterior">
+      <prior id="prior">
+        <multivariateWishartPrior idref="precisionPrior"/>
+        <multivariateWishartPrior idref="residualPrior"/>
+      </prior>
+      <likelihood id="likelihood">
+        <traitDataLikelihood idref="traitLikelihood"/>
+      </likelihood>
+    </posterior>
+    <operators idref="operators"/>
+    <log id="screenLog" logEvery="100">
+      <column label="posterior" dp="4" width="12">
+        <posterior idref="posterior"/>
+      </column>
+      <column label="prior" dp="4" width="12">
+        <prior idref="prior"/>
+      </column>
+      <column label="likelihood" dp="4" width="12">
+        <likelihood idref="likelihood"/>
+      </column>
+    </log>
+    <log id="fileLog" logEvery="50" fileName="prokSim_100Taxa_7Traits_75percMissing_10.log" overwrite="true">
+      <posterior idref="posterior"/>
+      <prior idref="prior"/>
+      <likelihood idref="likelihood"/>
+      <modelExtensionTraitLogger idref="modelExtensionTraitLogger"/>
+      <matrixInverse idref="inverse.diffusion.precision"/>
+      <matrixInverse idref="inverse.residualPrecision"/>
+      <correlationMatrix idref="correlation.inverted.diffusion.precision"/>
+      <correlationMatrix idref="correlation.inverted.residualPrecision"/>
+      <varianceProportionStatistic idref="varianceProportionStatistic"/>
+    </log>
+  </mcmc>
+  <report>
+    <property name="timer">
+      <mcmc idref="mcmc"/>
+    </property>
+  </report>
+</beast>
