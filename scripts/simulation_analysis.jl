@@ -357,28 +357,34 @@ function make_dataframe(sas::Array{SimAnalysis},
                         rep = Vector{Int}(undef, N_trait),
                         nTaxa = Vector{Int}(undef, N_trait),
                         nTraits = Vector{Int}(undef, N_trait),
+                        nObs = Vector{Float64}(undef, N_trait),
                         sparsity = Vector{Float64}(undef, N_trait),
                         bias = Vector{Float64}(undef, N_trait),
-                        mse = Vector{Float64}(undef, N_trait))
+                        mse = Vector{Float64}(undef, N_trait),
+                        isRandom = fill(true, N_trait))
 
     matrix_df = DataFrame(run = Vector{String}(undef, N_matrix),
                         rep = Vector{Int}(undef, N_matrix),
                         nTaxa = Vector{Int}(undef, N_matrix),
                         nTraits = Vector{Int}(undef, N_matrix),
+                        nObs = Vector{Float64}(undef, N_matrix),
                         sparsity = Vector{Float64}(undef, N_matrix),
                         variable = Vector{String}(undef, N_matrix),
                         component = Vector{String}(undef, N_matrix),
                         bias = Vector{Float64}(undef, N_matrix),
-                        mse = Vector{Float64}(undef, N_matrix))
+                        mse = Vector{Float64}(undef, N_matrix),
+                        isRandom = Vector{Bool}(undef, N_matrix))
 
     coverage_df = DataFrame(run = Vector{String}(undef, N_coverage),
                         rep = Vector{Int}(undef, N_coverage),
                         nTaxa = Vector{Int}(undef, N_coverage),
                         nTraits = Vector{Int}(undef, N_coverage),
+                        nObs = Vector{Float64}(undef, N_coverage),
                         sparsity = Vector{Float64}(undef, N_coverage),
                         variable = Vector{String}(undef, N_coverage),
                         component = Vector{String}(undef, N_coverage),
-                        coverage = Vector{Float64}(undef, N_coverage))
+                        coverage = Vector{Float64}(undef, N_coverage),
+                        isRandom = Vector{Bool}(undef, N_coverage))
 
     # set up for matrix statistics
     variables = [DIFFUSION_CORRELATION, RESIDUAL_CORRELATION, HERITABILITY]
@@ -396,6 +402,10 @@ function make_dataframe(sas::Array{SimAnalysis},
 
         sa = sas[i]
         sv = sa.sv
+
+        # n_obs = sv.N * sv.P - n_missing[i]
+        n_obs = sv.N * (1 - sv.sparsity) * sv.P / (1 - sv.sparsity ^ sv.P) #expected number of observations
+        @show n_obs
 
         trait_range = trait_ind:(trait_ind + n_missing[i] - 1)
         mat_range = matrix_ind:(matrix_ind + n_matrix_slots[i] - 1)
@@ -421,6 +431,10 @@ function make_dataframe(sas::Array{SimAnalysis},
         matrix_df.sparsity[mat_range] .= sv.sparsity
         coverage_df.sparsity[cov_range] .= sv.sparsity
 
+        trait_df.nObs[trait_range] .= n_obs
+        matrix_df.nObs[mat_range] .= n_obs
+        coverage_df.nObs[cov_range] .= n_obs
+
 
         #missing trait values
 
@@ -430,6 +444,11 @@ function make_dataframe(sas::Array{SimAnalysis},
         coverage_df.variable[coverage_ind] = TRAIT
         coverage_df.component[coverage_ind] = NONE
         coverage_df.coverage[coverage_ind] = sa.traits.coverage
+
+        no_traits = length(sa.traits.bias) == 0
+        coverage_df.isRandom[coverage_ind] = !no_traits
+
+
 
 
         # matrix stats setup
@@ -451,13 +470,18 @@ function make_dataframe(sas::Array{SimAnalysis},
             matrix_df.component[diag_range] .= DIAGONAL
             diag_stats = mat_stats.diagonal
 
+
             matrix_df.bias[diag_range] .= diag_stats.bias
             matrix_df.mse[diag_range] .= diag_stats.mse
+
+            corr_diag = (variables[j] == "diffCorr" || variables[j] == "resCorr")
+            matrix_df.isRandom[diag_range] .= !corr_diag
 
             diag_cov_ind = coverage_ind + 2 * (j - 1) + 1
             coverage_df.variable[diag_cov_ind] = variables[j]
             coverage_df.component[diag_cov_ind] = DIAGONAL
             coverage_df.coverage[diag_cov_ind] = diag_stats.coverage
+            coverage_df.isRandom[diag_cov_ind] = !corr_diag
 
             #off-diagonal
             off_diag_range = (s + p):(s + t - 1)
@@ -466,11 +490,13 @@ function make_dataframe(sas::Array{SimAnalysis},
 
             matrix_df.bias[off_diag_range] .= od_stats.bias
             matrix_df.mse[off_diag_range] .= od_stats.mse
+            matrix_df.isRandom[off_diag_range] .= true
 
-            diag_cov_ind = coverage_ind + 2 * (j - 1) + 2
-            coverage_df.variable[diag_cov_ind] = variables[j]
-            coverage_df.component[diag_cov_ind] = OFF_DIAGONAL
-            coverage_df.coverage[diag_cov_ind] = od_stats.coverage
+            off_diag_cov_ind = coverage_ind + 2 * (j - 1) + 2
+            coverage_df.variable[off_diag_cov_ind] = variables[j]
+            coverage_df.component[off_diag_cov_ind] = OFF_DIAGONAL
+            coverage_df.coverage[off_diag_cov_ind] = od_stats.coverage
+            coverage_df.isRandom[off_diag_cov_ind] = true
 
 
         end
@@ -499,6 +525,7 @@ sas = Vector{SimAnalysis}(undef, n)
 for i = 1:n
     sim_version = parse_filename(files[i])
     sas[i] = sim_analysis(sim_version)
+    println("$i of $n completed\n")
 end
 
 storage_dir = joinpath(@__DIR__, "storage")
