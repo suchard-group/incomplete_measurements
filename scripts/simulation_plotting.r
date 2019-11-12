@@ -62,8 +62,8 @@ mats.diag <- mats[which(mats$component == "diagonal"),]
 mats.offDiag <- mats[which(mats$component == "offDiagonal"),]
 
 
-p <- simBoxPlot(mats.diag, "hivSim", "nTaxa", "logmse", "sparsity")
+p <- simBoxPlot(traits, "prokSim", "nTaxa", "logmse", "sparsity")
 p
 
-ps <- simLinePlot(mats, "mammalsSim", "nObs", "logmse", "sparsity")
+ps <- simLinePlot(mats.diag, "hivSim", "nObs", "logmse", "sparsity")
 ps
