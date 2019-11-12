@@ -1,4 +1,4 @@
-using Revise
+using Statistics, DataFrames, CSV
 
 function pcm_time(path::String)
     s = read(path, String)
@@ -15,32 +15,64 @@ function beast_time(path::String)
     return tm * unit_mult[unit]
 end
 
+function get_time(path::String, method::String)
+    if method == "beast"
+        return beast_time(path)
+    elseif method == "pcm"
+        return pcm_time(path)
+    else
+        error("The second argument must be \"beast\" or \"pcm\".")
+    end
+end
+
 const Nreps = 1_000
+const Nruns = 6
 
 time_dir = joinpath(@__DIR__, "..", "logs", "PCMBase_timing")
 cd(time_dir)
 
+sets = ["hiv", "prok", "mammals"]
 
-mammals_beast_path = "mammalsPCMComparisonTimer_beast.txt"
-mammals_pcm_path = "mammalsPCMComparisonTimer_pcm.txt"
-hiv_beast_path = "hivPCMComparisonTimer_beast.txt"
-hiv_pcm_path = "hivPCMComparisonTimer_pcm.txt"
-#TODO: add prokaryotes
+nTraits = [3, 7, 8]
+nTaxa = [1536, 705, 3649]
 
-#all times are in seconds
-m_pcm_time = pcm_time(mammals_pcm_path)
-m_beast_time = beast_time(mammals_beast_path)
-h_pcm_time = pcm_time(hiv_pcm_path)
-h_beast_time = beast_time(hiv_beast_path)
+meths = ["pcm", "beast"]
 
+n = length(sets)
+p = length(meths)
 
-data_sets = ["mammals", "mammals", "hiv", "hiv"]
-software = ["beast", "pcm", "beast", "pcm"]
-times = [m_beast_time, m_pcm_time, h_beast_time, h_pcm_time]
-reps_per_sec = Nreps ./ times
+paths = Array{String, 3}(undef, n, p, Nruns)
 
-mammals_increase = times[2] / times[1]
-hiv_increase = times[4] / times[3]
+for i = 1:n
+    for j = 1:p
+        for k = 1:Nruns
+            paths[i, j, k] = "$(sets[i])PCMComparisonTimer_$(meths[j])_$k.txt"
+        end
+    end
+end
 
-@show mammals_increase
-@show hiv_increase
+times = zeros(n, p, Nruns)
+for i = 1:n
+    for j = 1:p
+        for k = 1:Nruns
+            times[i, j, k] = get_time(paths[i, j, k], meths[j])
+        end
+    end
+end
+
+times = times / Nreps
+speed_ups = times[:, 1, :] ./ times[:, 2, :]
+
+mins = zeros(n)
+maxs = zeros(n)
+means = zeros(n)
+
+for i = 1:n
+    x = speed_ups[i, :]
+    means[i] = mean(x)
+    mins[i] = minimum(x)
+    maxs[i] = maximum(x)
+end
+
+df = DataFrame(run = sets, N = nTaxa, P = nTraits, mean = means, min = mins, max = maxs)
+CSV.write(joinpath(@__DIR__, "storage", "speed_results.csv"), df)

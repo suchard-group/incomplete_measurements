@@ -72,8 +72,8 @@ mammals_data_path = joinpath(data_dir, "mammals_log_data.csv")
 mammals_newick_path = joinpath(data_dir, "mammals_trimmed_newick.txt")
 mammals_xml_path = joinpath(xml_dir, "$(mammals_filename).xml")
 
-mammals_Σ_outpath = join(@__DIR__, "storage", "mammals_diff_mat.mat")
-mammals_Γ_outpath = join(@__DIR__, "storage", "mammals_res_mat.mat")
+mammals_Σ_outpath = joinpath(@__DIR__, "storage", "mammals_diff_mat.mat")
+mammals_Γ_outpath = joinpath(@__DIR__, "storage", "mammals_res_mat.mat")
 
 
 mammals_Σ, mammals_Γ = setup_variances(mammals_log_path,
@@ -90,8 +90,8 @@ hiv_data_path = joinpath(data_dir, "hiv_processed_data.csv")
 hiv_newick_path = joinpath(data_dir, "hiv_newick.txt")
 hiv_xml_path = joinpath(xml_dir, "$(hiv_filename).xml")
 
-hiv_Σ_outpath = join(@__DIR__, "storage", "hiv_diff_mat.mat")
-hiv_Γ_outpath = join(@__DIR__, "storage", "hiv_res_mat.mat")
+hiv_Σ_outpath = joinpath(@__DIR__, "storage", "hiv_diff_mat.mat")
+hiv_Γ_outpath = joinpath(@__DIR__, "storage", "hiv_res_mat.mat")
 
 hiv_Σ, hiv_Γ = setup_variances(hiv_log_path,
                                         hiv_Σ_outpath,
@@ -100,3 +100,20 @@ hiv_Σ, hiv_Γ = setup_variances(hiv_log_path,
 
 setup_xml(hiv_data_path, hiv_newick_path, hiv_xml_path,
             hiv_filename, hiv_Σ, hiv_Γ)
+
+prok_filename = "prokPCMComparison"
+prok_log_path = joinpath(log_dir, "prokaryotes.log")
+prok_data_path = joinpath(data_dir, "prokaryotes_processed_data.csv")
+prok_newick_path = joinpath(data_dir, "prokaryotes_newick.txt")
+prok_xml_path = joinpath(xml_dir, "$(prok_filename).xml")
+
+prok_Σ_outpath = joinpath(@__DIR__, "storage", "prok_diff_mat.mat")
+prok_Γ_outpath = joinpath(@__DIR__, "storage", "prok_res_mat.mat")
+
+prok_Σ, prok_Γ = setup_variances(prok_log_path,
+                                        prok_Σ_outpath,
+                                        prok_Γ_outpath,
+                                        "diffVar", "resVar")
+
+setup_xml(prok_data_path, prok_newick_path, prok_xml_path,
+            prok_filename, prok_Σ, prok_Γ)
