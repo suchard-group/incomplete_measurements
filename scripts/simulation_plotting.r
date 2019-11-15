@@ -8,9 +8,7 @@ library(RColorBrewer)
 library(ggpubr)
 
 
-colors.sparsity <- brewer.pal(4, "Set1")
-names(colors.sparsity) <- levels(mats$sparsity)
-colscale.sparsity <- scale_fill_manual(values=colors.sparsity)
+
 
 my_theme <- function(){
   theme_bw(base_size=12) +
@@ -130,6 +128,15 @@ coverage <- coverage[which(coverage$isRandom == "true"),]
 traits$sparsity <- factor(traits$sparsity)
 mats$sparsity <- factor(mats$sparsity)
 coverage$sparsity <- factor(coverage$sparsity)
+
+stopifnot(levels(mats$sparsity)[1] == "0")
+levels(mats$sparsity)[1] = "0.0"
+stopifnot(levels(coverage$sparsity)[1] == "0")
+levels(coverage$sparsity)[1] = "0.0"
+
+colors.sparsity <- brewer.pal(length(levels(mats$sparsity)), "Set1")
+names(colors.sparsity) <- levels(mats$sparsity)
+colscale.sparsity <- scale_fill_manual(values=colors.sparsity)
 
 
 traits$nTaxa <- factor(traits$nTaxa)
