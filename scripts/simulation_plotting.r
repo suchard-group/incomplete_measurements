@@ -10,7 +10,7 @@ library(ggpubr)
 
 colors.sparsity <- brewer.pal(4, "Set1")
 names(colors.sparsity) <- levels(mats$sparsity)
-colscale.sparsity <- scale_fill_manual(name="sparsity", values=colors.sparsity)
+colscale.sparsity <- scale_fill_manual(values=colors.sparsity)
 
 my_theme <- function(){
   theme_bw(base_size=12) +
@@ -36,12 +36,11 @@ simBoxPlot <- function(data, run, xVar, yVar, shadeVar, title="") {
   
   print(title)
   
-  p = ggplot() + geom_boxplot(aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar]), lwd=.25) +
+  p = ggplot() + geom_boxplot(aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar]), lwd=.25, outlier.size=0.25) +
     colscale.sparsity + 
-    labs(fill = plot.labels[shadeVar], x = plot.labels[xVar], y = plot.labels[yVar]) + 
     ggtitle(title) +
-    my_theme()
-  
+    my_theme() + 
+    labs(fill = plot.labels[shadeVar], x = plot.labels[xVar], y = plot.labels[yVar])
 }
 
 simLinePlot <- function(data, run, xVar, yVar, colVar) {
