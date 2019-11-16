@@ -21,8 +21,8 @@ my_theme <- function(){
 
 
 
-plot.labels <- c("HIV", "Mammals", "Prokaryotes", "N", "logMSE", "Sparsity", "Diffusion Correlation", "Residual Correlation", "Heritability", "Traits")
-names(plot.labels) <- c("hivSim", "mammalsSim", "prokSim", "nTaxa", "logmse", "sparsity", "diffCorr", "resCorr", "her", "traits")
+plot.labels <- c("HIV", "Mammals", "Prokaryotes", "N", "logMSE", "Sparsity", "Diffusion Correlation", "Residual Correlation", "Heritability", "Traits", "Bias")
+names(plot.labels) <- c("hivSim", "mammalsSim", "prokSim", "nTaxa", "logmse", "sparsity", "diffCorr", "resCorr", "her", "traits", "bias")
 
 
 simBoxPlot <- function(data, run, xVar, yVar, shadeVar, title="") {
@@ -35,13 +35,13 @@ simBoxPlot <- function(data, run, xVar, yVar, shadeVar, title="") {
   print(title)
   
   p = ggplot() + geom_boxplot(aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar]), lwd=.25, outlier.size=0.25) +
-    colscale.sparsity + 
+    colFill.sparsity + 
     ggtitle(title) +
     my_theme() + 
     labs(fill = plot.labels[shadeVar], x = plot.labels[xVar], y = plot.labels[yVar])
 }
 
-simLinePlot <- function(data, run, xVar, yVar, colVar) {
+simLinePlot <- function(data, run, xVar, yVar, colVar, title="") {
   data.run = data
   if (run != "") {
     data.run <- data[which(data$run == run),]
@@ -50,7 +50,10 @@ simLinePlot <- function(data, run, xVar, yVar, colVar) {
   p = ggplot() + 
     # geom_point(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar])) +
     stat_summary(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar]), fun.data = "stat_sum_quantiles") +
-    labs(color = colVar, x = xVar, y = yVar)
+    colFill.sparsity + 
+    ggtitle(title) +
+    my_theme() + 
+    labs(color = plot.labels[colVar], x = plot.labels[xVar], y = plot.labels[yVar])
   
 }
 
@@ -82,6 +85,64 @@ gridBox <- function(datas, run, xVar, yVar, colVar, titles) {
   
   for (i in 1:n) {
     plots[[i]] = simBoxPlot(datas[[i]], run, xVar, yVar, colVar, title=plot.labels[titles[i]])
+  }
+  plots[[1]] = plots[[1]] + theme(legend.direction = "horizontal")
+  legend = get_legend(plots[[1]])
+  for (i in 1:n) {
+    plots[[i]] = plots[[i]] + theme(legend.position = "none")
+  }
+  
+  plots[[n + 1]] = legend
+  
+  p = grid.arrange(grobs = plots, 
+                   nrow = 3, ncol= 2,
+                   heights = c(1, 1, 0.1),
+                   layout_matrix = rbind(c(1, 2), c(3, 4), c(5, 5)),
+                   top = textGrob(plot.labels[run], gp=gpar(fontsize=20)))
+  
+}
+
+gridBigBox <- function(datas, run, xVar, yVarOne, yVarTwo, colVar, titles) {
+  
+  n = 4
+  stopifnot(length(datas) == n)
+  
+  plots = vector("list", 2 * n + 1)
+  
+  for (i in 1:n) {
+    plots[[i]] = simBoxPlot(datas[[i]], run, xVar, yVarOne, colVar, title=plot.labels[titles[i]])
+  }
+  
+  for (i in (n + 1):(2 * n)) {
+    plots[[i]] = simBoxPlot(datas[[i - n]], run, xVar, yVarTwo, colVar, title=plot.labels[titles[i - n]])
+  }
+  
+  
+  plots[[1]] = plots[[1]] + theme(legend.direction = "horizontal")
+  legend = get_legend(plots[[1]])
+  for (i in 1:(2 * n)) {
+    plots[[i]] = plots[[i]] + theme(legend.position = "none")
+  }
+  
+  plots[[2 * n + 1]] = legend
+  
+  p = grid.arrange(grobs = plots, 
+                   nrow = 5, ncol= 2,
+                   heights = c(1, 1, 1, 1, 0.1),
+                   layout_matrix = rbind(c(1, 5), c(2, 6), c(3, 7), c(4, 8), c(9, 9)),
+                   top = textGrob(plot.labels[run], gp=gpar(fontsize=20)))
+  
+}
+
+gridLine <- function(datas, run, xVar, yVar, colVar, titles) {
+  
+  n = 4
+  stopifnot(length(datas) == n)
+  
+  plots = vector("list", n + 1)
+  
+  for (i in 1:n) {
+    plots[[i]] = simLinePlot(datas[[i]], run, xVar, yVar, colVar, title=plot.labels[titles[i]])
   }
   plots[[1]] = plots[[1]] + theme(legend.direction = "horizontal")
   legend = get_legend(plots[[1]])
@@ -136,7 +197,8 @@ levels(coverage$sparsity)[1] = "0.0"
 
 colors.sparsity <- brewer.pal(length(levels(mats$sparsity)), "Set1")
 names(colors.sparsity) <- levels(mats$sparsity)
-colscale.sparsity <- scale_fill_manual(values=colors.sparsity)
+colFill.sparsity <- scale_fill_manual(values=colors.sparsity)
+colCol.sparsity <- scale_color_manual(values=colors.sparsity)
 
 
 traits$nTaxa <- factor(traits$nTaxa)
@@ -177,17 +239,35 @@ pc <- simCoveragePlot(coverage.her.diag, "", "nObs", "coverage","run")
 
 mat_dats <- list(mats.diffCorr, mats.resCorr, mats.her.diag, traits)
 titles <- c("diffCorr", "resCorr", "her", "traits")
-grid.hiv <- gridBox(mat_dats, "hivSim", "nTaxa", "logmse", "sparsity", titles)
-grid.mammals <- gridBox(mat_dats, "mammalsSim", "nTaxa", "logmse", "sparsity", titles)
-grid.prok <- gridBox(mat_dats, "prokSim", "nTaxa", "logmse", "sparsity", titles)
+grid.hivMSE <- gridBox(mat_dats, "hivSim", "nTaxa", "logmse", "sparsity", titles)
+grid.mammalsMSE <- gridBox(mat_dats, "mammalsSim", "nTaxa", "logmse", "sparsity", titles)
+grid.prokMSE <- gridBox(mat_dats, "prokSim", "nTaxa", "logmse", "sparsity", titles)
 
 plot.width <- 7.5
 plot.height <- 5
 
-ggsave("hivSim.pdf", plot=grid.hiv, width=plot.width, height=plot.height, units="in")
-ggsave("mammalsSim.pdf", plot=grid.mammals, width=plot.width, height=plot.height, units="in")
-ggsave("prokSim.pdf", plot=grid.prok, width=plot.width, height=plot.height, units="in")
+ggsave("hivSimMSE.pdf", plot=grid.hivMSE, width=plot.width, height=plot.height, units="in")
+ggsave("mammalsSimMSE.pdf", plot=grid.mammalsMSE, width=plot.width, height=plot.height, units="in")
+ggsave("prokSimMSE.pdf", plot=grid.prokMSE, width=plot.width, height=plot.height, units="in")
 
+grid.hivBias <- gridBox(mat_dats, "hivSim", "nObs", "bias", "sparsity", titles)
+grid.mammalsBias <- gridBox(mat_dats, "mammalsSim", "nTaxa", "bias", "sparsity", titles)
+grid.prokBias <- gridBox(mat_dats, "prokSim", "nTaxa", "bias", "sparsity", titles)
+
+ggsave("hivSimBias.pdf", plot=grid.hivBias, width=plot.width, height=plot.height, units="in")
+ggsave("mammalsSimBias.pdf", plot=grid.mammalsBias, width=plot.width, height=plot.height, units="in")
+ggsave("prokSimBias.pdf", plot=grid.prokBias, width=plot.width, height=plot.height, units="in")
+
+
+plot.height <- 10
+
+grid.hivBoth <- gridBigBox(mat_dats, "hivSim", "nTaxa", "logmse", "bias", "sparsity", titles)
+grid.mammalsBoth <- gridBigBox(mat_dats, "mammalsSim", "nTaxa", "logmse", "bias", "sparsity", titles)
+grid.prokBoth <- gridBigBox(mat_dats, "prokSim", "nTaxa", "logmse", "bias", "sparsity", titles)
+
+ggsave("hivSimBoth.pdf", plot=grid.hivBoth, width=plot.width, height=plot.height, units="in")
+ggsave("mammalsSimBoth.pdf", plot=grid.mammalsBoth, width=plot.width, height=plot.height, units="in")
+ggsave("prokSimBoth.pdf", plot=grid.prokBoth, width=plot.width, height=plot.height, units="in")
 
 
 gc()
