@@ -63,7 +63,7 @@ StatBoxplotCustom <- ggproto("StatBoxplotCustom", Stat,
                                params
                              },
 
-                             compute_group = function(data, scales, width = NULL, na.rm = FALSE, qs = c(.05, .25, 0.5, 0.75, 0.95)) {
+                             compute_group = function(data, scales, width = NULL, na.rm = FALSE, qs = c(.025, .25, 0.5, 0.75, 0.975)) {
 
                                if (!is.null(data$weight)) {
                                  mod <- quantreg::rq(y ~ 1, weights = weight, data = data, tau = qs)
@@ -112,11 +112,17 @@ simBoxPlot <- function(data, run, xVar, yVar, shadeVar, title="") {
 
   print(title)
 
-  p = ggplot() +
-    stat_boxplot_custom(aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar]), lwd=0.25, outlier.size=0.5) +
-    # stat_summary(aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar]), fun.data=box_plot_quantiles, geom="boxplot", lwd=0.25, position="dodge2") +
+  dodge.width <- 0.95
+
+  p = ggplot(data.run, aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar])) +
+    # stat_boxplot_custom(lwd=0.25, outlier.size=0) +
+    stat_summary(fun.data=box_plot_quantiles, geom="boxplot", lwd=0.25, position=position_dodge(width=dodge.width)) +
+    # geom_boxplot(outlier.size=0, lwd=0.75) +
     colFill.sparsity +
-    # stat_summary(aes(x = data.run[,xVar], y = data.run[,yVar]), fun.y = box_plot_outliers, geom="point", position=position_dodge2(width=1)) +
+    stat_summary(fun.y = box_plot_outliers, geom="point", size=1, position=position_jitterdodge(dodge.width=dodge.width), pch=21) +
+    # geom_point(position=position_jitterdodge()) +
+    # dummy.sparsity +
+    colCol.sparsity +
     ggtitle(title) +
     my_theme() +
     labs(fill = plot.labels[shadeVar], x = plot.labels[xVar], y = plot.labels[yVar])
@@ -129,7 +135,7 @@ box_plot_quantiles <- function(x) {
 }
 
 box_plot_outliers <- function(x) {
-  r <- quantile(x, probs=c(0.05, 0.95))
+  r <- quantile(x, probs=c(0.025, 0.975))
   subset(x, x < r[1] | r[2] < x)
 }
 
@@ -316,6 +322,8 @@ colors.sparsity <- brewer.pal(length(levels(mats$sparsity)), "Set1")
 names(colors.sparsity) <- levels(mats$sparsity)
 colFill.sparsity <- scale_fill_manual(values=colors.sparsity)
 colCol.sparsity <- scale_color_manual(values=colors.sparsity)
+colors.dummy <- c("blue", "black", "black", "black")
+dummy.sparsity <- scale_color_manual(values=colors.dummy)
 
 
 traits$nTaxa <- factor(traits$nTaxa)
