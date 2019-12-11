@@ -1,4 +1,5 @@
 this.dir <- dirname(parent.frame(2)$ofile)
+setwd(this.dir)
 
 library(ggplot2)
 library(grid)
@@ -6,8 +7,8 @@ library(gtable)
 library(gridExtra)
 library(RColorBrewer)
 library(ggpubr)
-
-
+library(magrittr)
+library(dplyr)
 
 
 my_theme <- function(){
@@ -19,6 +20,84 @@ my_theme <- function(){
     )
 }
 
+# modified from https://github.com/tidyverse/ggplot2/blob/master/R/stat-boxplot.r
+stat_boxplot_custom <- function(mapping = NULL, data = NULL,
+                                geom = "boxplot", position = "dodge",
+                                ...,
+                                qs = c(.025, .25, 0.5, 0.75, 0.975),
+                                na.rm = FALSE,
+                                show.legend = NA,
+                                inherit.aes = TRUE) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatBoxplotCustom,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      qs = qs,
+      ...
+    )
+  )
+}
+
+StatBoxplotCustom <- ggproto("StatBoxplotCustom", Stat,
+                             required_aes = c("x", "y"),
+                             non_missing_aes = "weight",
+
+                             setup_params = function(data, params) {
+                               params$width <- ggplot2:::"%||%"(
+                                 params$width, (resolution(data$x) * 0.75)
+                               )
+
+                               if (is.double(data$x) && !ggplot2:::has_groups(data) && any(data$x != data$x[1L])) {
+                                 warning(
+                                   "Continuous x aesthetic -- did you forget aes(group=...)?",
+                                   call. = FALSE
+                                 )
+                               }
+
+                               params
+                             },
+
+                             compute_group = function(data, scales, width = NULL, na.rm = FALSE, qs = c(.05, .25, 0.5, 0.75, 0.95)) {
+
+                               if (!is.null(data$weight)) {
+                                 mod <- quantreg::rq(y ~ 1, weights = weight, data = data, tau = qs)
+                                 stats <- as.numeric(stats::coef(mod))
+                               } else {
+                                 stats <- as.numeric(stats::quantile(data$y, qs))
+                               }
+                               names(stats) <- c("ymin", "lower", "middle", "upper", "ymax")
+                               iqr <- diff(stats[c(2, 4)])
+
+                               outliers <- (data$y < stats[1]) | (data$y > stats[5])
+
+                               if (length(unique(data$x)) > 1)
+                                 width <- diff(range(data$x)) * 0.9
+
+                               df <- as.data.frame(as.list(stats))
+                               df$outliers <- list(data$y[outliers])
+
+                               if (is.null(data$weight)) {
+                                 n <- sum(!is.na(data$y))
+                               } else {
+                                 # Sum up weights for non-NA positions of y and weight
+                                 n <- sum(data$weight[!is.na(data$y) & !is.na(data$weight)])
+                               }
+
+                               df$notchupper <- df$middle + 1.58 * iqr / sqrt(n)
+                               df$notchlower <- df$middle - 1.58 * iqr / sqrt(n)
+
+                               df$x <- if (is.factor(data$x)) data$x[1] else mean(range(data$x))
+                               df$width <- width
+                               df$relvarwidth <- sqrt(n)
+                               df
+                             }
+)
 
 
 plot.labels <- c("HIV", "Mammals", "Prokaryotes", "N", "logMSE", "Sparsity", "Diffusion Correlation", "Residual Correlation", "Heritability", "Traits", "Bias")
@@ -26,19 +105,32 @@ names(plot.labels) <- c("hivSim", "mammalsSim", "prokSim", "nTaxa", "logmse", "s
 
 
 simBoxPlot <- function(data, run, xVar, yVar, shadeVar, title="") {
-  
   data.run = data
   if (run != "") {
     data.run <- data[which(data$run == run),]
   }
-  
+
   print(title)
-  
-  p = ggplot() + geom_boxplot(aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar]), lwd=.25, outlier.size=0.25) +
-    colFill.sparsity + 
+
+  p = ggplot() +
+    stat_boxplot_custom(aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar]), lwd=0.25, outlier.size=0.5) +
+    # stat_summary(aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar]), fun.data=box_plot_quantiles, geom="boxplot", lwd=0.25, position="dodge2") +
+    colFill.sparsity +
+    # stat_summary(aes(x = data.run[,xVar], y = data.run[,yVar]), fun.y = box_plot_outliers, geom="point", position=position_dodge2(width=1)) +
     ggtitle(title) +
-    my_theme() + 
+    my_theme() +
     labs(fill = plot.labels[shadeVar], x = plot.labels[xVar], y = plot.labels[yVar])
+}
+
+box_plot_quantiles <- function(x) {
+  r <- quantile(x, probs = c(0.05, 0.25, 0.5, 0.75, 0.95))
+  names(r) <- c("ymin", "lower", "middle", "upper", "ymax")
+  r
+}
+
+box_plot_outliers <- function(x) {
+  r <- quantile(x, probs=c(0.05, 0.95))
+  subset(x, x < r[1] | r[2] < x)
 }
 
 simLinePlot <- function(data, run, xVar, yVar, colVar, title="") {
@@ -46,15 +138,15 @@ simLinePlot <- function(data, run, xVar, yVar, colVar, title="") {
   if (run != "") {
     data.run <- data[which(data$run == run),]
   }
-  
-  p = ggplot() + 
+
+  p = ggplot() +
     # geom_point(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar])) +
     stat_summary(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar]), fun.data = "stat_sum_quantiles") +
-    colFill.sparsity + 
+    colFill.sparsity +
     ggtitle(title) +
-    my_theme() + 
+    my_theme() +
     labs(color = plot.labels[colVar], x = plot.labels[xVar], y = plot.labels[yVar])
-  
+
 }
 
 stat_sum_quantiles <- function(data) {
@@ -68,8 +160,8 @@ simCoveragePlot <- function(data, run, xVar, yVar, colVar) {
   if (run != "") {
     data.run <- data[which(data$run == run),]
   }
-  
-  p = ggplot() + 
+
+  p = ggplot() +
     # geom_point(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar])) +
     stat_summary(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar]), fun.y = "mean", geom = "point") +
     labs(color = colVar, x = xVar, y = yVar) +
@@ -77,12 +169,12 @@ simCoveragePlot <- function(data, run, xVar, yVar, colVar) {
 }
 
 gridBox <- function(datas, run, xVar, yVar, colVar, titles) {
-  
+
   n = 4
   stopifnot(length(datas) == n)
-  
+
   plots = vector("list", n + 1)
-  
+
   for (i in 1:n) {
     plots[[i]] = simBoxPlot(datas[[i]], run, xVar, yVar, colVar, title=plot.labels[titles[i]])
   }
@@ -91,56 +183,81 @@ gridBox <- function(datas, run, xVar, yVar, colVar, titles) {
   for (i in 1:n) {
     plots[[i]] = plots[[i]] + theme(legend.position = "none")
   }
-  
+
   plots[[n + 1]] = legend
-  
-  p = grid.arrange(grobs = plots, 
+
+  p = grid.arrange(grobs = plots,
                    nrow = 3, ncol= 2,
                    heights = c(1, 1, 0.1),
                    layout_matrix = rbind(c(1, 2), c(3, 4), c(5, 5)),
                    top = textGrob(plot.labels[run], gp=gpar(fontsize=20)))
-  
+
 }
 
 gridBigBox <- function(datas, run, xVar, yVarOne, yVarTwo, colVar, titles) {
-  
+
   n = 4
   stopifnot(length(datas) == n)
-  
+
   plots = vector("list", 2 * n + 1)
-  
+
   for (i in 1:n) {
     plots[[i]] = simBoxPlot(datas[[i]], run, xVar, yVarOne, colVar, title=plot.labels[titles[i]])
   }
-  
+
   for (i in (n + 1):(2 * n)) {
     plots[[i]] = simBoxPlot(datas[[i - n]], run, xVar, yVarTwo, colVar, title=plot.labels[titles[i - n]])
   }
-  
-  
+
+
   plots[[1]] = plots[[1]] + theme(legend.direction = "horizontal")
   legend = get_legend(plots[[1]])
   for (i in 1:(2 * n)) {
     plots[[i]] = plots[[i]] + theme(legend.position = "none")
   }
-  
+
   plots[[2 * n + 1]] = legend
-  
-  p = grid.arrange(grobs = plots, 
+
+  p = grid.arrange(grobs = plots,
                    nrow = 5, ncol= 2,
                    heights = c(1, 1, 1, 1, 0.1),
                    layout_matrix = rbind(c(1, 5), c(2, 6), c(3, 7), c(4, 8), c(9, 9)),
                    top = textGrob(plot.labels[run], gp=gpar(fontsize=20)))
-  
+
+}
+
+paperGrid <- function(data, runs, xVar, yVar, colVar, titles) {
+  n = 3
+  stopifnot(length(runs) == n)
+
+  plots = vector("list", n + 1)
+
+  for (i in 1:n) {
+    plots[[i]] = simBoxPlot(data, runs[i], xVar, yVar, colVar, title=plot.labels[titles[i]])
+  }
+  # plots[[1]] = plots[[1]] + theme(legend.direction = "vertical")
+  legend = get_legend(plots[[1]])
+  for (i in 1:n) {
+    plots[[i]] = plots[[i]] + theme(legend.position = "none")
+  }
+
+  plots[[n + 1]] = legend
+
+  p = grid.arrange(grobs = plots,
+                   nrow = 2, ncol= 2
+                   # heights = c(1, 1, 0.1),
+                   # layout_matrix = rbind(c(1, 2), c(3, 4), c(5, 5)),
+                   # top = textGrob(plot.labels[run], gp=gpar(fontsize=20))
+                   )
 }
 
 gridLine <- function(datas, run, xVar, yVar, colVar, titles) {
-  
+
   n = 4
   stopifnot(length(datas) == n)
-  
+
   plots = vector("list", n + 1)
-  
+
   for (i in 1:n) {
     plots[[i]] = simLinePlot(datas[[i]], run, xVar, yVar, colVar, title=plot.labels[titles[i]])
   }
@@ -149,15 +266,15 @@ gridLine <- function(datas, run, xVar, yVar, colVar, titles) {
   for (i in 1:n) {
     plots[[i]] = plots[[i]] + theme(legend.position = "none")
   }
-  
+
   plots[[n + 1]] = legend
-  
-  p = grid.arrange(grobs = plots, 
+
+  p = grid.arrange(grobs = plots,
                    nrow = 3, ncol= 2,
                    heights = c(1, 1, 0.1),
                    layout_matrix = rbind(c(1, 2), c(3, 4), c(5, 5)),
                    top = textGrob(plot.labels[run], gp=gpar(fontsize=20)))
-  
+
 }
 
 get_legend<-function(myggplot){
@@ -183,7 +300,7 @@ traits <- traits[which(traits$isRandom == "true"),] #remove rows with no error (
 mats <- mats[which(mats$isRandom == "true"),]
 coverage <- coverage[which(coverage$isRandom == "true"),]
 
-  
+
 
 
 traits$sparsity <- factor(traits$sparsity)
@@ -226,37 +343,38 @@ coverage.her.offdiag <- coverage.her[which(coverage.her$component == "offDiagona
 coverage.trait <- coverage[which(coverage$variable == "trait"),]
 
 
-
-
-p <- simBoxPlot(mats.resCorr, "", "nTaxa", "logmse", "sparsity", "testTitle")
-# p
-# 
-ps <- simLinePlot(mats.her.diag, "mammalsSim", "nObs", "logmse", "sparsity")
-# ps
-# 
-pc <- simCoveragePlot(coverage.her.diag, "", "nObs", "coverage","run")
-# pc
+#
+#
+# p <- simBoxPlot(mats.resCorr, "", "nTaxa", "logmse", "sparsity", "testTitle")
+# # p
+# #
+# ps <- simLinePlot(mats.her.diag, "mammalsSim", "nObs", "logmse", "sparsity")
+# # ps
+# #
+# pc <- simCoveragePlot(coverage.her.diag, "", "nObs", "coverage","run")
+# # pc
 
 mat_dats <- list(mats.diffCorr, mats.resCorr, mats.her.diag, traits)
 titles <- c("diffCorr", "resCorr", "her", "traits")
-grid.hivMSE <- gridBox(mat_dats, "hivSim", "nTaxa", "logmse", "sparsity", titles)
-grid.mammalsMSE <- gridBox(mat_dats, "mammalsSim", "nTaxa", "logmse", "sparsity", titles)
-grid.prokMSE <- gridBox(mat_dats, "prokSim", "nTaxa", "logmse", "sparsity", titles)
+
+# grid.hivMSE <- gridBox(mat_dats, "hivSim", "nTaxa", "logmse", "sparsity", titles)
+# grid.mammalsMSE <- gridBox(mat_dats, "mammalsSim", "nTaxa", "logmse", "sparsity", titles)
+# grid.prokMSE <- gridBox(mat_dats, "prokSim", "nTaxa", "logmse", "sparsity", titles)
 
 plot.width <- 7.5
-plot.height <- 5
-
-ggsave("hivSimMSE.pdf", plot=grid.hivMSE, width=plot.width, height=plot.height, units="in")
-ggsave("mammalsSimMSE.pdf", plot=grid.mammalsMSE, width=plot.width, height=plot.height, units="in")
-ggsave("prokSimMSE.pdf", plot=grid.prokMSE, width=plot.width, height=plot.height, units="in")
-
-grid.hivBias <- gridBox(mat_dats, "hivSim", "nObs", "bias", "sparsity", titles)
-grid.mammalsBias <- gridBox(mat_dats, "mammalsSim", "nTaxa", "bias", "sparsity", titles)
-grid.prokBias <- gridBox(mat_dats, "prokSim", "nTaxa", "bias", "sparsity", titles)
-
-ggsave("hivSimBias.pdf", plot=grid.hivBias, width=plot.width, height=plot.height, units="in")
-ggsave("mammalsSimBias.pdf", plot=grid.mammalsBias, width=plot.width, height=plot.height, units="in")
-ggsave("prokSimBias.pdf", plot=grid.prokBias, width=plot.width, height=plot.height, units="in")
+# plot.height <- 5
+#
+# ggsave("hivSimMSE.pdf", plot=grid.hivMSE, width=plot.width, height=plot.height, units="in")
+# ggsave("mammalsSimMSE.pdf", plot=grid.mammalsMSE, width=plot.width, height=plot.height, units="in")
+# ggsave("prokSimMSE.pdf", plot=grid.prokMSE, width=plot.width, height=plot.height, units="in")
+#
+# grid.hivBias <- gridBox(mat_dats, "hivSim", "nObs", "bias", "sparsity", titles)
+# grid.mammalsBias <- gridBox(mat_dats, "mammalsSim", "nTaxa", "bias", "sparsity", titles)
+# grid.prokBias <- gridBox(mat_dats, "prokSim", "nTaxa", "bias", "sparsity", titles)
+#
+# ggsave("hivSimBias.pdf", plot=grid.hivBias, width=plot.width, height=plot.height, units="in")
+# ggsave("mammalsSimBias.pdf", plot=grid.mammalsBias, width=plot.width, height=plot.height, units="in")
+# ggsave("prokSimBias.pdf", plot=grid.prokBias, width=plot.width, height=plot.height, units="in")
 
 
 plot.height <- 10
@@ -268,6 +386,13 @@ grid.prokBoth <- gridBigBox(mat_dats, "prokSim", "nTaxa", "logmse", "bias", "spa
 ggsave("hivSimBoth.pdf", plot=grid.hivBoth, width=plot.width, height=plot.height, units="in")
 ggsave("mammalsSimBoth.pdf", plot=grid.mammalsBoth, width=plot.width, height=plot.height, units="in")
 ggsave("prokSimBoth.pdf", plot=grid.prokBoth, width=plot.width, height=plot.height, units="in")
+
+runs <- c("mammalsSim", "prokSim", "hivSim")
+grid.paper <- paperGrid(mats.diffCorr, runs, "nTaxa", "logmse", "sparsity", runs)
+
+
+plot.height <- 5
+ggsave("diffCorSim.pdf", plot=grid.paper, width=plot.width, height=plot.height, units="in")
 
 
 gc()
