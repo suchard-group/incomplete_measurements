@@ -115,14 +115,14 @@ simBoxPlot <- function(data, run, xVar, yVar, shadeVar, title="") {
   dodge.width <- 0.95
 
   p = ggplot(data.run, aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar])) +
-    # stat_boxplot_custom(lwd=0.25, outlier.size=0) +
-    stat_summary(fun.data=box_plot_quantiles, geom="boxplot", lwd=0.25, position=position_dodge(width=dodge.width)) +
+    stat_boxplot_custom(lwd=0.25, outlier.size=0.75) +
+    # stat_summary(fun.data=box_plot_quantiles, geom="boxplot", lwd=0.25, position=position_dodge(width=dodge.width)) +
     # geom_boxplot(outlier.size=0, lwd=0.75) +
     colFill.sparsity +
-    stat_summary(fun.y = box_plot_outliers, geom="point", size=1, position=position_jitterdodge(dodge.width=dodge.width), pch=21) +
+    # stat_summary(fun.y = box_plot_outliers, geom="point", size=1, position=position_jitterdodge(dodge.width=dodge.width), pch=21) +
     # geom_point(position=position_jitterdodge()) +
     # dummy.sparsity +
-    colCol.sparsity +
+    # colCol.sparsity +
     ggtitle(title) +
     my_theme() +
     labs(fill = plot.labels[shadeVar], x = plot.labels[xVar], y = plot.labels[yVar])
