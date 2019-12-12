@@ -104,7 +104,7 @@ plot.labels <- c("HIV", "Mammals", "Prokaryotes", "N", "logMSE", "Sparsity", "Di
 names(plot.labels) <- c("hivSim", "mammalsSim", "prokSim", "nTaxa", "logmse", "sparsity", "diffCorr", "resCorr", "her", "traits", "bias")
 
 
-simBoxPlot <- function(data, run, xVar, yVar, shadeVar, title="") {
+simBoxPlot <- function(data, run, xVar, yVar, shadeVar, title="", zero.line=FALSE) {
   data.run = data
   if (run != "") {
     data.run <- data[which(data$run == run),]
@@ -112,9 +112,15 @@ simBoxPlot <- function(data, run, xVar, yVar, shadeVar, title="") {
 
   print(title)
 
+
+
   dodge.width <- 0.95
 
-  p = ggplot(data.run, aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar])) +
+  p <- ggplot(data.run, aes(x = data.run[,xVar], y = data.run[,yVar], fill=data.run[,shadeVar]))
+  if (zero.line) {
+    p = p + geom_hline(yintercept=0, linetype="dashed", size=.5)
+  }
+  p = p +
     stat_boxplot_custom(lwd=0.25, outlier.size=0.75) +
     # stat_summary(fun.data=box_plot_quantiles, geom="boxplot", lwd=0.25, position=position_dodge(width=dodge.width)) +
     # geom_boxplot(outlier.size=0, lwd=0.75) +
@@ -212,7 +218,7 @@ gridBigBox <- function(datas, run, xVar, yVarOne, yVarTwo, colVar, titles) {
   }
 
   for (i in (n + 1):(2 * n)) {
-    plots[[i]] = simBoxPlot(datas[[i - n]], run, xVar, yVarTwo, colVar, title=plot.labels[titles[i - n]])
+    plots[[i]] = simBoxPlot(datas[[i - n]], run, xVar, yVarTwo, colVar, title=plot.labels[titles[i - n]], zero.line = TRUE)
   }
 
 
@@ -385,7 +391,7 @@ plot.width <- 7.5
 # ggsave("prokSimBias.pdf", plot=grid.prokBias, width=plot.width, height=plot.height, units="in")
 
 
-plot.height <- 10
+plot.height <- 8.5
 
 grid.hivBoth <- gridBigBox(mat_dats, "hivSim", "nTaxa", "logmse", "bias", "sparsity", titles)
 grid.mammalsBoth <- gridBigBox(mat_dats, "mammalsSim", "nTaxa", "logmse", "bias", "sparsity", titles)
