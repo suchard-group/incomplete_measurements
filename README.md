@@ -5,6 +5,7 @@
     * From the command line, type `java -version`.
     * The output should start with `java version "1.8.0_<other numbers>"`.
     * If java is not installed or the wrong version of java is installed, please follow the instructions [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
+    * Note that if a different version of Java is already installed, you will probably be able to run all of the xml. If you encounter problems, you can update your version of Java later.
 2. Ensure you have `git` installed.
     * From the command line, type `git --version`. The version of git should be returned.
     * If `git` is not installed, you can find directions to install it [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
@@ -18,6 +19,7 @@
     ```
     git clone https://github.com/beast-dev/beast-mcmc.git
     cd beast-mcmc
+    git checkout repeated_measures
     ant
     ```
 ## Running an XML file on BEAST 

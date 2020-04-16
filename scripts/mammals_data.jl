@@ -1,7 +1,6 @@
-cd(dirname(@__FILE__))
+cd(@__DIR__)
 push!(LOAD_PATH, pwd())
 
-using Revise
 using Trees2, DelimitedFiles, CSV, DataFrames
 
 const MISSING_VAL = -999.0
@@ -21,7 +20,7 @@ data_path = joinpath(data_dir, "PanTHERIA_1-0_WR05_Aug2008.txt")
 
 raw_data = readdlm(data_path)
 
-#Need to combine 'Genus species' to 'Genus_species'
+### Need to combine 'Genus species' to 'Genus_species'
 comb_cols = [5, 6]
 n, p = size(raw_data)
 n = n - 1 #Omit header row
@@ -51,7 +50,8 @@ col_names = ["body_mass",
 display([header[cols] col_names])
 
 
-#Converting the missing values (-999.0) to NaN before working with the data
+### Converting the missing values (-999.0) to 'missing' before working with the data
+
 trimmed_data = all_data[:, cols]
 for i = 1:length(trimmed_data)
     if trimmed_data[i] == MISSING_VAL
@@ -59,7 +59,7 @@ for i = 1:length(trimmed_data)
     end
 end
 
-col_names = ["body_mass",
+col_names = ["body_mass", # reassigning col_names to reflect traits used in final analysis
             "age_at_first_birth",
             "gestation_length",
             "litter_size",
@@ -78,7 +78,10 @@ data = Matrix{Union{Float64, Missing}}(undef, n, p)
 data[:, 1:(p - 1)] .= trimmed_data[:, 1:(p - 1)]
 data[:, p] .= trimmed_data[:, p] * m_mult .- trimmed_data[:, p + 1] #Longevity is in months, but age at first birth is in days
 
-#Remove rows with all missing values
+### Remove taxa from tree and data list for various reasons
+
+# Remove rows with all missing values
+
 keep_inds = zeros(Int, n)
 current_ind = 0
 for i = 1:n
@@ -97,7 +100,7 @@ end
 
 keep_inds = keep_inds[1:current_ind]
 
-#Need to manually remove one additional taxon (it has a reproductive_lifespan of 0.0)
+# Need to manually remove one additional taxon (it has a reproductive_lifespan of 0.0)
 rem_ind = findfirst(x -> x == "Monodelphis_dimidiata", taxa)
 deleteat!(keep_inds, findfirst(x -> x == rem_ind, keep_inds))
 
@@ -106,7 +109,7 @@ taxa = taxa[keep_inds]
 data = data[keep_inds, :]
 
 
-#Remove taxa from the data matrix not represented in the tree
+# Remove taxa from the data matrix not represented in the tree
 not_on_tree = setdiff(taxa, tree.tip_labels)
 keep_inds = findall(x -> !(taxa[x] in not_on_tree), 1:length(taxa))
 
@@ -115,24 +118,20 @@ data = data[keep_inds, :]
 log_data = log10.(data)
 
 
-#Remove taxa from the tree that aren't present in the data
+# Remove taxa from the tree that aren't present in the data
 not_in_data = setdiff(tree.tip_labels, taxa)
 for taxon in not_in_data
     Trees2.trim_tree!(tree, taxon)
 end
 
-#Get new newick after culling taxa
+### Save newick and data
+
+# newick
 newick = Trees2.make_newick(tree)
+write(joinpath(data_dir, "mammals_trimmed_newick.txt"), newick)
 
-#Standardize tree and add prior sample size
-max_distance = maximum([Trees2.distance_to_root(tree, i) for i = 1:tree.n_tips])
-tree.edge_lengths ./= max_distance
-pcm_newick_noRoot = Trees2.make_newick(tree)
 
-Trees2.add_root!(tree, 1 / PSS)
-pcm_newick = Trees2.make_newick(tree)
-
-# Save newick and data
+# trait data
 df = DataFrame()
 
 df[!, :taxon] = taxa
@@ -143,14 +142,26 @@ end
 CSV.write(joinpath(data_dir, "mammals_log_data.csv"), df)
 
 
-write(joinpath(data_dir, "mammals_trimmed_newick.txt"), newick)
+### Additional newicks for PCMBase comparison
+
+# Standardize tree and add prior sample size
+max_distance = maximum([Trees2.distance_to_root(tree, i) for i = 1:tree.n_tips])
+tree.edge_lengths ./= max_distance
+pcm_newick_noRoot = Trees2.make_newick(tree)
+
+Trees2.add_root!(tree, 1 / PSS)
+pcm_newick = Trees2.make_newick(tree)
+
+# Save newick and data
+
+
 write(joinpath(data_dir, "mammals_trimmed_pcm_newick.txt"), pcm_newick)
 write(joinpath(data_dir, "mammals_trimmed_pcm_newick_noRoot.txt"), pcm_newick_noRoot)
 
 
 
 
-###Checking that the trimming process worked. This doesn't check topology (I did that by hand on smaller examples), but it does make
+### Checking that the trimming process worked. This doesn't check topology (I did that by hand on smaller examples), but it does make
 
 old_tree = Trees2.parse_newick(full_newick)
 new_tree = Trees2.parse_newick(newick)
