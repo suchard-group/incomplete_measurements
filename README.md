@@ -1,6 +1,6 @@
 # Inferring phenotypic trait evolution on large trees with many incomplete measurements
 
-This repository contains the necessary data and scripts to reproduce the analyses and figures in the [manuscript](https://arxiv.org/abs/1906.03222) entitled _Inferring phenotypic trait evolution on large trees with many incomplete measurements_ by Gabriel Hassler, Max R. Tolkoff, William L. Allen, Lam Si Tung Ho, Philippe Lemey, and Marc A. Suchard.
+This repository contains the necessary data and scripts to reproduce the analyses and figures in the [manuscript](https://arxiv.org/abs/1906.03222) entitled _Inferring phenotypic trait evolution on large trees with many incomplete measurements_ by [temporarily blinded for review].<!--Gabriel Hassler, Max R. Tolkoff, William L. Allen, Lam Si Tung Ho, Philippe Lemey, and Marc A. Suchard.-->
 
 The instructions below should be sufficient to perform all analyses on OSX, Windows, and Linux, but please raise an issue on this GitHub repository if you encounter any problems.
 
