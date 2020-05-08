@@ -302,6 +302,23 @@ All references to the `beast-mcmc` directory point to the location of the BEAST 
 5. Run the __simulation_analysis.jl__ script.
 6. Run the __simulation_plotting.r__ script in the `./scripts/plots` directory to generate Figure 2 and SI Figures 1, 2, and 3.
 
+To perform simulation studies with different parameter values than those in the three examples we used in this papers, use the `sim_xml` function in the __simulation_setup.jl__ script.
+This function takes the following eight arguments, the last two of which are optional:
+
+* `xml_dir` - String representing the directory you want to write the XML files two. This is already set in the script, but can be changed to wherever you want.
+* `newick` - String representing the newick representation of the phylogenetic tree.
+* $\Sigma$ - 2-D array representing the diffusion variance.
+* $\Gamma$ - 2-D array representing the residual variance (note that this is different notation than the paper where $\Gamma$ is the residual precision).
+* `sparsity` - Floating point number between 0 and 1 representing the proportion of the data you want to randomly remove.
+* `base_name` - String that will be the first part of the filename.
+* `standardize_tree` - Boolean value indicating whether you want to rescale the tree edge lengths such that the maximum distance between the root and any tip is equal to 1.
+* `rep` - Integer that, if supplied as an argument, appends `r_<rep>` to the end of the filename. Used to distinguish different runs with the same `base_name`, number of taxa, number of traits, and percent missing.
+
+Note that `sim_xml` stores the parameters used for simulation in the `./scripts/storage/simulation` directory, and relies on the internal structure of this repository.
+Any scripts you write using `sim_xml` should be located in the `./scripts` directory.
+
+    
+
 ### Comparison with PCMBaseCpp and SI Tables 1 and 2
 1. Ensure the __mammals.log__, __hiv.log__, and __prokaryotes.log__ files are in the `./logs` directory of this repository.
 2. Run the __mammals_data.jl__ script to generate the relevant newick files.
