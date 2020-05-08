@@ -1,7 +1,4 @@
 .Rhistory
 README.html
-scripts/simulation_batch.jl
 *.trees
 *.tree
-logs/prokaryotes.log
-xml/PCMBase_comparison/sim*
