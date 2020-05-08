@@ -166,7 +166,7 @@ To run a Julia script, use the command line to navigate to the directory contain
 6. Download and build BEAST
     * Enter the following code on the command line. 
     ```
-    git clone https://github.com/beast-dev/beast-mcmc.git
+    git clone --branch repeated_measures --depth 1 https://github.com/beast-dev/beast-mcmc.git
     cd beast-mcmc
     git checkout repeated_measures
     ant
