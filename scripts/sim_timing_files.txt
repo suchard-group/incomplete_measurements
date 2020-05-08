@@ -1,9 +1,0 @@
-sim_100Taxa_2Traits_1
-sim_100Taxa_10Traits_1
-sim_100Taxa_20Traits_1
-sim_1000Taxa_2Traits_1
-sim_1000Taxa_10Traits_1
-sim_1000Taxa_20Traits_1
-sim_10000Taxa_2Traits_1
-sim_10000Taxa_10Traits_1
-sim_10000Taxa_20Traits_1

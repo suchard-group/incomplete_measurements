@@ -1,0 +1,65 @@
+row,col,corrs,p,signed_p,corr_ref,string_p,fill_p
+body mass,body mass,,,,1.0,,
+gestation time,body mass,,1.0,1.0,,,1.0
+weaning age,body mass,,1.0,1.0,,,1.0
+neonatal body mass,body mass,,1.0,1.0,,,1.0
+age at first birth,body mass,,1.0,1.0,,,1.0
+reproductive lifespan,body mass,,1.0,1.0,,,1.0
+litter size,body mass,,1.0,-1.0,,,1.0
+litters per year,body mass,,1.0,-1.0,,,1.0
+body mass,gestation time,0.3084214660610699,,,,,
+gestation time,gestation time,,,,1.0,,
+weaning age,gestation time,,1.0,1.0,,,1.0
+neonatal body mass,gestation time,,1.0,1.0,,,1.0
+age at first birth,gestation time,,1.0,1.0,,,1.0
+reproductive lifespan,gestation time,,0.9998889012331963,0.9998889012331963,,,1.0
+litter size,gestation time,,1.0,-1.0,,,1.0
+litters per year,gestation time,,1.0,-1.0,,,1.0
+body mass,weaning age,0.43293497672790193,,,,,
+gestation time,weaning age,0.3205019003614585,,,,,
+weaning age,weaning age,,,,1.0,,
+neonatal body mass,weaning age,,1.0,1.0,,,1.0
+age at first birth,weaning age,,1.0,1.0,,,1.0
+reproductive lifespan,weaning age,,1.0,1.0,,,1.0
+litter size,weaning age,,0.9975558271303189,-0.9975558271303189,,,1.0
+litters per year,weaning age,,1.0,-1.0,,,1.0
+body mass,neonatal body mass,0.8597377638770608,,,,,
+gestation time,neonatal body mass,0.47715644828136367,,,,,
+weaning age,neonatal body mass,0.36806450283293346,,,,,
+neonatal body mass,neonatal body mass,,,,1.0,,
+age at first birth,neonatal body mass,,1.0,1.0,,,1.0
+reproductive lifespan,neonatal body mass,,1.0,1.0,,,1.0
+litter size,neonatal body mass,,1.0,-1.0,,,1.0
+litters per year,neonatal body mass,,1.0,-1.0,,,1.0
+body mass,age at first birth,0.5306253924534035,,,,,
+gestation time,age at first birth,0.4646523714511309,,,,,
+weaning age,age at first birth,0.5362794124920667,,,,,
+neonatal body mass,age at first birth,0.5294012732423924,,,,,
+age at first birth,age at first birth,,,,1.0,,
+reproductive lifespan,age at first birth,,1.0,1.0,,,1.0
+litter size,age at first birth,,0.9997778024663926,-0.9997778024663926,,,1.0
+litters per year,age at first birth,,1.0,-1.0,,,1.0
+body mass,reproductive lifespan,0.5764222308950414,,,,,
+gestation time,reproductive lifespan,0.27797633539103456,,,,,
+weaning age,reproductive lifespan,0.47935050388455447,,,,,
+neonatal body mass,reproductive lifespan,0.5691447961172346,,,,,
+age at first birth,reproductive lifespan,0.7478756058086847,,,,,
+reproductive lifespan,reproductive lifespan,,,,1.0,,
+litter size,reproductive lifespan,,1.0,-1.0,,,1.0
+litters per year,reproductive lifespan,,0.9986668147983557,-0.9986668147983557,,,1.0
+body mass,litter size,-0.14482544060416744,,,,,
+gestation time,litter size,-0.31467133390316354,,,,,
+weaning age,litter size,-0.15319597444085914,,,,,
+neonatal body mass,litter size,-0.30707848715112085,,,,,
+age at first birth,litter size,-0.328071712295281,,,,,
+reproductive lifespan,litter size,-0.44008251418260214,,,,,
+litter size,litter size,,,,1.0,,
+litters per year,litter size,,0.7160315520497722,-0.7160315520497722,,.71,
+body mass,litters per year,-0.2643464537501517,,,,,
+gestation time,litters per year,-0.2900231457351061,,,,,
+weaning age,litters per year,-0.5462936535533524,,,,,
+neonatal body mass,litters per year,-0.20203095489706144,,,,,
+age at first birth,litters per year,-0.6327338455298485,,,,,
+reproductive lifespan,litters per year,-0.35169177366834575,,,,,
+litter size,litters per year,-0.0404394881439798,,,,,
+litters per year,litters per year,,,,1.0,,

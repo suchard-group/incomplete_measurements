@@ -109,7 +109,8 @@ df = DataFrame(run = sets, N = nTaxa, P = nTraits,
 
 
 cd(@__DIR__)
-filenames = readlines("sim_timing_files.txt")
+filenames = readlines(joinpath("storage", "PCMBase_comparison",
+                                "sim_timing_files.txt"))
 
 n = length(filenames)
 

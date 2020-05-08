@@ -1,7 +1,11 @@
 cd(@__DIR__)
 push!(LOAD_PATH, pwd())
 
-using Trees2, DelimitedFiles, CSV, DataFrames
+using DelimitedFiles, DataFrames, CSV
+
+import BeastUtils.RTrees
+trees = RTrees
+
 
 const MISSING_VAL = -999.0
 const PSS = 0.001
@@ -13,7 +17,7 @@ data_dir = joinpath(root_dir, "data")
 
 newick_path = joinpath(data_dir, "mammals_newick.txt")
 full_newick = read(newick_path, String)
-tree = Trees2.parse_newick(full_newick)
+tree = trees.parse_newick(full_newick)
 
 data_path = joinpath(data_dir, "PanTHERIA_1-0_WR05_Aug2008.txt")
 
@@ -121,13 +125,13 @@ log_data = log10.(data)
 # Remove taxa from the tree that aren't present in the data
 not_in_data = setdiff(tree.tip_labels, taxa)
 for taxon in not_in_data
-    Trees2.trim_tree!(tree, taxon)
+    trees.trim_tree!(tree, taxon)
 end
 
 ### Save newick and data
 
 # newick
-newick = Trees2.make_newick(tree)
+newick = trees.make_newick(tree)
 write(joinpath(data_dir, "mammals_trimmed_newick.txt"), newick)
 
 
@@ -145,12 +149,12 @@ CSV.write(joinpath(data_dir, "mammals_log_data.csv"), df)
 ### Additional newicks for PCMBase comparison
 
 # Standardize tree and add prior sample size
-max_distance = maximum([Trees2.distance_to_root(tree, i) for i = 1:tree.n_tips])
+max_distance = maximum([trees.distance_to_root(tree, i) for i = 1:tree.n_tips])
 tree.edge_lengths ./= max_distance
-pcm_newick_noRoot = Trees2.make_newick(tree)
+pcm_newick_noRoot = trees.make_newick(tree)
 
-Trees2.add_root!(tree, 1 / PSS)
-pcm_newick = Trees2.make_newick(tree)
+trees.add_root!(tree, 1 / PSS)
+pcm_newick = trees.make_newick(tree)
 
 # Save newick and data
 
@@ -163,15 +167,15 @@ write(joinpath(data_dir, "mammals_trimmed_pcm_newick_noRoot.txt"), pcm_newick_no
 
 ### Checking that the trimming process worked. This doesn't check topology (I did that by hand on smaller examples), but it does make
 
-old_tree = Trees2.parse_newick(full_newick)
-new_tree = Trees2.parse_newick(newick)
+old_tree = trees.parse_newick(full_newick)
+new_tree = trees.parse_newick(newick)
 
 
 tol = 1e-10
 for i in 1:tree.n_tips
     taxon = tree.tip_labels[i]
-    d1 = Trees2.distance_to_root(old_tree, taxon)
-    d2 = Trees2.distance_to_root(new_tree, taxon)
+    d1 = trees.distance_to_root(old_tree, taxon)
+    d2 = trees.distance_to_root(new_tree, taxon)
     if abs(d1 - d2) > tol
         error("The distances for taxon $taxon do not match.")
     end

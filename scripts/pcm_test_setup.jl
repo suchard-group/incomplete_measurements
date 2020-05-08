@@ -1,9 +1,9 @@
-using Revise
-
 cd(@__DIR__)
 
 using LinearAlgebra, CSV, LightXML, Distributions
-using ReadLogs, MyFunctions, XMLConstructor2, Trees2, DiffusionSimulation2, DataStorage #Personal modules
+using BeastUtils.XMLConstructor, BeastUtils.RTrees, BeastUtils.Logs,
+        BeastUtils.MatrixUtils, BeastUtils.DiffusionSimulation,
+        BeastUtils.DataStorage
 
 ### Set up diffusion and residual variance based on real data
 
@@ -40,7 +40,7 @@ function setup_xml(data_path::String, newick_path::String, xml_dir::String,
                     filename::String, Σ::Matrix{Float64}, Γ::Matrix{Float64})
 
     df = CSV.read(data_path)
-    taxa, data = XMLConstructor2.df_to_matrix(df)
+    taxa, data = XMLConstructor.df_to_matrix(df)
     newick = read(newick_path, String)
 
     return setup_xml(taxa, data, newick, Σ, Γ, xml_dir, filename)
@@ -50,7 +50,7 @@ function setup_xml(taxa::Vector{String}, data::Matrix{Float64}, newick::String,
                     Σ::Matrix{Float64}, Γ::Matrix{Float64},
                     xml_dir::String, filename::String)
 
-    bx = XMLConstructor2.make_timing_MBD_XML(data, taxa, newick, chain_length = 1_000)
+    bx = XMLConstructor.make_timing_MBD_XML(data, taxa, newick, chain_length = 1_000)
 
     bx.mcmc_el.filename = filename
     bx.mcmc_el.screen_logEvery = 100
@@ -58,7 +58,7 @@ function setup_xml(taxa::Vector{String}, data::Matrix{Float64}, newick::String,
     bx.MBD_el.precision = inv(Σ)
     bx.extension_el.precision = inv(Γ)
 
-    save_file(XMLConstructor2.make_xml(bx), joinpath(xml_dir, "$filename.xml"))
+    save_file(XMLConstructor.make_xml(bx), joinpath(xml_dir, "$filename.xml"))
 
     return bx
 end
@@ -172,16 +172,16 @@ for i = 1:nn
             Σ = inv(rand(W))
             Γ = inv(rand(W))
 
-            MyFunctions.make_symmetric!(Σ)
-            MyFunctions.make_symmetric!(Γ)
+            MatrixUtils.make_symmetric!(Σ)
+            MatrixUtils.make_symmetric!(Γ)
 
             #Random tree
-            tree = Trees2.rtree(taxa)
-            newick = Trees2.make_newick(tree)
+            tree = RTrees.rtree(taxa)
+            newick = RTrees.make_newick(tree)
 
             #Simulate data
-            tdm = DiffusionSimulation2.TreeDiffusionModel(tree, Σ, Γ, zeros(p))
-            data = DiffusionSimulation2.simulate_data(tdm, taxa)
+            tdm = DiffusionSimulation.TreeDiffusionModel(tree, Σ, Γ, zeros(p))
+            data = DiffusionSimulation.simulate_data(tdm, taxa)
             DataStorage.make_sparse!(data, sparsity)
 
             #setup xml
@@ -209,4 +209,4 @@ for i = 1:nn
     end
 end
 
-write("sim_timing_files.txt", join(filenames, '\n'))
+write(joinpath(storage_dir, "sim_timing_files.txt"), join(filenames, '\n'))

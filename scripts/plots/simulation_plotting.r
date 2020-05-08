@@ -9,6 +9,7 @@ library(RColorBrewer)
 library(ggpubr)
 library(magrittr)
 library(dplyr)
+library(wesanderson)
 
 
 my_theme <- function(){
@@ -122,28 +123,21 @@ simBoxPlot <- function(data, run, xVar, yVar, shadeVar, title="", zero.line=FALS
   }
   p = p +
     stat_boxplot_custom(lwd=0.25, outlier.size=0.75) +
-    # stat_summary(fun.data=box_plot_quantiles, geom="boxplot", lwd=0.25, position=position_dodge(width=dodge.width)) +
-    # geom_boxplot(outlier.size=0, lwd=0.75) +
     colFill.sparsity +
-    # stat_summary(fun.y = box_plot_outliers, geom="point", size=1, position=position_jitterdodge(dodge.width=dodge.width), pch=21) +
-    # geom_point(position=position_jitterdodge()) +
-    # dummy.sparsity +
-    # colCol.sparsity +
     ggtitle(title) +
     my_theme() +
-    labs(fill = plot.labels[shadeVar], x = plot.labels[xVar], y = plot.labels[yVar])
+    labs(fill = plot.labels[shadeVar], x = plot.labels[xVar], y = plot.labels[yVar]) +
+    theme(plot.title = element_text(size=title.size),
+          axis.title = element_text(size=axis.size))
+  
+  if (!identical(c(0, 0), ylims)) {
+    p = p + ylim(ylims[[1]], ylims[[2]])
+  }
+  
+  return(p)
 }
 
-box_plot_quantiles <- function(x) {
-  r <- quantile(x, probs = c(0.05, 0.25, 0.5, 0.75, 0.95))
-  names(r) <- c("ymin", "lower", "middle", "upper", "ymax")
-  r
-}
 
-box_plot_outliers <- function(x) {
-  r <- quantile(x, probs=c(0.025, 0.975))
-  subset(x, x < r[1] | r[2] < x)
-}
 
 simLinePlot <- function(data, run, xVar, yVar, colVar, title="") {
   data.run = data
@@ -152,7 +146,6 @@ simLinePlot <- function(data, run, xVar, yVar, colVar, title="") {
   }
 
   p = ggplot() +
-    # geom_point(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar])) +
     stat_summary(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar]), fun.data = "stat_sum_quantiles") +
     colFill.sparsity +
     ggtitle(title) +
@@ -167,18 +160,6 @@ stat_sum_quantiles <- function(data) {
   df = data.frame(y = y, ymin = qs[[1]], ymax = qs[[2]])
 }
 
-simCoveragePlot <- function(data, run, xVar, yVar, colVar) {
-  data.run = data
-  if (run != "") {
-    data.run <- data[which(data$run == run),]
-  }
-
-  p = ggplot() +
-    # geom_point(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar])) +
-    stat_summary(aes(x = data.run[,xVar], y = data.run[,yVar], color=data.run[,colVar]), fun.y = "mean", geom = "point") +
-    labs(color = colVar, x = xVar, y = yVar) +
-    ylim(0, 1)
-}
 
 gridBox <- function(datas, run, xVar, yVar, colVar, titles) {
 
@@ -238,29 +219,67 @@ gridBigBox <- function(datas, run, xVar, yVarOne, yVarTwo, colVar, titles) {
 
 }
 
-paperGrid <- function(data, runs, xVar, yVar, colVar, titles) {
-  n = 3
-  stopifnot(length(runs) == n)
+paperGrid <- function(datas, runs, params, xVar, yVar, colVar, titles) {
+  n <- length(runs)
+  p <- length(params)
 
-  plots = vector("list", n + 1)
+  plots = vector("list", n * p + 1)
 
   for (i in 1:n) {
-    plots[[i]] = simBoxPlot(data, runs[i], xVar, yVar, colVar, title=plot.labels[titles[i]])
+    for (j in 1:p) {
+      sub_plot <- simBoxPlot(datas[[params[j]]], runs[i], xVar, yVar, colVar)
+      if (i != 1) {
+        sub_plot <- sub_plot + theme(axis.title.y = element_blank()) #+ theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+
+      }
+
+      if (j != p) {
+        sub_plot <- sub_plot + theme(axis.title.x = element_blank()) #+ theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+      }
+      
+      
+      plots[[(j - 1) * n + i]] = sub_plot
+    }
   }
-  # plots[[1]] = plots[[1]] + theme(legend.direction = "vertical")
+  plots[[1]] = plots[[1]] + theme(legend.direction = "horizontal")
   legend = get_legend(plots[[1]])
-  for (i in 1:n) {
+  for (i in 1:(n * p)) {
     plots[[i]] = plots[[i]] + theme(legend.position = "none")
   }
+  
+  col.titles = sapply(runs, function(i){plot.labels[i]})
+  row.titles <- sapply(params, function(i){plot.labels[i]})
+  rowjusts <- c(0.5, 0.5, 0.4)
+  coljusts <- c(0.15, 0.34, 0.25)
+  
+  
+  rowcolsize <- 15
+  
+  for (j in 1:p) {
+    ind <- n * (j - 1) + 1
+    plots[[ind]] = arrangeGrob(plots[[ind]], 
+                               left=textGrob(row.titles[j], gp=gpar(fontsize=rowcolsize), hjust=rowjusts[j], rot=90))
+  }
 
-  plots[[n + 1]] = legend
+  
 
-  p = grid.arrange(grobs = plots,
-                   nrow = 2, ncol= 2
-                   # heights = c(1, 1, 0.1),
-                   # layout_matrix = rbind(c(1, 2), c(3, 4), c(5, 5)),
-                   # top = textGrob(plot.labels[run], gp=gpar(fontsize=20))
-                   )
+  plots[[n * p + 1]] = legend
+
+  f <- function(i) {
+    arrangeGrob(grobs=plots[c(i, i + 3, i + 6)], 
+                top=textGrob(col.titles[i], gp=gpar(fontsize=rowcolsize), hjust=coljusts[i]), 
+                heights=c(1, 1, 1.06), 
+                ncol=1)
+  }
+  
+  grobs <- lapply(c(1, 2, 3), f)
+  grobs[[4]] <- plots[[10]]
+  p = grid.arrange(grobs = grobs, 
+                   layout_matrix=rbind(c(1, 2, 3), c(4, 4, 4)),
+                   heights=c(3, 0.1),
+                   widths=c(1, 0.7, 0.68))
+  
 }
 
 gridLine <- function(datas, run, xVar, yVar, colVar, titles) {
@@ -297,36 +316,28 @@ get_legend<-function(myggplot){
 }
 
 
+ylims = c(0, 0)
 
-
-storage.dir <- file.path(this.dir, "storage")
+storage.dir <- file.path(this.dir, "..", "storage")
 traits.path <- file.path(storage.dir, "trait_simulation.csv")
 matrix.path <- file.path(storage.dir, "matrix_simulation.csv")
-coverage.path <- file.path(storage.dir, "coverage_simulation.csv")
 
 traits <- read.csv(traits.path)
 mats <- read.csv(matrix.path)
-coverage <- read.csv(coverage.path)
 
 traits <- traits[which(traits$isRandom == "true"),] #remove rows with no error (i.e. the diagonals of a correlation matrix)
 mats <- mats[which(mats$isRandom == "true"),]
-coverage <- coverage[which(coverage$isRandom == "true"),]
-
-
 
 
 traits$sparsity <- factor(traits$sparsity)
 mats$sparsity <- factor(mats$sparsity)
-coverage$sparsity <- factor(coverage$sparsity)
 
 stopifnot(levels(mats$sparsity)[1] == "0")
 levels(mats$sparsity)[1] = "0.0"
-stopifnot(levels(coverage$sparsity)[1] == "0")
-levels(coverage$sparsity)[1] = "0.0"
 
 colors.sparsity <- brewer.pal(length(levels(mats$sparsity)), "Set1")
 names(colors.sparsity) <- levels(mats$sparsity)
-colFill.sparsity <- scale_fill_manual(values=colors.sparsity)
+colFill.sparsity <-     scale_fill_manual(values=wes_palette(n=4, name="Darjeeling2"))
 colCol.sparsity <- scale_color_manual(values=colors.sparsity)
 colors.dummy <- c("blue", "black", "black", "black")
 dummy.sparsity <- scale_color_manual(values=colors.dummy)
@@ -334,7 +345,6 @@ dummy.sparsity <- scale_color_manual(values=colors.dummy)
 
 traits$nTaxa <- factor(traits$nTaxa)
 mats$nTaxa <- factor(mats$nTaxa)
-coverage$nTaxa <- factor(coverage$nTaxa)
 
 traits$logmse <- unlist(lapply(traits$mse, log))
 
@@ -349,48 +359,14 @@ mats.her <- mats[which(mats$variable == "heritability"),]
 mats.her.diag <- mats.her[which(mats.her$component == "diagonal"),]
 mats.her.offdiag <- mats.her[which(mats.her$component == "offDiagonal"),]
 
-coverage.diffCorr <- coverage[which(coverage$variable == "diffCorr"),]
-coverage.resCorr <- coverage[which(coverage$variable == "resCorr"),]
-coverage.her <- coverage[which(coverage$variable == "heritability"),]
-coverage.her.diag <- coverage.her[which(coverage.her$component == "diagonal"),]
-coverage.her.offdiag <- coverage.her[which(coverage.her$component == "offDiagonal"),]
-coverage.trait <- coverage[which(coverage$variable == "trait"),]
-
-
-#
-#
-# p <- simBoxPlot(mats.resCorr, "", "nTaxa", "logmse", "sparsity", "testTitle")
-# # p
-# #
-# ps <- simLinePlot(mats.her.diag, "mammalsSim", "nObs", "logmse", "sparsity")
-# # ps
-# #
-# pc <- simCoveragePlot(coverage.her.diag, "", "nObs", "coverage","run")
-# # pc
 
 mat_dats <- list(mats.diffCorr, mats.resCorr, mats.her.diag, traits)
 titles <- c("diffCorr", "resCorr", "her", "traits")
+names(mat_dats) <- titles
 
-# grid.hivMSE <- gridBox(mat_dats, "hivSim", "nTaxa", "logmse", "sparsity", titles)
-# grid.mammalsMSE <- gridBox(mat_dats, "mammalsSim", "nTaxa", "logmse", "sparsity", titles)
-# grid.prokMSE <- gridBox(mat_dats, "prokSim", "nTaxa", "logmse", "sparsity", titles)
-
+title.size <- 16
+axis.size <- 11
 plot.width <- 7.5
-# plot.height <- 5
-#
-# ggsave("hivSimMSE.pdf", plot=grid.hivMSE, width=plot.width, height=plot.height, units="in")
-# ggsave("mammalsSimMSE.pdf", plot=grid.mammalsMSE, width=plot.width, height=plot.height, units="in")
-# ggsave("prokSimMSE.pdf", plot=grid.prokMSE, width=plot.width, height=plot.height, units="in")
-#
-# grid.hivBias <- gridBox(mat_dats, "hivSim", "nObs", "bias", "sparsity", titles)
-# grid.mammalsBias <- gridBox(mat_dats, "mammalsSim", "nTaxa", "bias", "sparsity", titles)
-# grid.prokBias <- gridBox(mat_dats, "prokSim", "nTaxa", "bias", "sparsity", titles)
-#
-# ggsave("hivSimBias.pdf", plot=grid.hivBias, width=plot.width, height=plot.height, units="in")
-# ggsave("mammalsSimBias.pdf", plot=grid.mammalsBias, width=plot.width, height=plot.height, units="in")
-# ggsave("prokSimBias.pdf", plot=grid.prokBias, width=plot.width, height=plot.height, units="in")
-
-
 plot.height <- 8.5
 
 grid.hivBoth <- gridBigBox(mat_dats, "hivSim", "nTaxa", "logmse", "bias", "sparsity", titles)
@@ -401,12 +377,18 @@ ggsave("hivSimBoth.pdf", plot=grid.hivBoth, width=plot.width, height=plot.height
 ggsave("mammalsSimBoth.pdf", plot=grid.mammalsBoth, width=plot.width, height=plot.height, units="in")
 ggsave("prokSimBoth.pdf", plot=grid.prokBoth, width=plot.width, height=plot.height, units="in")
 
+
+title.size <- 10
+axis.size <- 9
+ylims <- c(-11, 1)
+
 runs <- c("mammalsSim", "prokSim", "hivSim")
-grid.paper <- paperGrid(mats.diffCorr, runs, "nTaxa", "logmse", "sparsity", runs)
+params <- c("diffCorr", "resCorr", "her")
+grid.paper <- paperGrid(mat_dats, runs, params, "nTaxa", "logmse", "sparsity", params)
 
 
-plot.height <- 5
-ggsave("diffCorSim.pdf", plot=grid.paper, width=plot.width, height=plot.height, units="in")
+
+ggsave("simMSE.pdf", plot=grid.paper, width=plot.width, height=plot.height, units="in")
 
 
 gc()

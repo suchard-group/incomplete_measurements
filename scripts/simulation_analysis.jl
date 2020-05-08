@@ -1,6 +1,7 @@
 using Revise
 
 using CSV, DataFrames
+using BeastUtils.Logs, BeastUtils.RTrees, BeastUtils.MatrixUtils
 using ReadLogs, Trees2, MyFunctions #my packages
 
 const VALUE_DIR = joinpath(@__DIR__, "storage", "simulation")
@@ -103,11 +104,11 @@ function df_to_data(df::DataFrame)
     return taxa, data
 end
 
-function make_heritability(tree::Trees2.PhyloTree, Σ::AbstractArray{Float64, 2},
+function make_heritability(tree::RTrees.PhyloTree, Σ::AbstractArray{Float64, 2},
                         Γ::AbstractArray{Float64, 2})
 
 
-    diag_sum, all_sum = Trees2.tree_variance_sums(tree, standardize_tree = true)
+    diag_sum, all_sum = RTrees.tree_variance_sums(tree, standardize_tree = true)
 
     n = tree.n_tips
     cσ = 1.0 / n * diag_sum - 1.0 / (n^2) * all_sum
@@ -153,7 +154,7 @@ function compute_stats(x::Vector{Float64}, value::Float64)
     bias = mean_x - value
     mse = var_x + bias^2
 
-    hpd_interval = ReadLogs.HPD_intervals(x, conf = 0.95) #95% hpd intervals
+    hpd_interval = Logs.HPD_intervals(x, conf = 0.95) #95% hpd intervals
 
     covered = 0
     if hpd_interval[1] <= value <= hpd_interval[2]
@@ -270,11 +271,11 @@ function sim_analysis(sv::SimVersion)
     params = read("$(filename)_parameters.txt", String)
     data_df = CSV.read("$(filename)_traitData.csv")
 
-    tree = Trees2.parse_newick(newick)
+    tree = RTrees.parse_newick(newick)
 
     Σ, Γ = parse_parameters(params)
-    Σcorr = MyFunctions.cov2corr(Σ)
-    Γcorr = MyFunctions.cov2corr(Γ)
+    Σcorr = MatrixUtils.cov2corr(Σ)
+    Γcorr = MatrixUtils.cov2corr(Γ)
 
     H = make_heritability(tree, Σ, Γ) #TODO: check this
 
@@ -288,24 +289,24 @@ function sim_analysis(sv::SimVersion)
     print("loading log file ... ")
 
     cd(LOG_DIR)
-    cols, log_data = ReadLogs.get_log("$(sv.filename).log")
+    cols, log_data = Logs.get_log("$(sv.filename).log")
     cd(current_dir)
 
     println("done")
 
     trait_range = 1:0
     if sv.sparsity > 0.0
-        f, l = ReadLogs.find_cols(cols, "tip.traits")
+        f, l = Logs.find_cols(cols, "tip.traits")
         trait_range = f:l
     end
 
-    f, l = ReadLogs.find_cols(cols, "correlation.inverted.diffusion.precision")
+    f, l = Logs.find_cols(cols, "correlation.inverted.diffusion.precision")
     Σcorr_range = f:l
 
-    f, l = ReadLogs.find_cols(cols, "correlation.inverted.residualPrecision")
+    f, l = Logs.find_cols(cols, "correlation.inverted.residualPrecision")
     Γcorr_range = f:l
 
-    f, l = ReadLogs.find_cols(cols, "varianceProportionStatistic")
+    f, l = Logs.find_cols(cols, "varianceProportionStatistic")
     H_range = f:l
 
     #Compute statistics for traits
@@ -405,7 +406,6 @@ function make_dataframe(sas::Array{SimAnalysis},
 
         # n_obs = sv.N * sv.P - n_missing[i]
         n_obs = sv.N * (1 - sv.sparsity) * sv.P / (1 - sv.sparsity ^ sv.P) #expected number of observations
-        @show n_obs
 
         trait_range = trait_ind:(trait_ind + n_missing[i] - 1)
         mat_range = matrix_ind:(matrix_ind + n_matrix_slots[i] - 1)
@@ -516,7 +516,6 @@ end
 files = readdir(LOG_DIR)
 deleteat!(files, findfirst(x -> x == ".gitignore", files))
 
-
 n = length(files)
 sas = Vector{SimAnalysis}(undef, n)
 
@@ -534,36 +533,3 @@ matrix_path = joinpath(storage_dir, "matrix_simulation.csv")
 coverage_path = joinpath(storage_dir, "coverage_simulation.csv")
 
 df = make_dataframe(sas, trait_path, matrix_path, coverage_path)
-
-#testing
-using Plots
-
-function display_analysis(sa::SimAnalysis)
-    @show sa.traits.coverage
-    @show sa.diff_corr.off_diagonal.coverage
-    @show sa.res_corr.off_diagonal.coverage
-    @show sa.heritability.diagonal.coverage
-    @show sa.heritability.off_diagonal.coverage
-end
-
-sa = sas[1]
-display_analysis(sa)
-
-using Distributions, LinearAlgebra
-
-p = 8
-W = Wishart(p, Matrix(Diagonal(ones(p))))
-
-
-# newick = read(joinpath(VALUE_DIR, "$(sa.sv.filename)_newick.txt"), String)
-newick = "((A:1, B:1):1.5, (C:2, D:2):.5)"
-tree = Trees2.parse_newick(newick)
-
-diag_sum, all_sum = Trees2.tree_variance_sums(tree, standardize_tree = true)
-
-n = tree.n_tips
-cσ = 1.0 / n * diag_sum - 1.0 / (n^2) * all_sum
-cγ = (n - 1) / n
-
-@show all_sum
-@show diag_sum

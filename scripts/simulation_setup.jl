@@ -1,7 +1,7 @@
-using Revise
-
 using LinearAlgebra, LightXML, DataFrames, CSV
-using XMLConstructor2, DiffusionSimulation2, Trees2, ReadLogs, MyFunctions, DataStorage #personal packages
+using BeastUtils.XMLConstructor, BeastUtils.DiffusionSimulation,
+        BeastUtils.RTrees, BeastUtils.Logs, BeastUtils.MatrixUtils,
+        BeastUtils.DataStorage
 
 function sim_xml(xml_dir::String,
                 newick::String,
@@ -12,22 +12,22 @@ function sim_xml(xml_dir::String,
                 standardize_tree::Bool = true,
                 rep::Int = 0)
 
-    tree = Trees2.parse_newick(newick)
+    tree = RTrees.parse_newick(newick)
     if standardize_tree
-        max_height = maximum([Trees2.distance_to_root(tree, i) for i = 1:tree.n_tips])
+        max_height = maximum([RTrees.distance_to_root(tree, i) for i = 1:tree.n_tips])
         tree.edge_lengths ./= max_height
     end
     taxa = tree.tip_labels
     p = size(Σ, 1)
 
-    tdm = DiffusionSimulation2.TreeDiffusionModel(tree, Σ, Γ, zeros(p))
-    data = DiffusionSimulation2.simulate_data(tdm, taxa)
+    tdm = DiffusionSimulation.TreeDiffusionModel(tree, Σ, Γ, zeros(p))
+    data = DiffusionSimulation.simulate_data(tdm, taxa)
     n, p = size(data)
 
     mis_data = copy(data)
     DataStorage.make_sparse!(mis_data, sparsity)
 
-    bx = XMLConstructor2.make_validation_MBD_XML(mis_data, data, taxa, newick,
+    bx = XMLConstructor.make_validation_MBD_XML(mis_data, data, taxa, newick,
                                                 chain_length = 20_000)
     bx.mcmc_el.file_logEvery = 50
     bx.mcmc_el.screen_logEvery = 100
@@ -48,7 +48,7 @@ function sim_xml(xml_dir::String,
     end
 
     bx.mcmc_el.filename = filename
-    xdoc = XMLConstructor2.make_xml(bx)
+    xdoc = XMLConstructor.make_xml(bx)
     save_file(xdoc, joinpath(xml_dir, xml_name))
     bx = nothing
     free(xdoc)
@@ -79,12 +79,12 @@ function sim_from_example(xml_dir::String,
                             base_name::String;
                             repeats::Int = 0)
 
-    cols, data = ReadLogs.get_log(log_path)
-    Σ_hat = ReadLogs.make_meanmatrix(data, cols, diff_string)
-    Γ_hat = ReadLogs.make_meanmatrix(data, cols, res_string)
+    cols, data = Logs.get_log(log_path)
+    Σ_hat = Logs.make_meanmatrix(data, cols, diff_string)
+    Γ_hat = Logs.make_meanmatrix(data, cols, res_string)
 
-    MyFunctions.make_symmetric!(Σ_hat)
-    MyFunctions.make_symmetric!(Γ_hat)
+    MatrixUtils.make_symmetric!(Σ_hat)
+    MatrixUtils.make_symmetric!(Γ_hat)
 
 
     @assert isposdef(Σ_hat)
@@ -94,13 +94,13 @@ function sim_from_example(xml_dir::String,
     p = size(Σ_hat, 1)
 
     newick = read(newick_path, String)
-    tree = Trees2.parse_newick(newick)
+    tree = RTrees.parse_newick(newick)
 
     for s in sparsity
         for n in ns
 
-            trimmed_tree = Trees2.trim_to_n(tree, n)
-            trimmed_newick = Trees2.make_newick(trimmed_tree)
+            trimmed_tree = RTrees.trim_to_n(tree, n)
+            trimmed_newick = RTrees.make_newick(trimmed_tree)
 
 
             if repeats == 0
@@ -173,40 +173,3 @@ sim_from_example(xml_dir, prok_log_path, prok_newick_path,
 
 
 println("done")
-#test
-# import Likelihoods, Trees, Random
-# seed = 666
-# Random.seed!(seed)
-#
-#
-# n = 5
-# p = 2
-# taxa = ["taxa$i" for i = 1:n]
-#
-# Σ = randn(p, p)
-# Σ = Σ * Σ'
-# Γ = randn(p, p)
-# Γ = Γ * Γ'
-#
-# tree = Trees2.rtree(taxa, seed)
-# tree.edge_lengths[rand(1:(2 * n - 2))] = 0.0
-# newick = Trees2.make_newick(tree)
-#
-# tdm2 = DiffusionSimulation2.TreeDiffusionModel(tree, Σ, Γ, zeros(p))
-# tdm = Likelihoods.TreeDataModel(zeros(n, p), taxa, newick, standardize_tree = false)
-# tdm.Σ = Hermitian(Σ)
-# tdm.Γ = Hermitian(Γ)
-# tdm.pss = Inf
-#  V = Likelihoods.data_distribution(tdm)[2].Σ.mat
-#
-# cov = zeros(n * p, n * p)
-# reps = 10_000_000
-# for i = 1:reps
-#     d = vec(DiffusionSimulation2.simulate_data(tdm2, taxa))
-#     LinearAlgebra.BLAS.syr!('U', 1.0, d, cov)
-# end
-#
-# make_symmetric!(cov)
-# cov ./= reps
-# display(V - cov)
-# display(maximum(abs.(V - cov)))
