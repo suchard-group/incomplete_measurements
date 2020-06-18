@@ -17,4 +17,4 @@ for pkg in required_packages
 end
 
 # installs BeastUtils package which stores lots of utilities for working with BEAST
-Pkg.add(PackageSpec(url="https://github.com/gabehassler/BeastUtils.jl.git"))
+Pkg.add(Pkg.PackageSpec(url="https://github.com/gabehassler/BeastUtils.jl.git", rev="9b5b58e0155daf15148464bb1dfada7a124e5043"))
