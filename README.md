@@ -73,7 +73,7 @@ The instructions below should be sufficient to perform all analyses on OSX, Wind
     * __prokaryotes.xml__ - BEAST xml file for prokaryotes analysis in Section 7.2. Created with [BEAUti](http://beast.community/beauti), the graphical user interface for generating BEAST XML files, and manually edited.
 
 ## Computing Environment
-
+<!--
 ### Java
 
 Java is required to run BEAST.
@@ -106,6 +106,54 @@ These log files can be investigated using [Tracer](http://beast.community/tracer
 
 Note that to run the `./xml/prokaryotes.xml` file, you will have to install [BEAGLE](https://github.com/beagle-dev/beagle-lib).
 Instructions for installing BEAGLE with BEAST can be found [here](https://beast.community/beagle). BEAGLE is not required to run any other BEAST xml files.
+-->
+
+### Java & BEAST
+
+1. Ensure you have Java version 1.8 installed.
+    * From the command line, type `java -version`.
+    * The output should start with `java version "1.8.0_<other numbers>"`.
+    * If java is not installed or the wrong version of java is installed, please follow the instructions [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html).
+    * Note that if a different version of Java is already installed, you will probably be able to run all of the xml. If you encounter problems, you can update your version of Java later.
+2. Ensure you have `git` installed.
+    * From the command line, type `git --version`. The version of git should be returned.
+    * If `git` is not installed, you can find directions to install it [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+3. Ensure you have `ant` installed.
+    * From the command line, type `ant -version`. The version of ant should be returned.
+    * If `ant` is not installed, you can find directions to install in [here](https://ant.apache.org/manual/install.html).
+5. Download and build BEAGLE (this is only necessary to run the `prokaryote.xml` example).
+    * Follow the instructions [here](https://github.com/beagle-dev/beagle-lib) to download and install BEAGLE.
+6. Download and build BEAST
+    * Enter the following code on the command line. 
+    ```
+    git clone --branch repeated_measures --depth 1 https://github.com/beast-dev/beast-mcmc.git
+    cd beast-mcmc
+    git checkout repeated_measures
+    ant
+    ```
+    
+#### Running an XML file on BEAST 
+1. Navigate to the directory with the `beast.jar` file, which can be found in `./beast` directory.
+    * From the `beast-mcmc` directory (which you set up above), enter the following into the command line:
+    ```
+    cd build
+    cd dist
+    ```
+2. Run an `.xml` file on BEAST
+    * Option 1: launch the BEAST gui
+        * Enter `java -jar beast.jar`
+        * A gui will pop up.
+        * Click __Choose File__ and select the `.xml` file you wish to run.
+        * Click __Run__.
+        * BEAST should begin running in a gui window.
+    * Option 2: run BEAST from the command line
+        * Enter `java -jar beast.jar <path/to/your/file.xml>`.
+        * BEAST should begin running on the command line.
+        
+    * The output `.log` file will be in the `././beast` directory.
+3. Use Tracer to view the `.log` file.
+    * Tracer installation and usage instructions can be found [here](http://beast.community/tracer).
+
 
 
 
